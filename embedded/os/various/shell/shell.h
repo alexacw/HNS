@@ -197,7 +197,7 @@ typedef struct {
  * @api
  */
 #define shellUsage(stream, message)                                           \
-  chprintf(stream, "Usage: %s"SHELL_NEWLINE_STR, message)
+  chprintf(stream, "Usage: %s" SHELL_NEWLINE_STR, message)
 
 /*===========================================================================*/
 /* External declarations.                                                    */

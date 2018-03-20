@@ -149,7 +149,7 @@
  * Everything input with pull-up except:
  */
 #define VAL_GPIOCCRL            0x88888888      /*  PC7...PC0 */
-#define VAL_GPIOCCRH            0x88888888      /* PC15...PC8 */
+#define VAL_GPIOCCRH            0x88688888      /* PC15...PC8 */
 #define VAL_GPIOCODR            0xFFFFFFFF
 
 /*

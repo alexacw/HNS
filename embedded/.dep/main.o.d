@@ -1,4 +1,4 @@
-build/obj/main.o: main.c /usr/arm-none-eabi/include/stdio.h \
+build/obj/main.o: main.cpp /usr/arm-none-eabi/include/stdio.h \
  /usr/arm-none-eabi/include/_ansi.h /usr/arm-none-eabi/include/newlib.h \
  /usr/arm-none-eabi/include/_newlib_version.h \
  /usr/arm-none-eabi/include/sys/config.h \

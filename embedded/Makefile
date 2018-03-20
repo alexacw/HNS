@@ -4,7 +4,7 @@
 #
 
 # En/disable usage of maplemini bootloader support
-USE_MAPLEMINI_BOOTLOADER ?= 1
+USE_MAPLEMINI_BOOTLOADER ?= 0
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
@@ -107,6 +107,8 @@ include $(CHIBIOS)/test/oslib/oslib_test.mk
 include $(CHIBIOS)/os/hal/lib/streams/streams.mk
 include $(CHIBIOS)/os/various/shell/shell.mk
 
+include $(CHIBIOS)/os/various/cpp_wrappers/chcpp.mk
+
 # Define linker script file here
 ifeq ($(USE_MAPLEMINI_BOOTLOADER),1)
   LDSCRIPT = $(STARTUPLD)/STM32F103xB_maplemini_bootloader.ld
@@ -126,11 +128,11 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        $(STREAMSSRC) \
        $(SHELLSRC) \
-       usbcfg.c main.c
+       usbcfg.c 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
-CPPSRC =
+CPPSRC = main.cpp #$(CHCPPSRC)
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -159,7 +161,7 @@ ASMXSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 INCDIR = $(CHIBIOS)/os/license \
          $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
-         $(STREAMSINC) $(SHELLINC)
+         $(STREAMSINC) $(SHELLINC) $(CHCPPINC)
 
 #
 # Project, sources and paths
