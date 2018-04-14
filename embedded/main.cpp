@@ -20,7 +20,6 @@
 
 #include <stdio.h>
 #include <string.h>
-//#include <test.hpp>
 
 #include "ch.h"
 #include "hal.h"
@@ -29,6 +28,7 @@
 #include "chprintf.h"
 
 #include "usbcfg.h"
+//#include "UartHandler.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */
@@ -118,6 +118,16 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 	}
 }
 
+#define USART_CR1_9BIT_WORD (1 << 12)  /* CR1 9 bit word */
+#define USART_CR1_PARITY_SET (1 << 10) /* CR1 parity bit enable */
+#define USART_CR1_EVEN_PARITY (0 << 9) /* CR1 even parity */
+
+static SerialConfig sd1cfg = {
+	9600, /* 115200 baud rate */
+	USART_CR1_9BIT_WORD | USART_CR1_PARITY_SET | USART_CR1_EVEN_PARITY,
+	USART_CR2_STOP1_BITS | USART_CR2_LINEN,
+	0};
+
 /*
  * Application entry point.
  */
@@ -150,6 +160,7 @@ int main(void)
 	usbStart(serusbcfg.usbp, &usbcfg);
 	usbConnectBus(serusbcfg.usbp);
 
+	sdStart(&SD1, &sd1cfg);
 	/*
 	 * Shell manager initialization.
 	 */
@@ -159,7 +170,6 @@ int main(void)
 	 * Creates the blinker thread.
 	 */
 	chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-	//TestClass temp(1000);
 	/*
 	 * Normal main() thread activity, spawning shells.
 	 */
@@ -175,7 +185,8 @@ int main(void)
 													(void *)&shell_cfg1);
 			chThdWait(shelltp); /* Waiting termination.             */
 		}
-		chThdSleepMilliseconds(1000);
-		//testFun();
+		chThdSleepMilliseconds(300);
+
+		sdWrite(&SD1, (uint8_t *)"Button Pressed!\r\n", 17);
 	}
 }

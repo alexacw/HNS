@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchOaPTC.s 			page 1
+ARM GAS  /tmp/cc0oOWhO.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -12,14 +12,14 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"chdynamic.c"
-  12              		.section	.gnu.lto_.profile.b898fba0d1e1c258,"",%progbits
+  12              		.section	.gnu.lto_.profile.1fedee6658085a9,"",%progbits
   13 0000 789C6363 		.ascii	"x\234cc```\001bF\206\014\003\000\001x\000\244"
   13      60606001 
   13      6246860C 
   13      03000178 
   13      00A4
   14              		.text
-  15              		.section	.gnu.lto_.icf.b898fba0d1e1c258,"",%progbits
+  15              		.section	.gnu.lto_.icf.1fedee6658085a9,"",%progbits
   16 0000 789C6363 		.ascii	"x\234cc``\340c@\000&\206O}\233\37703\256>5\371\016\037"
   16      6060E063 
   16      40002686 
@@ -28,7 +28,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   17 0018 030030B5 		.ascii	"\003\0000\265\006<"
   17      063C
   18              		.text
-  19              		.section	.gnu.lto_.jmpfuncs.b898fba0d1e1c258,"",%progbits
+  19              		.section	.gnu.lto_.jmpfuncs.1fedee6658085a9,"",%progbits
   20 0000 789C858F 		.ascii	"x\234\205\217=\012\302P\020\204g\336\313\317S\220\\"
   20      3D0AC250 
   20      108467DE 
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   25      B2B9B7D4 
   25      11125C
   26 006d 304669D1 		.ascii	"0Fi\321\236jy\250\237\2328\351\357\316\241\372\235\370"
-ARM GAS  /tmp/cchOaPTC.s 			page 2
+ARM GAS  /tmp/cc0oOWhO.s 			page 2
 
 
   26      9E6A79A8 
@@ -82,7 +82,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   30 00b2 F104A81A 		.ascii	"\361\004\250\032[$"
   30      5B24
   31              		.text
-  32              		.section	.gnu.lto_.inline.b898fba0d1e1c258,"",%progbits
+  32              		.section	.gnu.lto_.inline.1fedee6658085a9,"",%progbits
   33 0000 789C6363 		.ascii	"x\234cc``\010g@\000&\006\011)CF\006&\211\206\365\214"
   33      60600867 
   33      40002606 
@@ -102,7 +102,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   36      C80300E7 
   36      830A89
   37              		.text
-  38              		.section	.gnu.lto_.pureconst.b898fba0d1e1c258,"",%progbits
+  38              		.section	.gnu.lto_.pureconst.1fedee6658085a9,"",%progbits
   39 0000 789C6363 		.ascii	"x\234cc```\007b&\206]\214\214\273\030\001\005\342\001"
   39      60606007 
   39      6226865D 
@@ -110,7 +110,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   39      0105E201 
   40 0014 87       		.ascii	"\207"
   41              		.text
-  42              		.section	.gnu.lto_chThdCreateFromHeap.b898fba0d1e1c258,"",%progbits
+  42              		.section	.gnu.lto_chThdCreateFromHeap.1fedee6658085a9,"",%progbits
   43 0000 789C8D55 		.ascii	"x\234\215U[LTW\024=\373\236;3\027\006|\225Zk\214\305"
   43      5B4C5457 
   43      143DFB9E 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   43      7C955A6B 
   44 0016 B4444DAC 		.ascii	"\264DM\254\267?\246|5i\350\207&\2451\322\244\037mbp"
   44      B73FA67C 
-ARM GAS  /tmp/cchOaPTC.s 			page 3
+ARM GAS  /tmp/cc0oOWhO.s 			page 3
 
 
   44      3569E887 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   55      3852
   56 00ed C2B577FC 		.ascii	"\302\265w\374\234C\005\360\261D\\bp\014\346\"\374\247"
   56      9C4305F0 
-ARM GAS  /tmp/cchOaPTC.s 			page 4
+ARM GAS  /tmp/cc0oOWhO.s 			page 4
 
 
   56      B1445C62 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   67      0838ADAB 
   67      D7
   68 01c1 A37A9DE8 		.ascii	"\243z\235\350 #t`\250\267L\346\237\011\346\257\333w"
-ARM GAS  /tmp/cchOaPTC.s 			page 5
+ARM GAS  /tmp/cc0oOWhO.s 			page 5
 
 
   68      20237460 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   79      91110164 
   79      D46820CF 
   80 029a 4D0632CF 		.ascii	"M\0062\317T \037\3040\322dl\013\026\012\247Z\013\260"
-ARM GAS  /tmp/cchOaPTC.s 			page 6
+ARM GAS  /tmp/cc0oOWhO.s 			page 6
 
 
   80      54201FC4 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
   91      26C25D27 
   91      DC54AC9E 
   92 0376 0283F95E 		.ascii	"\002\203\371^n0\270\001qH\332<\240\325\310\324\215H"
-ARM GAS  /tmp/cchOaPTC.s 			page 7
+ARM GAS  /tmp/cc0oOWhO.s 			page 7
 
 
   92      6E30B801 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  103      AC1C434D 
  103      1CB9DBB9 
  103      D762
-ARM GAS  /tmp/cchOaPTC.s 			page 8
+ARM GAS  /tmp/cc0oOWhO.s 			page 8
 
 
  104 0447 F4D1BBB1 		.ascii	"\364\321\273\261\356\222\205\352-\211K\241\272\256\271"
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  115      9B09480B 
  116 0514 F717A9A9 		.ascii	"\367\027\251\251N\207]M\266\255U?\262{\276Lw\272\324"
  116      4E875D4D 
-ARM GAS  /tmp/cchOaPTC.s 			page 9
+ARM GAS  /tmp/cc0oOWhO.s 			page 9
 
 
  116      B6AD553F 
@@ -531,14 +531,14 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  126      AF67FF00 
  126      7B3F175B 
  127              		.text
- 128              		.section	.gnu.lto_chThdCreateFromMemoryPool.b898fba0d1e1c258,"",%progbits
+ 128              		.section	.gnu.lto_chThdCreateFromMemoryPool.1fedee6658085a9,"",%progbits
  129 0000 789C8D55 		.ascii	"x\234\215U[L\024W\030>\377\234\331\331\205\005\361B"
  129      5B4C1457 
  129      183EFF9C 
  129      D9D98505 
  129      F142
  130 0012 ADA5A6C5 		.ascii	"\255\245\246\305\244DM\254\323\027S\222\276\264\301"
-ARM GAS  /tmp/cchOaPTC.s 			page 10
+ARM GAS  /tmp/cc0oOWhO.s 			page 10
 
 
  130      A4444DAC 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  141      B56D0726 
  141      CC
  142 00e5 2C10C49B 		.ascii	",\020\304\233?r\355-\235s(\001\376\"\021?1\370\031f"
-ARM GAS  /tmp/cchOaPTC.s 			page 11
+ARM GAS  /tmp/cc0oOWhO.s 			page 11
 
 
  142      3F72ED2D 
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  153      5FA22095 
  153      A2EA2D9C 
  153      BC27CBA0 
-ARM GAS  /tmp/cchOaPTC.s 			page 12
+ARM GAS  /tmp/cc0oOWhO.s 			page 12
 
 
  153      5AE1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  165      21BE6505 
  165      D9206407 
  165      BA
-ARM GAS  /tmp/cchOaPTC.s 			page 13
+ARM GAS  /tmp/cc0oOWhO.s 			page 13
 
 
  166 029d F3AC5426 		.ascii	"\363\254T&?\267a\\ee\203\315\326\214\2775\233\316#|"
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  177      2AE122C7 
  177      C72906CE 
  178 036d 42B86B84 		.ascii	"B\270k\204\213\032\205{\270\377~3\020\316j\340\024\302"
-ARM GAS  /tmp/cchOaPTC.s 			page 14
+ARM GAS  /tmp/cc0oOWhO.s 			page 14
 
 
  178      8B1A857B 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  189      42CD201E 
  189      835EC8D0 
  189      7934E906 
-ARM GAS  /tmp/cchOaPTC.s 			page 15
+ARM GAS  /tmp/cc0oOWhO.s 			page 15
 
 
  189      62C490
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  201      8FB9F027 
  201      E5
  202 051d 9700EF4A 		.ascii	"\227\000\357J -<q\236\272\334\355r\252\311\216U\352"
-ARM GAS  /tmp/cchOaPTC.s 			page 16
+ARM GAS  /tmp/cc0oOWhO.s 			page 16
 
 
  202      202D3C71 
@@ -955,10 +955,10 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  212      FE0180BB 
  212      34E2
  213              		.text
- 214              		.section	.gnu.lto_.symbol_nodes.b898fba0d1e1c258,"",%progbits
+ 214              		.section	.gnu.lto_.symbol_nodes.1fedee6658085a9,"",%progbits
  215 0000 789C55C9 		.ascii	"x\234U\311+\016\200@\020\003\320v?\034\203\263\300\311"
  215      2B0E8040 
-ARM GAS  /tmp/cchOaPTC.s 			page 17
+ARM GAS  /tmp/cc0oOWhO.s 			page 17
 
 
  215      1003D076 
@@ -988,13 +988,13 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  220      EAB801FB 
  220      A42856
  221              		.text
- 222              		.section	.gnu.lto_.refs.b898fba0d1e1c258,"",%progbits
+ 222              		.section	.gnu.lto_.refs.1fedee6658085a9,"",%progbits
  223 0000 789C6363 		.ascii	"x\234cc```\004b\006\000\000D\000\010"
  223      60606004 
  223      62060000 
  223      440008
  224              		.text
- 225              		.section	.gnu.lto_.decls.b898fba0d1e1c258,"",%progbits
+ 225              		.section	.gnu.lto_.decls.1fedee6658085a9,"",%progbits
  226 0000 789CB53A 		.ascii	"x\234\265:iTTg\226\365\275\2576\212\002\322`\367\330"
  226      69545467 
  226      96F5BDAF 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  230 004a 05514045 		.ascii	"\005Q@EPd\021\004\027pc\021\025\021\005A\020\024\024"
  230      50641104 
  230      17706311 
-ARM GAS  /tmp/cchOaPTC.s 			page 18
+ARM GAS  /tmp/cc0oOWhO.s 			page 18
 
 
  230      15110541 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  243 0122 C54366CB 		.ascii	"\305Cf\313-7\366\204s\233\236:\331\344\353\302&\022"
  243      2D37F684 
  243      739B9E3A 
-ARM GAS  /tmp/cchOaPTC.s 			page 19
+ARM GAS  /tmp/cc0oOWhO.s 			page 19
 
 
  243      D9E4EBC2 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  255 01f2 C2B1EE6C 		.ascii	"\302\261\356l\366\3535\2756\333k\350\004\002\033\020"
  255      F6EB35BD 
  255      36DB6BE8 
-ARM GAS  /tmp/cchOaPTC.s 			page 20
+ARM GAS  /tmp/cc0oOWhO.s 			page 20
 
 
  255      04021B10 
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  267 02c3 EAD7B2CE 		.ascii	"\352\327\262\316\021\177\237\203\013\235\222\277\201"
  267      117F9F83 
  267      0B9D92BF 
-ARM GAS  /tmp/cchOaPTC.s 			page 21
+ARM GAS  /tmp/cc0oOWhO.s 			page 21
 
 
  267      81
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  279      6AAA6A1B 
  280 03a2 D0B89BB9 		.ascii	"\320\270\233\271\327\275\361Z%\275\326\230\034\237\250"
  280      D7BDF15A 
-ARM GAS  /tmp/cchOaPTC.s 			page 22
+ARM GAS  /tmp/cc0oOWhO.s 			page 22
 
 
  280      25BDD698 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  292      C573E062 
  292      3577F113 
  292      189C
-ARM GAS  /tmp/cchOaPTC.s 			page 23
+ARM GAS  /tmp/cc0oOWhO.s 			page 23
 
 
  293 0482 8541D2B8 		.ascii	"\205A\322\270\037\217\035T\342t&\343@\352\223\014o\273"
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  304      8972259E 
  304      61E6
  305 055b EC2BBFF9 		.ascii	"\354+\277\371\225,\203\226\254YG\242\233\001\006\245"
-ARM GAS  /tmp/cchOaPTC.s 			page 24
+ARM GAS  /tmp/cc0oOWhO.s 			page 24
 
 
  305      952C8396 
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  316      DB
  317 0630 F793BE19 		.ascii	"\367\223\276\031\250C\177\221%M K\232\234\224\201m\036"
  317      A8437F91 
-ARM GAS  /tmp/cchOaPTC.s 			page 25
+ARM GAS  /tmp/cc0oOWhO.s 			page 25
 
 
  317      254D204B 
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  328      2FA7E9B1 
  328      878E53AF 
  328      7F
-ARM GAS  /tmp/cchOaPTC.s 			page 26
+ARM GAS  /tmp/cc0oOWhO.s 			page 26
 
 
  329 071a 1EF5F547 		.ascii	"\036\365\365G\363'\365r\243j\034\214\252\265\033u\242"
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  341 07e1 59A74501 		.ascii	"Y\247E\001\354\347\027\030\020\220O\254\255\233~\202"
  341      ECE71718 
  341      10904FAC 
-ARM GAS  /tmp/cchOaPTC.s 			page 27
+ARM GAS  /tmp/cc0oOWhO.s 			page 27
 
 
  341      AD9B7E82 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  353      BD2BEB56 
  353      02CB2898 
  353      81EA4066 
-ARM GAS  /tmp/cchOaPTC.s 			page 28
+ARM GAS  /tmp/cc0oOWhO.s 			page 28
 
 
  353      9F
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  365      016C07F8 
  365      0E201720 
  365      07
-ARM GAS  /tmp/cchOaPTC.s 			page 29
+ARM GAS  /tmp/cc0oOWhO.s 			page 29
 
 
  366 09a4 201B200B 		.ascii	" \033 \013 \023 \003`\015@\014\200\015`\036R\372>\300"
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  377      2C56E142 
  377      FEB216D7 
  377      5BCC5ADC 
-ARM GAS  /tmp/cchOaPTC.s 			page 30
+ARM GAS  /tmp/cc0oOWhO.s 			page 30
 
 
  377      63C716
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  389 0b57 459F80E5 		.ascii	"E\237\200\345E\017\363\026\024\375\006h\264\353I\243"
  389      450FF316 
  389      14FD0668 
-ARM GAS  /tmp/cchOaPTC.s 			page 31
+ARM GAS  /tmp/cc0oOWhO.s 			page 31
 
 
  389      B4EB49A3 
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  401 0c2c DD3BA725 		.ascii	"\335;\247%\017\035v\272\242\225\005q\260\214\007\021"
  401      0F1D76BA 
  401      A2950571 
-ARM GAS  /tmp/cchOaPTC.s 			page 32
+ARM GAS  /tmp/cc0oOWhO.s 			page 32
 
 
  401      B08C0711 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  412      364FCB52 
  413 0d11 A8F3D32E 		.ascii	"\250\363\323.\311\235{K\231C\023.u\321\204\273\340\352"
  413      C99D7B4B 
-ARM GAS  /tmp/cchOaPTC.s 			page 33
+ARM GAS  /tmp/cc0oOWhO.s 			page 33
 
 
  413      9943132E 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  425 0dec 3AF8CF3F 		.ascii	":\370\317?\220\275\016>\212\311\353\340Z\314_\007\347"
  425      90BD0E3E 
  425      8AC9EBE0 
-ARM GAS  /tmp/cchOaPTC.s 			page 34
+ARM GAS  /tmp/cc0oOWhO.s 			page 34
 
 
  425      5ACC5F07 
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  436      E605
  437 0ec8 3B3692C8 		.ascii	";6\222\310\"/\022\266z\327N\221\211\036\315\340.$Ni"
  437      222F12B6 
-ARM GAS  /tmp/cchOaPTC.s 			page 35
+ARM GAS  /tmp/cc0oOWhO.s 			page 35
 
 
  437      7AD74E91 
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  448      40EFA6
  449 0fa0 062F7C9D 		.ascii	"\006/|\235:M\330^\2621K\343\370\370^>\025\365\203\243"
  449      3A4DD85E 
-ARM GAS  /tmp/cchOaPTC.s 			page 36
+ARM GAS  /tmp/cc0oOWhO.s 			page 36
 
 
  449      B2314BE3 
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  461      FE101B87 
  461      51811D38 
  461      2941C429 
-ARM GAS  /tmp/cchOaPTC.s 			page 37
+ARM GAS  /tmp/cc0oOWhO.s 			page 37
 
 
  461      C83E2270 
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  473 114e 8C7ECC06 		.ascii	"\214~\314\006\017\327^\356`\366A\372\241\031>}\317\236"
  473      0FD75EEE 
  473      60F641FA 
-ARM GAS  /tmp/cchOaPTC.s 			page 38
+ARM GAS  /tmp/cc0oOWhO.s 			page 38
 
 
  473      A1193E7D 
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  484      CCEAF5D4 
  485 122c EAF99DBD 		.ascii	"\352\371\235\275G\275p\234\267S\262\271Y-7*Y^5\037\355"
  485      47BD709C 
-ARM GAS  /tmp/cchOaPTC.s 			page 39
+ARM GAS  /tmp/cc0oOWhO.s 			page 39
 
 
  485      B753B2B9 
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  496      87D0E40B 
  496      3BF11B
  497 1309 D145EC1B 		.ascii	"\321E\354\033\321\322\201\264V\344\254L\246\322\037"
-ARM GAS  /tmp/cchOaPTC.s 			page 40
+ARM GAS  /tmp/cc0oOWhO.s 			page 40
 
 
  497      D1D281B4 
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  508      6FDFD15C 
  508      DA9BCD2C 
  509 13e6 6F120825 		.ascii	"o\022\010%\312\027\225E\005J%\301\034\365-\242\372&"
-ARM GAS  /tmp/cchOaPTC.s 			page 41
+ARM GAS  /tmp/cc0oOWhO.s 			page 41
 
 
  509      CA179545 
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  520      58676593 
  520      CB61
  521 14be E44F905D 		.ascii	"\344O\220]\225\312\237(\324\241\246\340\020\223Y\371"
-ARM GAS  /tmp/cchOaPTC.s 			page 42
+ARM GAS  /tmp/cc0oOWhO.s 			page 42
 
 
  521      95CA9F28 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  532      4D4445E3 
  532      08EBB7AA 
  533 15a4 A8559126 		.ascii	"\250U\221&\263\326l\012\016\2176\207E\351\014\206\225"
-ARM GAS  /tmp/cchOaPTC.s 			page 43
+ARM GAS  /tmp/cc0oOWhO.s 			page 43
 
 
  533      B3D66C0A 
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  544 1676 A007BE40 		.ascii	"\240\007\276@\031\034\035\012A\322X\210\232\226\025"
  544      191C1D0A 
  544      41D25888 
-ARM GAS  /tmp/cchOaPTC.s 			page 44
+ARM GAS  /tmp/cc0oOWhO.s 			page 44
 
 
  544      9A9615
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  556      45856B79 
  556      00AC5AB8 
  556      10B112E8 
-ARM GAS  /tmp/cchOaPTC.s 			page 45
+ARM GAS  /tmp/cc0oOWhO.s 			page 45
 
 
  557 175b 34F4BFC1 		.ascii	"4\364\277\301\372\336\013u\024\251\024-\320X@\344/^"
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  569      E9109C2F 
  569      5F6DF963 
  569      249C
-ARM GAS  /tmp/cchOaPTC.s 			page 46
+ARM GAS  /tmp/cc0oOWhO.s 			page 46
 
 
  570 1833 7EFDD2F9 		.ascii	"~\375\322\371\261\232\270\200U\342J\312\301\313\000"
@@ -2730,7 +2730,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  575      033EC8A4 
  575      41
  576              		.text
- 577              		.section	.gnu.lto_.symtab.b898fba0d1e1c258,"",%progbits
+ 577              		.section	.gnu.lto_.symtab.1fedee6658085a9,"",%progbits
  578 0000 63685468 		.ascii	"chThdCreateFromHeap\000"
  578      64437265 
  578      61746546 
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  590      65757053 
  590      00
  591 0059 00       		.ascii	"\000"
-ARM GAS  /tmp/cchOaPTC.s 			page 47
+ARM GAS  /tmp/cc0oOWhO.s 			page 47
 
 
  592 005a 02       		.ascii	"\002"
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  619      6672616D 
  619      652D706F 
  619      696E7465 
-ARM GAS  /tmp/cchOaPTC.s 			page 48
+ARM GAS  /tmp/cc0oOWhO.s 			page 48
 
 
  619      72272027 
@@ -2832,7 +2832,7 @@ ARM GAS  /tmp/cchOaPTC.s 			page 1
  623              		.comm	__gnu_lto_v1,1,1
  624              		.comm	__gnu_lto_slim,1,1
  625              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM
-ARM GAS  /tmp/cchOaPTC.s 			page 49
+ARM GAS  /tmp/cc0oOWhO.s 			page 49
 
 
 DEFINED SYMBOLS
