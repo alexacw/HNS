@@ -130,7 +130,8 @@ build/obj/main.o: main.cpp /usr/arm-none-eabi/include/stdio.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_serial_usb.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_usb_cdc.h \
  /home/acw/Desktop/HNS/embedded/os/various/shell/shell.h \
- /home/acw/Desktop/HNS/embedded/os/hal/lib/streams/chprintf.h usbcfg.h
+ /home/acw/Desktop/HNS/embedded/os/hal/lib/streams/chprintf.h usbcfg.h \
+ SIM868Com.hpp
 
 /usr/arm-none-eabi/include/stdio.h:
 
@@ -409,3 +410,5 @@ mcuconf.h:
 /home/acw/Desktop/HNS/embedded/os/hal/lib/streams/chprintf.h:
 
 usbcfg.h:
+
+SIM868Com.hpp:

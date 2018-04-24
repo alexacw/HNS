@@ -28,7 +28,7 @@
 #include "chprintf.h"
 
 #include "usbcfg.h"
-//#include "UartHandler.hpp"
+#include "SIM868Com.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */

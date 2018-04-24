@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchhCBMR.s 			page 1
+ARM GAS  /tmp/cctUMF4s.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -12,14 +12,14 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"board.c"
-  12              		.section	.gnu.lto_.profile.d08700a0e1399715,"",%progbits
+  12              		.section	.gnu.lto_.profile.56836cb6212dd114,"",%progbits
   13 0000 789C6363 		.ascii	"x\234cc```\001bF\006>f\000\000\227\000\035"
   13      60606001 
   13      6246063E 
   13      66000097 
   13      001D
   14              		.text
-  15              		.section	.gnu.lto_.icf.d08700a0e1399715,"",%progbits
+  15              		.section	.gnu.lto_.icf.56836cb6212dd114,"",%progbits
   16 0000 789C6363 		.ascii	"x\234cc``\020a@\000f\206\306\031\023623v-\331\376\235"
   16      60601061 
   16      40006686 
@@ -30,7 +30,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   17      00589108 
   17      FA
   18              		.text
-  19              		.section	.gnu.lto_.jmpfuncs.d08700a0e1399715,"",%progbits
+  19              		.section	.gnu.lto_.jmpfuncs.56836cb6212dd114,"",%progbits
   20 0000 789C6363 		.ascii	"x\234cc``\340d@\000&\020\301\010\304\000\001\202\000"
   20      6060E064 
   20      40002610 
@@ -38,7 +38,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   20      018200
   21 0013 13       		.ascii	"\023"
   22              		.text
-  23              		.section	.gnu.lto_.inline.d08700a0e1399715,"",%progbits
+  23              		.section	.gnu.lto_.inline.56836cb6212dd114,"",%progbits
   24 0000 789C6363 		.ascii	"x\234cc``\320f@\000&\006\006\026\036F\020\305\300\266"
   24      6060D066 
   24      40002606 
@@ -50,15 +50,15 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   25      6106002D 
   25      B601E9
   26              		.text
-  27              		.section	.gnu.lto_.pureconst.d08700a0e1399715,"",%progbits
+  27              		.section	.gnu.lto_.pureconst.56836cb6212dd114,"",%progbits
   28 0000 789C6363 		.ascii	"x\234cc```\005b&\006\011F\006\000\000\334\000'"
   28      60606005 
   28      62260609 
   28      46060000 
   28      DC0027
   29              		.text
-  30              		.section	.gnu.lto___early_init.d08700a0e1399715,"",%progbits
-ARM GAS  /tmp/cchhCBMR.s 			page 2
+  30              		.section	.gnu.lto___early_init.56836cb6212dd114,"",%progbits
+ARM GAS  /tmp/cctUMF4s.s 			page 2
 
 
   31 0000 789C6363 		.ascii	"x\234cc``X\001\304\372@,\015\304\214\314\014\214L\023"
@@ -118,12 +118,12 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   43      2535453F 
   43      293FB108 
   43      4AEA2533 
-ARM GAS  /tmp/cchhCBMR.s 			page 3
+ARM GAS  /tmp/cctUMF4s.s 			page 3
 
 
   43      000048B9 
   44              		.text
-  45              		.section	.gnu.lto_boardInit.d08700a0e1399715,"",%progbits
+  45              		.section	.gnu.lto_boardInit.56836cb6212dd114,"",%progbits
   46 0000 789C6363 		.ascii	"x\234cc``\250\003b} \226\006bFf\006F\246\011\347\030"
   46      6060A803 
   46      627D2096 
@@ -175,10 +175,10 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   56      CC0000C6 
   56      743B69
   57              		.text
-  58              		.section	.gnu.lto_pal_default_config.d08700a0e1399715,"",%progbits
+  58              		.section	.gnu.lto_pal_default_config.56836cb6212dd114,"",%progbits
   59 0000 789C6363 		.ascii	"x\234cc``hcd`\000\"0\230\302\314xp\323\204U\314\335"
   59      60606863 
-ARM GAS  /tmp/cchhCBMR.s 			page 4
+ARM GAS  /tmp/cctUMF4s.s 			page 4
 
 
   59      64600022 
@@ -238,11 +238,11 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   70      6060DC0F 
   70      2400BF
   71 00e6 4F82A8   		.ascii	"O\202\250"
-ARM GAS  /tmp/cchhCBMR.s 			page 5
+ARM GAS  /tmp/cctUMF4s.s 			page 5
 
 
   72              		.text
-  73              		.section	.gnu.lto_.symbol_nodes.d08700a0e1399715,"",%progbits
+  73              		.section	.gnu.lto_.symbol_nodes.56836cb6212dd114,"",%progbits
   74 0000 789C6363 		.ascii	"x\234cc``\360\000b\006\246\357\214\365\014\014\023\316"
   74      6060F000 
   74      6206A6EF 
@@ -263,13 +263,13 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   77      0C00
   78 0040 B20A1235 		.ascii	"\262\012\0225"
   79              		.text
-  80              		.section	.gnu.lto_.refs.d08700a0e1399715,"",%progbits
+  80              		.section	.gnu.lto_.refs.56836cb6212dd114,"",%progbits
   81 0000 789C6363 		.ascii	"x\234cc```\004b\006\000\000D\000\010"
   81      60606004 
   81      62060000 
   81      440008
   82              		.text
-  83              		.section	.gnu.lto_.decls.d08700a0e1399715,"",%progbits
+  83              		.section	.gnu.lto_.decls.56836cb6212dd114,"",%progbits
   84 0000 789C9555 		.ascii	"x\234\225UkL\223W\030>\357w\240B\333Y\002\313\342\017"
   84      6B4C9357 
   84      183EEF77 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
   89 0061 09EF77CE 		.ascii	"\011\357w\316{\316\363>\3179\357{z\320\020B\214i\204"
   89      7BCEF33E 
   89      CF39EF7B 
-ARM GAS  /tmp/cchhCBMR.s 			page 6
+ARM GAS  /tmp/cctUMF4s.s 			page 6
 
 
   89      7AD01042 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  101      679FC45B 
  101      DA17047E 
  101      071ACB67 
-ARM GAS  /tmp/cchhCBMR.s 			page 7
+ARM GAS  /tmp/cctUMF4s.s 			page 7
 
 
  101      F3C8
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  113 0210 CA97A7A1 		.ascii	"\312\227\247\241\373(Z\321\001\334\325\243\273:\320"
  113      FB285AD1 
  113      01DCD5A3 
-ARM GAS  /tmp/cchhCBMR.s 			page 8
+ARM GAS  /tmp/cctUMF4s.s 			page 8
 
 
  113      BB3AD0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  125      891E8C46 
  125      63966987 
  125      2C1A
-ARM GAS  /tmp/cchhCBMR.s 			page 9
+ARM GAS  /tmp/cctUMF4s.s 			page 9
 
 
  126 02f0 1CEE3455 		.ascii	"\034\3564U\266G%\351;=c\273\200l\035\220\245\356B\224"
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  137 03c1 5607E14D 		.ascii	"V\007\341M\246b\226o\031\335\232\214>\001O\225\007\341"
  137      A662966F 
  137      19DD9A8C 
-ARM GAS  /tmp/cchhCBMR.s 			page 10
+ARM GAS  /tmp/cctUMF4s.s 			page 10
 
 
  137      3E014F95 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  148      6281BB
  149 0496 D02E5AAC 		.ascii	"\320.Z\254\313\305<\273o\231\337\355\021\347.X(\332"
  149      CBC53CBB 
-ARM GAS  /tmp/cchhCBMR.s 			page 11
+ARM GAS  /tmp/cctUMF4s.s 			page 11
 
 
  149      6F99DFED 
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  160      E7B2037A 
  160      D443F2E4 
  160      2DF5
-ARM GAS  /tmp/cchhCBMR.s 			page 12
+ARM GAS  /tmp/cctUMF4s.s 			page 12
 
 
  161 0572 38DC669F 		.ascii	"8\334f\237\335_\3441\3735\371\263\344Cj\362\337\343"
@@ -673,7 +673,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  162      7FFE
  163 0596 DF       		.ascii	"\337"
  164              		.text
- 165              		.section	.gnu.lto_.symtab.d08700a0e1399715,"",%progbits
+ 165              		.section	.gnu.lto_.symtab.56836cb6212dd114,"",%progbits
  166 0000 5F5F6561 		.ascii	"__early_init\000"
  166      726C795F 
  166      696E6974 
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  190              		.text
  191              		.section	.gnu.lto_.opts,"",%progbits
  192 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
-ARM GAS  /tmp/cchhCBMR.s 			page 13
+ARM GAS  /tmp/cctUMF4s.s 			page 13
 
 
  192      6174682D 
@@ -750,7 +750,7 @@ ARM GAS  /tmp/cchhCBMR.s 			page 1
  199              		.comm	__gnu_lto_v1,1,1
  200              		.comm	__gnu_lto_slim,1,1
  201              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM
-ARM GAS  /tmp/cchhCBMR.s 			page 14
+ARM GAS  /tmp/cctUMF4s.s 			page 14
 
 
 DEFINED SYMBOLS

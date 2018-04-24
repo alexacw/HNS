@@ -15,15 +15,14 @@
 
 #define SIM868_SD &SD1
 
-static const SerialConfig SERIAL_JUDGE_CONFIG = {
-  115200,               //Baud Rate
-  USART_CR1_UE,         //CR1 Register
-  USART_CR2_LINEN,      //CR2 Register
-  0                     //CR3 Register
+#define SIM868_SERIAL_EVENT_ID 1
+#define LEAST_SET_BIT(x) x &(-x)
+
+static const SerialConfig SIM868_SERIAL_CONFIG = {
+    115200,          //Baud Rate
+    USART_CR1_UE,    //CR1 Register
+    USART_CR2_LINEN, //CR2 Register
+    0                //CR3 Register
 };
 
-void initSerialHandler();
-
-void myUartSend(UARTDriver *driver_struct, size_t size, const void *data);
-
-void rxCB(UARTDriver *driver_struct);
+void initSIM868Serialhandler();

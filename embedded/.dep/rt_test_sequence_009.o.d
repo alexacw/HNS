@@ -86,6 +86,7 @@ build/obj/rt_test_sequence_009.o: \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_ext.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_gpt.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_i2c.h \
+ /home/acw/Desktop/HNS/embedded/os/hal/ports/STM32/LLD/I2Cv1/hal_i2c_lld.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_i2s.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_icu.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_mac.h \
@@ -93,6 +94,7 @@ build/obj/rt_test_sequence_009.o: \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_qspi.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_rtc.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_serial.h \
+ /home/acw/Desktop/HNS/embedded/os/hal/ports/STM32/LLD/USARTv1/hal_serial_lld.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_sdc.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_spi.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_uart.h \
@@ -293,6 +295,8 @@ mcuconf.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_i2c.h:
 
+/home/acw/Desktop/HNS/embedded/os/hal/ports/STM32/LLD/I2Cv1/hal_i2c_lld.h:
+
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_i2s.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_icu.h:
@@ -306,6 +310,8 @@ mcuconf.h:
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_rtc.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_serial.h:
+
+/home/acw/Desktop/HNS/embedded/os/hal/ports/STM32/LLD/USARTv1/hal_serial_lld.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal_sdc.h:
 

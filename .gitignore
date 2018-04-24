@@ -1,2 +1,2 @@
-embedded/.dep/**.**
-embedded/build
+*.o
+*.d
