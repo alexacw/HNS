@@ -1,21 +1,21 @@
 Archive member included to satisfy reference by file (symbol)
 
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memcpy.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (memcpy)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (memcpy)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (memset)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (memset)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strchr)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strchr)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strcmp.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strcmp)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strcmp)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strncmp)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strncmp)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strncpy)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strncpy)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strpbrk)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strpbrk)
 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
-                              /tmp/cczK9oKh.ltrans0.ltrans.o (strspn)
+                              /tmp/cc2A8CYK.ltrans0.ltrans.o (strspn)
 
 Discarded input sections
 
@@ -25,15 +25,15 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 build/obj/vectors.o
  .data          0x0000000000000000        0x0 build/obj/chcoreasm_v7m.o
  .bss           0x0000000000000000        0x0 build/obj/chcoreasm_v7m.o
- .text          0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data          0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss           0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .text          0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .ARM.extab.text._ZL9send2UARTP20BaseSequentialStreamiPPc
-                0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .ARM.extab.text._ZL7Thread1Pv
-                0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .ARM.extab.text.startup.main
-                0x0000000000000000        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000000000000        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .data          0x0000000000000000        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memcpy.o)
  .bss           0x0000000000000000        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memcpy.o)
  .text          0x0000000000000000        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
@@ -83,7 +83,7 @@ Linker script and memory map
 LOAD build/obj/crt0_v7m.o
 LOAD build/obj/vectors.o
 LOAD build/obj/chcoreasm_v7m.o
-LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
+LOAD /tmp/cc2A8CYK.ltrans0.ltrans.o
 
 .mstack         0x0000000020000000      0x400
                 0x0000000020000000                . = ALIGN (0x8)
@@ -117,7 +117,7 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
  *(SORT_BY_NAME(.fini_array.*))
                 0x0000000008000160                __fini_array_end = .
 
-.text           0x0000000008000160     0xa0e0
+.text           0x0000000008000160     0x9db0
  *(.text)
  .text          0x0000000008000160       0xd8 build/obj/crt0_v7m.o
                 0x0000000008000160                _crt0_entry
@@ -200,1394 +200,1380 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
  .text          0x0000000008000354      0x1bc /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strcmp.o)
                 0x0000000008000354                strcmp
  *(.text.*)
- .text.chMtxTryLock.constprop.99
-                0x0000000008000510       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .text.chMtxTryLock.constprop.95
+                0x0000000008000510       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *fill*         0x0000000008000544        0xc 
- .text.chEvtGetAndClearEvents.constprop.89
-                0x0000000008000550       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+ .text.chEvtGetAndClearEvents.constprop.85
+                0x0000000008000550       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  *fill*         0x000000000800056c        0x4 
- .text.dmaStreamAllocate.constprop.35
-                0x0000000008000570       0xa4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000614        0xc 
  .text._test_assert_time_window.constprop.3
-                0x0000000008000620       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800065c        0x4 
+                0x0000000008000570       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080005ac        0x4 
  .text.chCoreAllocAlignedWithOffset
-                0x0000000008000660       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080006a4        0xc 
- .text.notify1  0x00000000080006b0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080005b0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080005f4        0xc 
+ .text.notify1  0x0000000008000600       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.get_descriptor
-                0x00000000080006c0       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000610       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.oslib_test_003_001_setup
-                0x00000000080006f0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000728        0x8 
+                0x0000000008000640       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000678        0x8 
  .text.oslib_test_002_003_setup
-                0x0000000008000730       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800074c        0x4 
+                0x0000000008000680       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800069c        0x4 
  .text.oslib_test_002_002_setup
-                0x0000000008000750        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000754        0xc 
+                0x00000000080006a0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080006a4        0xc 
  .text.null_provider
-                0x0000000008000760        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000764        0xc 
+                0x00000000080006b0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080006b4        0xc 
  .text.oslib_test_002_001_setup
-                0x0000000008000770       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000784        0xc 
+                0x00000000080006c0       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080006d4        0xc 
  .text.oslib_test_001_003_setup
-                0x0000000008000790       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080007c4        0xc 
+                0x00000000080006e0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000714        0xc 
  .text.oslib_test_001_002_setup
-                0x00000000080007d0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080007d4        0xc 
+                0x0000000008000720        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000724        0xc 
  .text.oslib_test_001_001_setup
-                0x00000000080007e0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080007e4        0xc 
+                0x0000000008000730        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000734        0xc 
  .text.rt_test_010_011_setup
-                0x00000000080007f0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000740       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_010_010_setup
-                0x0000000008000800       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.tmo      0x0000000008000810        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000814        0xc 
+                0x0000000008000750       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.tmo      0x0000000008000760        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000764        0xc 
  .text.rt_test_010_007_setup
-                0x0000000008000820       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000770       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_009_002_setup
-                0x0000000008000830       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000848        0x8 
+                0x0000000008000780       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000798        0x8 
  .text.rt_test_009_001_setup
-                0x0000000008000850       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000888        0x8 
+                0x00000000080007a0       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080007d8        0x8 
  .text.rt_test_008_007_setup
-                0x0000000008000890       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008a8        0x8 
+                0x00000000080007e0       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080007f8        0x8 
  .text.rt_test_008_006_setup
-                0x00000000080008b0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008b4        0xc 
+                0x0000000008000800        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000804        0xc 
  .text.rt_test_008_005_setup
-                0x00000000080008c0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008c4        0xc 
+                0x0000000008000810        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000814        0xc 
  .text.rt_test_008_004_setup
-                0x00000000080008d0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008d4        0xc 
+                0x0000000008000820        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000824        0xc 
  .text.rt_test_008_003_setup
-                0x00000000080008e0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008e4        0xc 
+                0x0000000008000830        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000834        0xc 
  .text.rt_test_008_002_setup
-                0x00000000080008f0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080008f4        0xc 
+                0x0000000008000840        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000844        0xc 
  .text.rt_test_006_009_setup
-                0x0000000008000900       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000928        0x8 
+                0x0000000008000850       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000878        0x8 
  .text.rt_test_006_008_setup
-                0x0000000008000930       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800094c        0x4 
+                0x0000000008000880       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800089c        0x4 
  .text.rt_test_006_007_setup
-                0x0000000008000950        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000954        0xc 
+                0x00000000080008a0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080008a4        0xc 
  .text.rt_test_006_005_setup
-                0x0000000008000960       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080008b0       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_006_004_setup
-                0x0000000008000970       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800098c        0x4 
+                0x00000000080008c0       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080008dc        0x4 
  .text.rt_test_006_001_setup
-                0x0000000008000990        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000994        0xc 
+                0x00000000080008e0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080008e4        0xc 
  .text.rt_test_005_005_setup
-                0x00000000080009a0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080008f0       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_005_004_setup
-                0x00000000080009b0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080009b4        0xc 
+                0x0000000008000900        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000904        0xc 
  .text.rt_test_005_003_setup
-                0x00000000080009c0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080009c4        0xc 
+                0x0000000008000910        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000914        0xc 
  .text.rt_test_005_002_setup
-                0x00000000080009d0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080009d4        0xc 
+                0x0000000008000920        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000924        0xc 
  .text.rt_test_005_001_setup
-                0x00000000080009e0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000930       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_004_001_setup
-                0x00000000080009f0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080009fc        0x4 
+                0x0000000008000940        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800094c        0x4 
  .text._test_assert
-                0x0000000008000a00       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000a28        0x8 
+                0x0000000008000950       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000978        0x8 
  .text.rt_test_002_004_execute
-                0x0000000008000a30       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000980       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_002_003_execute
-                0x0000000008000a50       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000a74        0xc 
+                0x00000000080009a0       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080009c4        0xc 
  .text.test_terminate_threads
-                0x0000000008000a80       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000ab4        0xc 
+                0x00000000080009d0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000a04        0xc 
  .text.test_printn.part.0
-                0x0000000008000ac0       0x58 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b18        0x8 
+                0x0000000008000a10       0x58 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000a68        0x8 
  .text.test_printn
-                0x0000000008000b20       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b38        0x8 
+                0x0000000008000a70       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000a88        0x8 
  .text.test_emit_token
-                0x0000000008000b40       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b68        0x8 
- .text.h3       0x0000000008000b70        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b78        0x8 
- .text.h2       0x0000000008000b80        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b88        0x8 
- .text.h1       0x0000000008000b90        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000b98        0x8 
- .text.thread   0x0000000008000ba0        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000ba8        0x8 
+                0x0000000008000a90       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ab8        0x8 
+ .text.h3       0x0000000008000ac0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ac8        0x8 
+ .text.h2       0x0000000008000ad0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ad8        0x8 
+ .text.h1       0x0000000008000ae0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ae8        0x8 
+ .text.thread   0x0000000008000af0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000af8        0x8 
  .text.dyn_thread1
-                0x0000000008000bb0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000bb4        0xc 
+                0x0000000008000b00        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000b04        0xc 
  .text.test_println
-                0x0000000008000bc0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000bf8        0x8 
+                0x0000000008000b10       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000b48        0x8 
  .text.test_print
-                0x0000000008000c00       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000c24        0xc 
+                0x0000000008000b50       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000b74        0xc 
  .text._test_assert_sequence
-                0x0000000008000c30       0x4c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000c7c        0x4 
+                0x0000000008000b80       0x4c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000bcc        0x4 
  .text.rt_test_008_002_execute
-                0x0000000008000c80       0x50 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000bd0       0x50 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.print_line
-                0x0000000008000cd0       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000cfc        0x4 
+                0x0000000008000c20       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000c4c        0x4 
  .text.usb_lld_start_in
-                0x0000000008000d00       0x7c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000d7c        0x4 
+                0x0000000008000c50       0x7c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ccc        0x4 
  .text.usb_lld_start_out
-                0x0000000008000d80       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000dc4        0xc 
+                0x0000000008000cd0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000d14        0xc 
  .text.usb_lld_init_endpoint
-                0x0000000008000dd0       0xdc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000eac        0x4 
+                0x0000000008000d20       0xdc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000dfc        0x4 
  .text.usb_lld_reset
-                0x0000000008000eb0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000ee8        0x8 
- .text.i2c_lld_serve_tx_end_irq
-                0x0000000008000ef0       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000f2c        0x4 
+                0x0000000008000e00       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000e38        0x8 
  .text._usb_ep0out
-                0x0000000008000f30       0xa4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008000fd4        0xc 
+                0x0000000008000e40       0xa4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008000ee4        0xc 
  .text._usb_ep0in
-                0x0000000008000fe0       0xf0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008000ef0       0xf0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text._usb_ep0setup
-                0x00000000080010d0      0x448 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001518        0x8 
+                0x0000000008000fe0      0x448 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001428        0x8 
  .text.usbStartTransmitI
-                0x0000000008001520       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800154c        0x4 
+                0x0000000008001430       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800145c        0x4 
  .text.set_address
-                0x0000000008001550       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001578        0x8 
+                0x0000000008001460       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001488        0x8 
  .text.sduInterruptTransmitted
-                0x0000000008001580        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001584        0xc 
+                0x0000000008001490        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001494        0xc 
  .text.sduRequestsHook
-                0x0000000008001590       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080015d4        0xc 
- .text._ctl.lto_priv.121
-                0x00000000080015e0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080015e4        0xc 
- .text._ctl     0x00000000080015f0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080015f4        0xc 
+                0x00000000080014a0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080014e4        0xc 
+ .text._ctl.lto_priv.116
+                0x00000000080014f0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080014f4        0xc 
+ .text._ctl     0x0000000008001500        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001504        0xc 
  .text.sdu_start_receive
-                0x0000000008001600       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001664        0xc 
+                0x0000000008001510       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001574        0xc 
  .text.ibnotify
-                0x0000000008001670        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001678        0x8 
+                0x0000000008001580        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001588        0x8 
  .text.obqGetFullBufferI
-                0x0000000008001680       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800169c        0x4 
+                0x0000000008001590       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080015ac        0x4 
  .text.obnotify
-                0x00000000080016a0       0x4c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080016ec        0x4 
+                0x00000000080015b0       0x4c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080015fc        0x4 
  .text.sof_handler
-                0x00000000080016f0       0x90 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001600       0x90 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text._port_irq_epilogue
-                0x0000000008001780       0x54 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080017d4        0xc 
+                0x0000000008001690       0x54 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080016e4        0xc 
  .text.chCoreAllocAlignedI
-                0x00000000080017e0       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001814        0xc 
+                0x00000000080016f0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001724        0xc 
  .text.chPoolAlloc
-                0x0000000008001820       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001730       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.oslib_test_002_001_execute
-                0x0000000008001850      0x10c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800195c        0x4 
+                0x0000000008001760      0x10c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800186c        0x4 
  .text.chEvtAddEvents
-                0x0000000008001960       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800197c        0x4 
+                0x0000000008001870       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800188c        0x4 
  .text.chEvtUnregister
-                0x0000000008001980       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080019ac        0x4 
+                0x0000000008001890       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080018bc        0x4 
  .text.rt_test_008_001_execute
-                0x00000000080019b0       0xf8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001aa8        0x8 
+                0x00000000080018c0       0xf8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080019b8        0x8 
  .text.chThdCreateSuspendedI
-                0x0000000008001ab0       0x7c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001b2c        0x4 
- .text.wakeup   0x0000000008001b30       0x70 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080019c0       0x7c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001a3c        0x4 
+ .text.wakeup   0x0000000008001a40       0x70 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chSchReadyI
-                0x0000000008001ba0       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001bc8        0x8 
- .text.chThdDequeueNextI.constprop.105
-                0x0000000008001bd0       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.chMBPostI.constprop.73
-                0x0000000008001bf0       0x48 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001c38        0x8 
- .text.chMBPostAheadI.constprop.70
-                0x0000000008001c40       0x48 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001c88        0x8 
- .text.chMBFetchI.constprop.67
-                0x0000000008001c90       0x48 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001cd8        0x8 
- .text.chCondSignalI.constprop.96
-                0x0000000008001ce0       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001d04        0xc 
+                0x0000000008001ab0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001ad8        0x8 
+ .text.chThdDequeueNextI.constprop.101
+                0x0000000008001ae0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.chMBPostI.constprop.69
+                0x0000000008001b00       0x48 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001b48        0x8 
+ .text.chMBPostAheadI.constprop.66
+                0x0000000008001b50       0x48 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001b98        0x8 
+ .text.chMBFetchI.constprop.63
+                0x0000000008001ba0       0x48 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001be8        0x8 
+ .text.chCondSignalI.constprop.92
+                0x0000000008001bf0       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001c14        0xc 
  .text.chEvtSignalI
-                0x0000000008001d10       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001c20       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chEvtBroadcastFlagsI
-                0x0000000008001d40       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001d6c        0x4 
+                0x0000000008001c50       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001c7c        0x4 
  .text.sduDataReceived
-                0x0000000008001d70       0x60 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001c80       0x60 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.sduDataTransmitted
-                0x0000000008001dd0       0xa4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001e74        0xc 
+                0x0000000008001ce0       0xa4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001d84        0xc 
  .text.chMtxUnlockS
-                0x0000000008001e80       0x50 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001d90       0x50 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chSemSignalI
-                0x0000000008001ed0       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001ef4        0xc 
+                0x0000000008001de0       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001e04        0xc 
  .text.chThdDequeueAllI
-                0x0000000008001f00       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001f24        0xc 
- .text.chThdResumeI
-                0x0000000008001f30       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008001f48        0x8 
- .text.i2c_lld_serve_rx_end_irq
-                0x0000000008001f50       0x60 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008001e10       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001e34        0xc 
  .text.chVTDoResetI
-                0x0000000008001fb0       0x84 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002034        0xc 
+                0x0000000008001e40       0x84 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001ec4        0xc 
  .text.chVTDoSetI
-                0x0000000008002040       0xc4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002104        0xc 
+                0x0000000008001ed0       0xc4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001f94        0xc 
  .text.chSysGetStatusAndLockX.part.1
-                0x0000000008002110        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800211c        0x4 
+                0x0000000008001fa0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008001fac        0x4 
  .text.chSysIntegrityCheckI
-                0x0000000008002120       0xa4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080021c4        0xc 
+                0x0000000008001fb0       0xa4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002054        0xc 
  .text.rt_test_002_001_execute
-                0x00000000080021d0       0xa8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002278        0x8 
+                0x0000000008002060       0xa8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002108        0x8 
  .text._idle_thread
-                0x0000000008002280        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002284        0xc 
+                0x0000000008002110        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002114        0xc 
  .text.usbInitEndpointI
-                0x0000000008002290       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080022bc        0x4 
+                0x0000000008002120       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800214c        0x4 
  .text.usb_event
-                0x00000000080022c0       0xdc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800239c        0x4 
+                0x0000000008002150       0xdc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800222c        0x4 
  .text.parse_arguments
-                0x00000000080023a0       0x54 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080023f4        0xc 
+                0x0000000008002230       0x54 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002284        0xc 
  .text.chprintf
-                0x0000000008002400      0x3e4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080027e4        0xc 
+                0x0000000008002290      0x3e4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002674        0xc 
  .text._ZL9send2UARTP20BaseSequentialStreamiPPc
-                0x00000000080027f0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080027fc        0x4 
+                0x0000000008002680        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800268c        0x4 
  .text.cmd_systime
-                0x0000000008002800       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002834        0xc 
+                0x0000000008002690       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080026c4        0xc 
  .text.cmd_echo
-                0x0000000008002840       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080026d0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.cmd_info
-                0x0000000008002860       0xbc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800291c        0x4 
+                0x00000000080026f0       0xbc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080027ac        0x4 
  .text.rt_test_010_012_execute
-                0x0000000008002920       0xfc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002a1c        0x4 
+                0x00000000080027b0       0xfc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080028ac        0x4 
  .text.rt_test_001_003_execute
-                0x0000000008002a20      0x3e0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080028b0      0x3e0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_001_002_execute
-                0x0000000008002e00       0x8c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002e8c        0x4 
+                0x0000000008002c90       0x8c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002d1c        0x4 
  .text.rt_test_001_001_execute
-                0x0000000008002e90       0xa8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002f38        0x8 
+                0x0000000008002d20       0xa8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002dc8        0x8 
  .text.dyn_find_object
-                0x0000000008002f40       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008002f74        0xc 
+                0x0000000008002dd0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002e04        0xc 
  .text.dyn_create_object_pool
-                0x0000000008002f80       0x50 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008002e10       0x50 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chThdYield
-                0x0000000008002fd0       0x58 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003028        0x8 
+                0x0000000008002e60       0x58 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002eb8        0x8 
  .text.bmk_thread8
-                0x0000000008003030       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800305c        0x4 
+                0x0000000008002ec0       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002eec        0x4 
  .text.chSchWakeupS
-                0x0000000008003060       0x60 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.chThdCreateStatic.constprop.107
-                0x00000000080030c0       0x88 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003148        0x8 
- .text.chCondSignal.constprop.97
-                0x0000000008003150       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003178        0x8 
- .text.chThdCreateFromMemoryPool.constprop.78
-                0x0000000008003180       0x5c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080031dc        0x4 
+                0x0000000008002ef0       0x60 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.chThdCreateStatic.constprop.103
+                0x0000000008002f50       0x88 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008002fd8        0x8 
+ .text.chCondSignal.constprop.93
+                0x0000000008002fe0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003008        0x8 
+ .text.chThdCreateFromMemoryPool.constprop.74
+                0x0000000008003010       0x5c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800306c        0x4 
  .text.chSemSignal
-                0x00000000080031e0       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003214        0xc 
+                0x0000000008003070       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080030a4        0xc 
  .text.chSchGoSleepS
-                0x0000000008003220       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003248        0x8 
- .text.chEvtWaitOne.constprop.85
-                0x0000000008003250       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003284        0xc 
- .text.chEvtWaitAny.constprop.84
-                0x0000000008003290       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080032bc        0x4 
- .text.chEvtWaitAll.constprop.83
-                0x00000000080032c0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080032f8        0x8 
+                0x00000000080030b0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080030d8        0x8 
+ .text.chEvtWaitOne.constprop.81
+                0x00000000080030e0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003114        0xc 
+ .text.chEvtWaitAny.constprop.80
+                0x0000000008003120       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800314c        0x4 
+ .text.chEvtWaitAll.constprop.79
+                0x0000000008003150       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003188        0x8 
  .text.bmk_thread4
-                0x0000000008003300       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003324        0xc 
+                0x0000000008003190       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080031b4        0xc 
  .text.chSchGoSleepTimeoutS
-                0x0000000008003330       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003374        0xc 
- .text.chSemWaitTimeout.constprop.104
-                0x0000000008003380       0x50 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.chGuardedPoolAllocTimeout.constprop.62
-                0x00000000080033d0       0x68 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003438        0x8 
+                0x00000000080031c0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003204        0xc 
+ .text.chSemWaitTimeout.constprop.100
+                0x0000000008003210       0x50 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.chGuardedPoolAllocTimeout.constprop.58
+                0x0000000008003260       0x68 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080032c8        0x8 
  .text.oslib_test_002_003_execute
-                0x0000000008003440       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003468        0x8 
+                0x00000000080032d0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080032f8        0x8 
  .text.rt_test_008_006_execute
-                0x0000000008003470      0x168 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080035d8        0x8 
+                0x0000000008003300      0x168 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003468        0x8 
  .text.chThdEnqueueTimeoutS
-                0x00000000080035e0       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003608        0x8 
+                0x0000000008003470       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003498        0x8 
  .text.oqWriteTimeout
-                0x0000000008003610       0xc0 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text._writet.lto_priv.125
-                0x00000000080036d0        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080036d8        0x8 
- .text._write.lto_priv.137
-                0x00000000080036e0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080036ec        0x4 
+                0x00000000080034a0       0xc0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text._writet.lto_priv.120
+                0x0000000008003560        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003568        0x8 
+ .text._write.lto_priv.132
+                0x0000000008003570        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800357c        0x4 
  .text.oqPutTimeout
-                0x00000000080036f0       0x54 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003744        0xc 
- .text._putt.lto_priv.129
-                0x0000000008003750        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003758        0x8 
- .text._put.lto_priv.133
-                0x0000000008003760        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800376c        0x4 
+                0x0000000008003580       0x54 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080035d4        0xc 
+ .text._putt.lto_priv.124
+                0x00000000080035e0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080035e8        0x8 
+ .text._put.lto_priv.128
+                0x00000000080035f0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080035fc        0x4 
  .text.iqReadTimeout
-                0x0000000008003770       0xc0 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text._readt.lto_priv.123
-                0x0000000008003830        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003838        0x8 
- .text._read.lto_priv.135
-                0x0000000008003840        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800384c        0x4 
+                0x0000000008003600       0xc0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text._readt.lto_priv.118
+                0x00000000080036c0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080036c8        0x8 
+ .text._read.lto_priv.130
+                0x00000000080036d0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080036dc        0x4 
  .text.iqGetTimeout
-                0x0000000008003850       0x54 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080038a4        0xc 
- .text._gett.lto_priv.127
-                0x00000000080038b0        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080038b8        0x8 
- .text._get.lto_priv.131
-                0x00000000080038c0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080038cc        0x4 
+                0x00000000080036e0       0x54 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003734        0xc 
+ .text._gett.lto_priv.122
+                0x0000000008003740        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003748        0x8 
+ .text._get.lto_priv.126
+                0x0000000008003750        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800375c        0x4 
  .text.obqGetEmptyBufferTimeoutS
-                0x00000000080038d0       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003904        0xc 
+                0x0000000008003760       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003794        0xc 
  .text.obqWriteTimeout
-                0x0000000008003910      0x110 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text._writet.lto_priv.126
-                0x0000000008003a20        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003a28        0x8 
- .text._write.lto_priv.138
-                0x0000000008003a30        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003a3c        0x4 
+                0x00000000080037a0      0x110 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text._writet.lto_priv.121
+                0x00000000080038b0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080038b8        0x8 
+ .text._write.lto_priv.133
+                0x00000000080038c0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080038cc        0x4 
  .text.obqPutTimeout
-                0x0000000008003a40       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003aa4        0xc 
- .text._putt.lto_priv.130
-                0x0000000008003ab0        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003ab8        0x8 
- .text._put.lto_priv.134
-                0x0000000008003ac0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003acc        0x4 
+                0x00000000080038d0       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003934        0xc 
+ .text._putt.lto_priv.125
+                0x0000000008003940        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003948        0x8 
+ .text._put.lto_priv.129
+                0x0000000008003950        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800395c        0x4 
  .text.ibqGetFullBufferTimeoutS
-                0x0000000008003ad0       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003b04        0xc 
+                0x0000000008003960       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003994        0xc 
  .text.ibqReadTimeout
-                0x0000000008003b10      0x118 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003c28        0x8 
- .text._readt.lto_priv.124
-                0x0000000008003c30        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003c38        0x8 
- .text._read.lto_priv.136
-                0x0000000008003c40        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003c4c        0x4 
+                0x00000000080039a0      0x118 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003ab8        0x8 
+ .text._readt.lto_priv.119
+                0x0000000008003ac0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003ac8        0x8 
+ .text._read.lto_priv.131
+                0x0000000008003ad0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003adc        0x4 
  .text.ibqGetTimeout
-                0x0000000008003c50       0x5c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003cac        0x4 
- .text._gett.lto_priv.128
-                0x0000000008003cb0        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003cb8        0x8 
- .text._get.lto_priv.132
-                0x0000000008003cc0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003ccc        0x4 
+                0x0000000008003ae0       0x5c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003b3c        0x4 
+ .text._gett.lto_priv.123
+                0x0000000008003b40        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003b48        0x8 
+ .text._get.lto_priv.127
+                0x0000000008003b50        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003b5c        0x4 
  .text.chThdSleep
-                0x0000000008003cd0       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003ce8        0x8 
+                0x0000000008003b60       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003b78        0x8 
  .text._ZL7Thread1Pv
-                0x0000000008003cf0       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008003d34        0xc 
+                0x0000000008003b80       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008003bc4        0xc 
  .text.rt_test_003_001_execute
-                0x0000000008003d40       0xd0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008003bd0       0xd0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.test_wait_tick
-                0x0000000008003e10       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008003ca0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_010_009_execute
-                0x0000000008003e30       0xa0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008003cc0       0xa0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.test_execute
-                0x0000000008003ed0      0x348 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004218        0x8 
- .text.test_rt  0x0000000008004220        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800422c        0x4 
+                0x0000000008003d60      0x348 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080040a8        0x8 
+ .text.test_rt  0x00000000080040b0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080040bc        0x4 
  .text.test_oslib
-                0x0000000008004230        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800423c        0x4 
+                0x00000000080040c0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080040cc        0x4 
  .text.chMsgWait
-                0x0000000008004240       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080040d0       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.bmk_thread1
-                0x0000000008004280       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008004110       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chMsgSend
-                0x00000000080042a0       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008004130       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.msg_loop_test
-                0x00000000080042e0       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008004170       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.msg_thread1
-                0x0000000008004320       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004348        0x8 
+                0x00000000080041b0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080041d8        0x8 
  .text.chMtxLockS
-                0x0000000008004350       0xe8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004438        0x8 
+                0x00000000080041e0       0xe8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080042c8        0x8 
  .text.chMtxLock
-                0x0000000008004440       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004454        0xc 
+                0x00000000080042d0       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080042e4        0xc 
  .text.chSemWait
-                0x0000000008004460       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080044a4        0xc 
+                0x00000000080042f0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008004334        0xc 
  .text.rt_test_010_010_execute
-                0x00000000080044b0       0x90 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008004340       0x90 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.bmk_thread7
-                0x0000000008004540       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800456c        0x4 
- .text.thread3  0x0000000008004570       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004588        0x8 
- .text.thread1.lto_priv.119
-                0x0000000008004590       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080045a8        0x8 
+                0x00000000080043d0       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080043fc        0x4 
+ .text.thread3  0x0000000008004400       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008004418        0x8 
+ .text.thread1.lto_priv.114
+                0x0000000008004420       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008004438        0x8 
  .text.chThdExitS
-                0x00000000080045b0       0x48 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080045f8        0x8 
+                0x0000000008004440       0x48 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008004488        0x8 
  .text.shellThread
-                0x0000000008004600      0x220 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008004490      0x220 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.cmd_exit
-                0x0000000008004820       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008004854        0xc 
+                0x00000000080046b0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080046e4        0xc 
  .text.__early_init
-                0x0000000008004860       0x7c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008004860                __early_init
- *fill*         0x00000000080048dc        0x4 
+                0x00000000080046f0       0x7c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x00000000080046f0                __early_init
+ *fill*         0x000000000800476c        0x4 
  .text.Vector90
-                0x00000000080048e0      0x318 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080048e0                Vector90
- *fill*         0x0000000008004bf8        0x8 
+                0x0000000008004770      0x318 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004770                Vector90
+ *fill*         0x0000000008004a88        0x8 
  .text.VectorD4
-                0x0000000008004c00      0x19c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008004c00                VectorD4
- *fill*         0x0000000008004d9c        0x4 
+                0x0000000008004a90      0x19c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004a90                VectorD4
+ *fill*         0x0000000008004c2c        0x4 
  .text.VectorB0
-                0x0000000008004da0       0xa0 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008004da0                VectorB0
+                0x0000000008004c30       0xa0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004c30                VectorB0
  .text.VectorC0
-                0x0000000008004e40       0xd4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008004e40                VectorC0
- *fill*         0x0000000008004f14        0xc 
+                0x0000000008004cd0       0xd8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004cd0                VectorC0
+ *fill*         0x0000000008004da8        0x8 
  .text.VectorBC
-                0x0000000008004f20       0xf4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008004f20                VectorBC
- *fill*         0x0000000008005014        0xc 
+                0x0000000008004db0       0xfc /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004db0                VectorBC
+ *fill*         0x0000000008004eac        0x4 
  .text.Vector84
-                0x0000000008005020       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005020                Vector84
- *fill*         0x000000000800505c        0x4 
+                0x0000000008004eb0       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004eb0                Vector84
+ *fill*         0x0000000008004eec        0x4 
  .text.Vector80
-                0x0000000008005060       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005060                Vector80
- *fill*         0x000000000800509c        0x4 
+                0x0000000008004ef0       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004ef0                Vector80
+ *fill*         0x0000000008004f2c        0x4 
  .text.Vector7C
-                0x00000000080050a0       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080050a0                Vector7C
- *fill*         0x00000000080050dc        0x4 
+                0x0000000008004f30       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004f30                Vector7C
+ *fill*         0x0000000008004f6c        0x4 
  .text.Vector78
-                0x00000000080050e0       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080050e0                Vector78
- *fill*         0x000000000800511c        0x4 
+                0x0000000008004f70       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004f70                Vector78
+ *fill*         0x0000000008004fac        0x4 
  .text.Vector74
-                0x0000000008005120       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005120                Vector74
- *fill*         0x000000000800515c        0x4 
+                0x0000000008004fb0       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004fb0                Vector74
+ *fill*         0x0000000008004fec        0x4 
  .text.Vector70
-                0x0000000008005160       0x3c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005160                Vector70
- *fill*         0x000000000800519c        0x4 
+                0x0000000008004ff0       0x3c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008004ff0                Vector70
+ *fill*         0x000000000800502c        0x4 
  .text.Vector6C
-                0x00000000080051a0       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080051a0                Vector6C
- *fill*         0x00000000080051d4        0xc 
+                0x0000000008005030       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005030                Vector6C
+ *fill*         0x0000000008005064        0xc 
  .text.VectorE0
-                0x00000000080051e0      0x11c /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080051e0                VectorE0
- *fill*         0x00000000080052fc        0x4 
+                0x0000000008005070      0x11c /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005070                VectorE0
+ *fill*         0x000000000800518c        0x4 
  .text.Vector9C
-                0x0000000008005300       0xe8 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005300                Vector9C
- *fill*         0x00000000080053e8        0x8 
+                0x0000000008005190       0xe8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005190                Vector9C
+ *fill*         0x0000000008005278        0x8 
  .text.Vector68
-                0x00000000080053f0       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080053f0                Vector68
- *fill*         0x0000000008005434        0xc 
+                0x0000000008005280       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005280                Vector68
+ *fill*         0x00000000080052c4        0xc 
  .text.Vector64
-                0x0000000008005440       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005440                Vector64
- *fill*         0x0000000008005484        0xc 
+                0x00000000080052d0       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x00000000080052d0                Vector64
+ *fill*         0x0000000008005314        0xc 
  .text.Vector60
-                0x0000000008005490       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005490                Vector60
- *fill*         0x00000000080054d4        0xc 
+                0x0000000008005320       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005320                Vector60
+ *fill*         0x0000000008005364        0xc 
  .text.Vector5C
-                0x00000000080054e0       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080054e0                Vector5C
- *fill*         0x0000000008005524        0xc 
+                0x0000000008005370       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005370                Vector5C
+ *fill*         0x00000000080053b4        0xc 
  .text.Vector58
-                0x0000000008005530       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005530                Vector58
+                0x00000000080053c0       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x00000000080053c0                Vector58
  .text.SVC_Handler
-                0x0000000008005570       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005570                SVC_Handler
- *fill*         0x0000000008005584        0xc 
+                0x0000000008005400       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005400                SVC_Handler
+ *fill*         0x0000000008005414        0xc 
  .text.chThdExit
-                0x0000000008005590        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008005590                chThdExit
- *fill*         0x000000000800559c        0x4 
+                0x0000000008005420        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005420                chThdExit
+ *fill*         0x000000000800542c        0x4 
  .text.bmk_thread3
-                0x00000000080055a0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080055a4        0xc 
+                0x0000000008005430        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005434        0xc 
  .text.chSchDoRescheduleAhead
-                0x00000000080055b0       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x00000000080055b0                chSchDoReschedule
+                0x0000000008005440       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008005440                chSchDoReschedule
  .text.chSchRescheduleS
-                0x00000000080055f0       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005608        0x8 
- .text.chSemSignalWait.constprop.101
-                0x0000000008005610       0x68 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005678        0x8 
+                0x0000000008005480       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005498        0x8 
+ .text.chSemSignalWait.constprop.97
+                0x00000000080054a0       0x68 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005508        0x8 
  .text.rt_test_005_005_execute
-                0x0000000008005680       0x9c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800571c        0x4 
- .text.chMBReset.constprop.76
-                0x0000000008005720       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008005510       0x9c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080055ac        0x4 
+ .text.chMBReset.constprop.72
+                0x00000000080055b0       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.oslib_test_001_003_teardown
-                0x0000000008005760        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005764        0xc 
+                0x00000000080055f0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080055f4        0xc 
  .text.oslib_test_001_002_teardown
-                0x0000000008005770        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005774        0xc 
+                0x0000000008005600        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005604        0xc 
  .text.oslib_test_001_001_teardown
-                0x0000000008005780        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005784        0xc 
- .text.chMBPostTimeout.constprop.74
-                0x0000000008005790       0x6c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080057fc        0x4 
- .text.chMBPostAheadTimeout.constprop.71
-                0x0000000008005800       0x6c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800586c        0x4 
- .text.chMBFetchTimeout.constprop.68
-                0x0000000008005870       0x6c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080058dc        0x4 
+                0x0000000008005610        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005614        0xc 
+ .text.chMBPostTimeout.constprop.70
+                0x0000000008005620       0x6c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800568c        0x4 
+ .text.chMBPostAheadTimeout.constprop.67
+                0x0000000008005690       0x6c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080056fc        0x4 
+ .text.chMBFetchTimeout.constprop.64
+                0x0000000008005700       0x6c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800576c        0x4 
  .text.oslib_test_001_003_execute
-                0x00000000080058e0      0x114 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080059f4        0xc 
+                0x0000000008005770      0x114 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005884        0xc 
  .text.oslib_test_001_002_execute
-                0x0000000008005a00      0x2f8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008005cf8        0x8 
+                0x0000000008005890      0x2f8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005b88        0x8 
  .text.oslib_test_001_001_execute
-                0x0000000008005d00      0x30c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800600c        0x4 
+                0x0000000008005b90      0x30c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008005e9c        0x4 
  .text.oslib_test_002_002_execute
-                0x0000000008006010      0x100 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008005ea0      0x100 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.evt_thread7
-                0x0000000008006110       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008005fa0       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.evt_thread3
-                0x0000000008006150       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006174        0xc 
+                0x0000000008005fe0       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006004        0xc 
  .text.thread4B
-                0x0000000008006180       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.thread2  0x00000000080061b0       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080061d4        0xc 
- .text.thread4  0x00000000080061e0       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800620c        0x4 
- .text.thread1.lto_priv.118
-                0x0000000008006210       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800623c        0x4 
+                0x0000000008006010       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.thread2  0x0000000008006040       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006064        0xc 
+ .text.thread4  0x0000000008006070       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800609c        0x4 
+ .text.thread1.lto_priv.113
+                0x00000000080060a0       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080060d4        0xc 
  .text.chMtxUnlock
-                0x0000000008006240       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080062a4        0xc 
- .text.chHeapAllocAligned.constprop.79
-                0x00000000080062b0       0xec /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800639c        0x4 
+                0x00000000080060e0       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006144        0xc 
+ .text.chHeapAllocAligned.constprop.75
+                0x0000000008006150       0xec /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800623c        0x4 
  .text.dyn_create_object_heap
-                0x00000000080063a0       0x50 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008006240       0x50 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chThdCreateFromHeap
-                0x00000000080063f0       0x4c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800643c        0x4 
- .text.chFactoryRegisterObject.constprop.59
-                0x0000000008006440       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.chFactoryFindObject.constprop.58
-                0x0000000008006470       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006498        0x8 
- .text.chFactoryCreateBuffer.constprop.57
-                0x00000000080064a0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080064d8        0x8 
- .text.chFactoryFindBuffer.constprop.56
-                0x00000000080064e0       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006508        0x8 
- .text.chFactoryCreateSemaphore.constprop.55
-                0x0000000008006510       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006548        0x8 
- .text.chFactoryFindSemaphore.constprop.54
-                0x0000000008006550       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008006290       0x4c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080062dc        0x4 
+ .text.chFactoryRegisterObject.constprop.55
+                0x00000000080062e0       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.chFactoryFindObject.constprop.54
+                0x0000000008006310       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006338        0x8 
+ .text.chFactoryCreateBuffer.constprop.53
+                0x0000000008006340       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006378        0x8 
+ .text.chFactoryFindBuffer.constprop.52
+                0x0000000008006380       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080063a8        0x8 
+ .text.chFactoryCreateSemaphore.constprop.51
+                0x00000000080063b0       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080063e8        0x8 
+ .text.chFactoryFindSemaphore.constprop.50
+                0x00000000080063f0       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006418        0x8 
+ .text.chFactoryCreateMailbox.constprop.49
+                0x0000000008006420       0x54 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006474        0xc 
+ .text.chFactoryFindMailbox.constprop.48
+                0x0000000008006480       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080064a8        0x8 
+ .text.chFactoryCreateObjectsFIFO.constprop.47
+                0x00000000080064b0       0xa0 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.chFactoryFindObjectsFIFO.constprop.46
+                0x0000000008006550       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *fill*         0x0000000008006578        0x8 
- .text.chFactoryCreateMailbox.constprop.53
-                0x0000000008006580       0x54 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080065d4        0xc 
- .text.chFactoryFindMailbox.constprop.52
-                0x00000000080065e0       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006608        0x8 
- .text.chFactoryCreateObjectsFIFO.constprop.51
-                0x0000000008006610       0xa0 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.chFactoryFindObjectsFIFO.constprop.50
-                0x00000000080066b0       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080066d8        0x8 
  .text.rt_test_010_011_execute
-                0x00000000080066e0       0x90 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.thread8  0x0000000008006770       0x88 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080067f8        0x8 
- .text.thread6  0x0000000008006800       0x6c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800686c        0x4 
- .text.thread9  0x0000000008006870       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008006580       0x90 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.thread8  0x0000000008006610       0x88 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006698        0x8 
+ .text.thread6  0x00000000080066a0       0x6c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800670c        0x4 
+ .text.thread9  0x0000000008006710       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_006_005_execute
-                0x0000000008006890      0x15c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080069ec        0x4 
+                0x0000000008006730      0x15c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800688c        0x4 
  .text.rt_test_006_004_execute
-                0x00000000080069f0      0x130 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008006890      0x130 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.thread4A
-                0x0000000008006b20       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
- .text.thread1.lto_priv.120
-                0x0000000008006b40       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080069c0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .text.thread1.lto_priv.115
+                0x00000000080069e0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chFactoryReleaseSemaphore
-                0x0000000008006b60       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006bc4        0xc 
+                0x0000000008006a00       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006a64        0xc 
  .text.oslib_test_004_003_execute
-                0x0000000008006bd0      0x128 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006cf8        0x8 
+                0x0000000008006a70      0x128 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006b98        0x8 
  .text.oslib_test_004_003_teardown
-                0x0000000008006d00       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006d1c        0x4 
+                0x0000000008006ba0       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006bbc        0x4 
  .text.chFactoryReleaseObject
-                0x0000000008006d20       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006d84        0xc 
+                0x0000000008006bc0       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006c24        0xc 
  .text.oslib_test_004_001_execute
-                0x0000000008006d90      0x174 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006f04        0xc 
+                0x0000000008006c30      0x174 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006da4        0xc 
  .text.oslib_test_004_001_teardown
-                0x0000000008006f10       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006f2c        0x4 
+                0x0000000008006db0       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006dcc        0x4 
  .text.chHeapStatus
-                0x0000000008006f30       0x68 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008006f98        0x8 
- .text.cmd_mem  0x0000000008006fa0       0x70 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008006dd0       0x68 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006e38        0x8 
+ .text.cmd_mem  0x0000000008006e40       0x70 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chHeapFree
-                0x0000000008007010       0x94 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080070a4        0xc 
+                0x0000000008006eb0       0x94 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006f44        0xc 
  .text.oslib_test_003_002_execute
-                0x00000000080070b0       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007114        0xc 
+                0x0000000008006f50       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008006fb4        0xc 
  .text.oslib_test_003_001_execute
-                0x0000000008007120      0x32c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800744c        0x4 
+                0x0000000008006fc0      0x32c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080072ec        0x4 
  .text.dyn_release_object_heap.part.3
-                0x0000000008007450       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080072f0       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.chFactoryReleaseObjectsFIFO
-                0x0000000008007470       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800749c        0x4 
+                0x0000000008007310       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800733c        0x4 
  .text.oslib_test_004_005_execute
-                0x00000000080074a0      0x128 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080075c8        0x8 
+                0x0000000008007340      0x128 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008007468        0x8 
  .text.oslib_test_004_005_teardown
-                0x00000000080075d0       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080075ec        0x4 
+                0x0000000008007470       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800748c        0x4 
  .text.chFactoryReleaseMailbox
-                0x00000000080075f0       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800761c        0x4 
+                0x0000000008007490       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080074bc        0x4 
  .text.oslib_test_004_004_execute
-                0x0000000008007620      0x128 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007748        0x8 
+                0x00000000080074c0      0x128 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080075e8        0x8 
  .text.oslib_test_004_004_teardown
-                0x0000000008007750       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800776c        0x4 
+                0x00000000080075f0       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800760c        0x4 
  .text.chFactoryReleaseBuffer
-                0x0000000008007770       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800779c        0x4 
+                0x0000000008007610       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800763c        0x4 
  .text.oslib_test_004_002_execute
-                0x00000000080077a0      0x128 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080078c8        0x8 
+                0x0000000008007640      0x128 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008007768        0x8 
  .text.oslib_test_004_002_teardown
-                0x00000000080078d0       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080078ec        0x4 
+                0x0000000008007770       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800778c        0x4 
  .text.chThdRelease
-                0x00000000080078f0       0x64 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007954        0xc 
+                0x0000000008007790       0x64 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080077f4        0xc 
  .text.cmd_threads
-                0x0000000008007960       0xc4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007a24        0xc 
+                0x0000000008007800       0xc4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080078c4        0xc 
  .text.rt_test_010_006_execute
-                0x0000000008007a30       0x84 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007ab4        0xc 
+                0x00000000080078d0       0x84 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008007954        0xc 
  .text.chThdWait
-                0x0000000008007ac0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008007af8        0x8 
+                0x0000000008007960       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008007998        0x8 
  .text.startup.main
-                0x0000000008007b00      0x7f0 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008007b00                main
+                0x00000000080079a0      0x620 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x00000000080079a0                main
  .text.cmd_test
-                0x00000000080082f0       0x8c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800837c        0x4 
+                0x0000000008007fc0       0x8c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800804c        0x4 
  .text.rt_test_010_005_execute
-                0x0000000008008380       0x84 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008404        0xc 
+                0x0000000008008050       0x84 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080080d4        0xc 
  .text.test_wait_threads
-                0x0000000008008410       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008434        0xc 
+                0x00000000080080e0       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008104        0xc 
  .text.rt_test_010_008_execute
-                0x0000000008008440       0xe4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008524        0xc 
+                0x0000000008008110       0xe4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080081f4        0xc 
  .text.rt_test_010_004_execute
-                0x0000000008008530       0xd0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008008200       0xd0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_010_003_execute
-                0x0000000008008600       0xd8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080086d8        0x8 
+                0x00000000080082d0       0xd8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080083a8        0x8 
  .text.rt_test_010_002_execute
-                0x00000000080086e0       0x74 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008754        0xc 
+                0x00000000080083b0       0x74 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008424        0xc 
  .text.rt_test_010_001_execute
-                0x0000000008008760       0x74 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000080087d4        0xc 
+                0x0000000008008430       0x74 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080084a4        0xc 
  .text.rt_test_009_002_execute
-                0x00000000080087e0      0x150 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080084b0      0x150 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_009_001_execute
-                0x0000000008008930      0x174 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008aa4        0xc 
+                0x0000000008008600      0x174 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008774        0xc 
  .text.rt_test_008_007_execute
-                0x0000000008008ab0      0x12c /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008bdc        0x4 
+                0x0000000008008780      0x12c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080088ac        0x4 
  .text.rt_test_008_005_execute
-                0x0000000008008be0       0xcc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008cac        0x4 
+                0x00000000080088b0       0xcc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800897c        0x4 
  .text.rt_test_008_004_execute
-                0x0000000008008cb0       0xc8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008d78        0x8 
+                0x0000000008008980       0xc8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008a48        0x8 
  .text.rt_test_008_003_execute
-                0x0000000008008d80       0xf8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008e78        0x8 
+                0x0000000008008a50       0xf8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008b48        0x8 
  .text.rt_test_007_001_execute
-                0x0000000008008e80       0x70 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008008b50       0x70 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_006_009_execute
-                0x0000000008008ef0       0xa4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008008f94        0xc 
+                0x0000000008008bc0       0xa4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008c64        0xc 
  .text.rt_test_006_008_execute
-                0x0000000008008fa0       0xe0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008008c70       0xe0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_006_007_execute
-                0x0000000008009080       0xd4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009154        0xc 
+                0x0000000008008d50       0xd4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008e24        0xc 
  .text.rt_test_005_006_teardown
-                0x0000000008009160        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009164        0xc 
+                0x0000000008008e30        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008e34        0xc 
  .text.rt_test_006_004_teardown
-                0x0000000008009170        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009174        0xc 
+                0x0000000008008e40        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008e44        0xc 
  .text.rt_test_006_001_execute
-                0x0000000008009180       0xd8 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009258        0x8 
+                0x0000000008008e50       0xd8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008f28        0x8 
  .text.rt_test_005_005_teardown
-                0x0000000008009260        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009264        0xc 
+                0x0000000008008f30        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008f34        0xc 
  .text.rt_test_005_004_execute
-                0x0000000008009270       0xb4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009324        0xc 
+                0x0000000008008f40       0xb4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008008ff4        0xc 
  .text.rt_test_005_003_execute
-                0x0000000008009330      0x160 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009000      0x160 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_005_002_execute
-                0x0000000008009490       0xe4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009574        0xc 
+                0x0000000008009160       0xe4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009244        0xc 
  .text.rt_test_004_001_execute
-                0x0000000008009580       0xf0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009250       0xf0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_003_002_execute
-                0x0000000008009670      0x194 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009804        0xc 
+                0x0000000008009340      0x194 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080094d4        0xc 
  .text.chSemReset
-                0x0000000008009810       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009848        0x8 
+                0x00000000080094e0       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009518        0x8 
  .text.rt_test_010_007_execute
-                0x0000000008009850      0x118 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009968        0x8 
+                0x0000000008009520      0x118 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009638        0x8 
  .text.rt_test_005_006_execute
-                0x0000000008009970      0x1b0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009640      0x1b0 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_005_001_execute
-                0x0000000008009b20       0xbc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009bdc        0x4 
+                0x00000000080097f0       0xbc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080098ac        0x4 
  .text.rt_test_005_001_teardown
-                0x0000000008009be0        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009bec        0x4 
+                0x00000000080098b0        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080098bc        0x4 
  .text.chThdSetPriority
-                0x0000000008009bf0       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000080098c0       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_003_004_execute
-                0x0000000008009c20       0xdc /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009cfc        0x4 
+                0x00000000080098f0       0xdc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000080099cc        0x4 
  .text.rt_test_003_003_execute
-                0x0000000008009d00       0x88 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009d88        0x8 
+                0x00000000080099d0       0x88 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009a58        0x8 
  .text.chSysRestoreStatusX.part.2
-                0x0000000008009d90       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009a60       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .text.rt_test_002_002_execute
-                0x0000000008009db0       0xd4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009e84        0xc 
- .text.vtcb     0x0000000008009e90       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000008009eb8        0x8 
+                0x0000000008009a80       0xd4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009b54        0xc 
+ .text.vtcb     0x0000000008009b60       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009b88        0x8 
  .text.__init_ram_areas
-                0x0000000008009ec0       0x68 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008009ec0                __init_ram_areas
- *fill*         0x0000000008009f28        0x8 
+                0x0000000008009b90       0x68 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008009b90                __init_ram_areas
+ *fill*         0x0000000008009bf8        0x8 
  .text.__default_exit
-                0x0000000008009f30        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008009f30                __default_exit
- *fill*         0x0000000008009f34        0xc 
+                0x0000000008009c00        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008009c00                __default_exit
+ *fill*         0x0000000008009c04        0xc 
  .text.__late_init
-                0x0000000008009f40        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008009f40                __late_init
- *fill*         0x0000000008009f44        0xc 
+                0x0000000008009c10        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008009c10                __late_init
+ *fill*         0x0000000008009c14        0xc 
  .text.__core_init
-                0x0000000008009f50        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x0000000008009f50                __core_init
- .text.memset   0x0000000008009f54       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
-                0x0000000008009f54                memset
- .text.strchr   0x0000000008009fe8       0xe8 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
-                0x0000000008009fe8                strchr
- .text.strncmp  0x000000000800a0d0       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
-                0x000000000800a0d0                strncmp
- .text.strncpy  0x000000000800a164       0x64 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
-                0x000000000800a164                strncpy
- .text.strpbrk  0x000000000800a1c8       0x44 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
-                0x000000000800a1c8                strpbrk
- .text.strspn   0x000000000800a20c       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
-                0x000000000800a20c                strspn
+                0x0000000008009c20        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x0000000008009c20                __core_init
+ .text.memset   0x0000000008009c24       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
+                0x0000000008009c24                memset
+ .text.strchr   0x0000000008009cb8       0xe8 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
+                0x0000000008009cb8                strchr
+ .text.strncmp  0x0000000008009da0       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
+                0x0000000008009da0                strncmp
+ .text.strncpy  0x0000000008009e34       0x64 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
+                0x0000000008009e34                strncpy
+ .text.strpbrk  0x0000000008009e98       0x44 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
+                0x0000000008009e98                strpbrk
+ .text.strspn   0x0000000008009edc       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
+                0x0000000008009edc                strspn
  *(.glue_7t)
- .glue_7t       0x000000000800a240        0x0 linker stubs
+ .glue_7t       0x0000000008009f10        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x000000000800a240        0x0 linker stubs
+ .glue_7        0x0000000008009f10        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x000000000800a240        0x0
- .vfp11_veneer  0x000000000800a240        0x0 linker stubs
+.vfp11_veneer   0x0000000008009f10        0x0
+ .vfp11_veneer  0x0000000008009f10        0x0 linker stubs
 
-.v4_bx          0x000000000800a240        0x0
- .v4_bx         0x000000000800a240        0x0 linker stubs
+.v4_bx          0x0000000008009f10        0x0
+ .v4_bx         0x0000000008009f10        0x0 linker stubs
 
-.iplt           0x000000000800a240        0x0
- .iplt          0x000000000800a240        0x0 build/obj/crt0_v7m.o
+.iplt           0x0000000008009f10        0x0
+ .iplt          0x0000000008009f10        0x0 build/obj/crt0_v7m.o
 
-.rodata         0x000000000800a240     0x2800
-                0x000000000800a240                . = ALIGN (0x4)
-                0x000000000800a240                __rodata_base__ = .
+.rodata         0x0000000008009f10     0x27e8
+                0x0000000008009f10                . = ALIGN (0x4)
+                0x0000000008009f10                __rodata_base__ = .
  *(.rodata)
- .rodata        0x000000000800a240        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
  *(.rodata.*)
  .rodata._ZL10shell_cfg1
-                0x000000000800a24c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009f10        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata._ZL7Thread1Pv.str1.4
-                0x000000000800a254        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009f18        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata._ZL8commands
-                0x000000000800a25c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009f20       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata._ZL9send2UARTP20BaseSequentialStreamiPPc.str1.4
-                0x000000000800a26c        0xe /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a27a        0x2 
+                0x0000000008009f30        0xe /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009f3e        0x2 
  .rodata._stm32_dma_streams
-                0x000000000800a27c       0x8c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000008009f40       0x8c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata._test_assert_time_window.constprop.3.str1.4
-                0x000000000800a308       0x13 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a31b        0x1 
+                0x0000000008009fcc       0x13 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009fdf        0x1 
  .rodata.active_status
-                0x000000000800a31c        0x2 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a31e        0x2 
- .rodata.chFactoryCreateBuffer.constprop.57.str1.4
-                0x000000000800a320        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a326        0x2 
- .rodata.chFactoryCreateMailbox.constprop.53.str1.4
-                0x000000000800a328        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a32e        0x2 
- .rodata.chFactoryCreateObjectsFIFO.constprop.51.str1.4
-                0x000000000800a330        0x7 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a337        0x1 
- .rodata.chFactoryCreateSemaphore.constprop.55.str1.4
-                0x000000000800a338        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a33e        0x2 
- .rodata.chFactoryRegisterObject.constprop.59.str1.4
-                0x000000000800a340        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a346        0x2 
- .rodata.chThdCreateStatic.constprop.107.str1.4
-                0x000000000800a348        0x7 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a34f        0x1 
+                0x0000000008009fe0        0x2 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009fe2        0x2 
+ .rodata.chFactoryCreateBuffer.constprop.53.str1.4
+                0x0000000008009fe4        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009fea        0x2 
+ .rodata.chFactoryCreateMailbox.constprop.49.str1.4
+                0x0000000008009fec        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009ff2        0x2 
+ .rodata.chFactoryCreateObjectsFIFO.constprop.47.str1.4
+                0x0000000008009ff4        0x7 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000008009ffb        0x1 
+ .rodata.chFactoryCreateSemaphore.constprop.51.str1.4
+                0x0000000008009ffc        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a002        0x2 
+ .rodata.chFactoryRegisterObject.constprop.55.str1.4
+                0x000000000800a004        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a00a        0x2 
+ .rodata.chThdCreateStatic.constprop.103.str1.4
+                0x000000000800a00c        0x7 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a013        0x1 
  .rodata.ch_debug
-                0x000000000800a350       0x16 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a366        0x2 
+                0x000000000800a014       0x16 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a02a        0x2 
  .rodata.chprintf.str1.4
-                0x000000000800a368        0x7 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a36f        0x1 
+                0x000000000800a02c        0x7 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a033        0x1 
  .rodata.cmd_echo.str1.4
-                0x000000000800a370       0x15 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a385        0x3 
+                0x000000000800a034       0x15 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a049        0x3 
  .rodata.cmd_info.str1.4
-                0x000000000800a388      0x181 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a509        0x3 
+                0x000000000800a04c      0x181 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a1cd        0x3 
  .rodata.cmd_mem.str1.4
-                0x000000000800a50c       0x7a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a586        0x2 
+                0x000000000800a1d0       0x7a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a24a        0x2 
  .rodata.cmd_systime.str1.4
-                0x000000000800a588       0x1a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a5a2        0x2 
+                0x000000000800a24c       0x1a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a266        0x2 
  .rodata.cmd_test.str1.4
-                0x000000000800a5a4       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a268       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x34 (size before relaxing)
  .rodata.cmd_threads.str1.4
-                0x000000000800a5c8       0x67 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a28c       0x67 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x6f (size before relaxing)
- *fill*         0x000000000800a62f        0x1 
+ *fill*         0x000000000800a2f3        0x1 
  .rodata.ep0config
-                0x000000000800a630       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a2f4       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.ep1config
-                0x000000000800a654       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a318       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.ep2config
-                0x000000000800a678       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a33c       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.evhndl
-                0x000000000800a69c        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a360        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.halted_status
-                0x000000000800a6a8        0x2 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a6aa        0x2 
- .rodata.i2c_lld_serve_tx_end_irq.str1.4
-                0x000000000800a6ac        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a36c        0x2 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a36e        0x2 
  .rodata.idle_descriptor.6251
-                0x000000000800a6b8       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a370       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.main.str1.4
-                0x000000000800a6d0       0x1a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a6ea        0x2 
+                0x000000000800a388       0x1a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a3a2        0x2 
  .rodata.oslib_test_001_001
-                0x000000000800a6ec       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a3a4       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_001_001_execute.str1.4
-                0x000000000800a6fc       0x13 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a70f        0x1 
+                0x000000000800a3b4       0x13 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a3c7        0x1 
  .rodata.oslib_test_001_002
-                0x000000000800a710       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a3c8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_001_002_execute.str1.4
-                0x000000000800a720       0xb5 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a7d5        0x3 
+                0x000000000800a3d8       0xb5 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a48d        0x3 
  .rodata.oslib_test_001_003
-                0x000000000800a7d8       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a490       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_001_003_execute.str1.4
-                0x000000000800a7e8       0x16 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a7fe        0x2 
+                0x000000000800a4a0       0x16 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a4b6        0x2 
  .rodata.oslib_test_002_001
-                0x000000000800a800       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a4b8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_002_001_execute.str1.4
-                0x000000000800a810       0x35 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a845        0x3 
+                0x000000000800a4c8       0x35 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a4fd        0x3 
  .rodata.oslib_test_002_002
-                0x000000000800a848       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a500       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_002_003
-                0x000000000800a858       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a510       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_003_001
-                0x000000000800a868       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a520       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_003_001_execute.str1.4
-                0x000000000800a878       0x59 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a8d1        0x3 
+                0x000000000800a530       0x59 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a589        0x3 
  .rodata.oslib_test_003_002
-                0x000000000800a8d4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a58c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_003_002_execute.str1.4
-                0x000000000800a8e4       0x2a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800a90e        0x2 
+                0x000000000800a59c       0x2a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a5c6        0x2 
  .rodata.oslib_test_004_001
-                0x000000000800a910       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a5c8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_004_001_execute.str1.4
-                0x000000000800a920       0x30 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a5d8       0x30 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_004_002
-                0x000000000800a950       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a608       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_004_003
-                0x000000000800a960       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a618       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_004_003_execute.str1.4
-                0x000000000800a970       0x58 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a628       0x58 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x60 (size before relaxing)
  .rodata.oslib_test_004_004
-                0x000000000800a9c8       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a680       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_004_005
-                0x000000000800a9d8       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a690       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_001
-                0x000000000800a9e8        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6a0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_001_array
-                0x000000000800a9f0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6a8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_002
-                0x000000000800aa00        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6b8        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_002_array
-                0x000000000800aa08       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6c0       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_003
-                0x000000000800aa18        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6d0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_003_array
-                0x000000000800aa20        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6d8        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_004
-                0x000000000800aa2c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6e4        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_sequence_004_array
-                0x000000000800aa34       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a6ec       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_suite
-                0x000000000800aa4c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a704        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.oslib_test_suite_array
-                0x000000000800aa54       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a70c       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.parse_arguments.str1.4
-                0x000000000800aa68        0x3 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800aa6b        0x1 
+                0x000000000800a720        0x3 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a723        0x1 
  .rodata.ram_areas
-                0x000000000800aa6c       0x80 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a724       0x80 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_001_001
-                0x000000000800aaec       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a7a4       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_001_001_execute.str1.4
-                0x000000000800aafc      0x131 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800ac2d        0x3 
+                0x000000000800a7b4      0x131 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800a8e5        0x3 
  .rodata.rt_test_001_002
-                0x000000000800ac30       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800a8e8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_001_002_execute.str1.4
-                0x000000000800ac40      0x10d /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800ad4d        0x3 
+                0x000000000800a8f8      0x10d /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800aa05        0x3 
  .rodata.rt_test_001_003
-                0x000000000800ad50       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800aa08       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_001_003_execute.str1.4
-                0x000000000800ad60      0x78d /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800aa18      0x78d /tmp/cc2A8CYK.ltrans0.ltrans.o
                                         0x791 (size before relaxing)
- *fill*         0x000000000800b4ed        0x3 
+ *fill*         0x000000000800b1a5        0x3 
  .rodata.rt_test_002_001
-                0x000000000800b4f0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b1a8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_002_001_execute.str1.4
-                0x000000000800b500       0x70 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b1b8       0x70 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_002_002
-                0x000000000800b570       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b228       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_002_002_execute.str1.4
-                0x000000000800b580       0x12 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b592        0x2 
+                0x000000000800b238       0x12 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b24a        0x2 
  .rodata.rt_test_002_003
-                0x000000000800b594       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b24c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_002_004
-                0x000000000800b5a4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b25c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_003_001
-                0x000000000800b5b4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b26c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_003_002
-                0x000000000800b5c4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b27c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_003_003
-                0x000000000800b5d4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b28c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_003_004
-                0x000000000800b5e4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b29c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_003_004_execute.str1.4
-                0x000000000800b5f4       0x87 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b67b        0x1 
+                0x000000000800b2ac       0x87 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b333        0x1 
  .rodata.rt_test_004_001
-                0x000000000800b67c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b334       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_004_001_execute.str1.4
-                0x000000000800b68c       0x23 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b6af        0x1 
+                0x000000000800b344       0x23 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b367        0x1 
  .rodata.rt_test_005_001
-                0x000000000800b6b0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b368       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_001_execute.str1.4
-                0x000000000800b6c0       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b378       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_002
-                0x000000000800b6d4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b38c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_003
-                0x000000000800b6e4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b39c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_004
-                0x000000000800b6f4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b3ac       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_004_execute.str1.4
-                0x000000000800b704       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b3bc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_005
-                0x000000000800b714       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b3cc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_005_execute.str1.4
-                0x000000000800b724       0x21 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b745        0x3 
+                0x000000000800b3dc       0x21 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b3fd        0x3 
  .rodata.rt_test_005_006
-                0x000000000800b748       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b400       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_005_006_execute.str1.4
-                0x000000000800b758       0x3f /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b410       0x3f /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x46 (size before relaxing)
- *fill*         0x000000000800b797        0x1 
+ *fill*         0x000000000800b44f        0x1 
  .rodata.rt_test_006_001
-                0x000000000800b798       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b450       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_006_004
-                0x000000000800b7a8       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b460       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_006_004_execute.str1.4
-                0x000000000800b7b8        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b7be        0x2 
+                0x000000000800b470        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b476        0x2 
  .rodata.rt_test_006_005
-                0x000000000800b7c0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b478       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_006_005_execute.str1.4
-                0x000000000800b7d0       0x3d /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b80d        0x3 
+                0x000000000800b488       0x3d /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b4c5        0x3 
  .rodata.rt_test_006_007
-                0x000000000800b810       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b4c8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_006_008
-                0x000000000800b820       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b4d8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_006_008_execute.str1.4
-                0x000000000800b830        0x6 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b836        0x2 
+                0x000000000800b4e8        0x6 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b4ee        0x2 
  .rodata.rt_test_006_009
-                0x000000000800b838       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b4f0       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_007_001
-                0x000000000800b848       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b500       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_001
-                0x000000000800b858       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b510       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_001_execute.str1.4
-                0x000000000800b868       0x1b /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b883        0x1 
+                0x000000000800b520       0x1b /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b53b        0x1 
  .rodata.rt_test_008_002
-                0x000000000800b884       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b53c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_002_execute.str1.4
-                0x000000000800b894       0x18 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b54c       0x18 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_003
-                0x000000000800b8ac       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b564       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_003_execute.str1.4
-                0x000000000800b8bc       0x13 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b8cf        0x1 
+                0x000000000800b574       0x13 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b587        0x1 
  .rodata.rt_test_008_004
-                0x000000000800b8d0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b588       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_004_execute.str1.4
-                0x000000000800b8e0       0x11 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b8f1        0x3 
+                0x000000000800b598       0x11 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b5a9        0x3 
  .rodata.rt_test_008_005
-                0x000000000800b8f4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b5ac       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_005_execute.str1.4
-                0x000000000800b904       0x2a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b92e        0x2 
+                0x000000000800b5bc       0x2a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b5e6        0x2 
  .rodata.rt_test_008_006
-                0x000000000800b930       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b5e8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_006_execute.str1.4
-                0x000000000800b940        0xf /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b94f        0x1 
+                0x000000000800b5f8        0xf /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b607        0x1 
  .rodata.rt_test_008_007
-                0x000000000800b950       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b608       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_008_007_execute.str1.4
-                0x000000000800b960        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b618        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_009_001
-                0x000000000800b96c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b624       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_009_001_execute.str1.4
-                0x000000000800b97c       0x56 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800b9d2        0x2 
+                0x000000000800b634       0x56 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b68a        0x2 
  .rodata.rt_test_009_002
-                0x000000000800b9d4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b68c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_009_002_execute.str1.4
-                0x000000000800b9e4       0x84 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b69c       0x84 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x8c (size before relaxing)
  .rodata.rt_test_010_001
-                0x000000000800ba68       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b720       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_002
-                0x000000000800ba78       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b730       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_003
-                0x000000000800ba88       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b740       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_003_execute.str1.4
-                0x000000000800ba98        0xa /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800baa2        0x2 
+                0x000000000800b750        0xa /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b75a        0x2 
  .rodata.rt_test_010_004
-                0x000000000800baa4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b75c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_005
-                0x000000000800bab4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b76c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_006
-                0x000000000800bac4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b77c       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_006_execute.str1.4
-                0x000000000800bad4        0xb /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800badf        0x1 
+                0x000000000800b78c        0xb /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b797        0x1 
  .rodata.rt_test_010_007
-                0x000000000800bae0       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b798       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_007_execute.str1.4
-                0x000000000800baf0       0x11 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bb01        0x3 
+                0x000000000800b7a8       0x11 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b7b9        0x3 
  .rodata.rt_test_010_008
-                0x000000000800bb04       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b7bc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_008_execute.str1.4
-                0x000000000800bb14        0xa /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bb1e        0x2 
+                0x000000000800b7cc        0xa /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b7d6        0x2 
  .rodata.rt_test_010_009
-                0x000000000800bb20       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b7d8       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_009_execute.str1.4
-                0x000000000800bb30       0x1a /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bb4a        0x2 
+                0x000000000800b7e8       0x1a /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b802        0x2 
  .rodata.rt_test_010_010
-                0x000000000800bb4c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b804       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_010_execute.str1.4
-                0x000000000800bb5c        0xf /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bb6b        0x1 
+                0x000000000800b814        0xf /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b823        0x1 
  .rodata.rt_test_010_011
-                0x000000000800bb6c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b824       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_011_execute.str1.4
-                0x000000000800bb7c        0xf /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bb8b        0x1 
+                0x000000000800b834        0xf /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b843        0x1 
  .rodata.rt_test_010_012
-                0x000000000800bb8c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b844       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_010_012_execute.str1.4
-                0x000000000800bb9c       0x95 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800bc31        0x3 
+                0x000000000800b854       0x95 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800b8e9        0x3 
  .rodata.rt_test_sequence_001
-                0x000000000800bc34        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b8ec        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_001_array
-                0x000000000800bc3c       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b8f4       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_002
-                0x000000000800bc4c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b904        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_002_array
-                0x000000000800bc54       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b90c       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_003
-                0x000000000800bc68        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b920        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_003_array
-                0x000000000800bc70       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b928       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_004
-                0x000000000800bc84        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b93c        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_004_array
-                0x000000000800bc8c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b944        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_005
-                0x000000000800bc94        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b94c        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_005_array
-                0x000000000800bc9c       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b954       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_006
-                0x000000000800bcb8        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b970        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_006_array
-                0x000000000800bcc0       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b978       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_007
-                0x000000000800bcdc        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b994        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_007_array
-                0x000000000800bce4        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b99c        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_008
-                0x000000000800bcec        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9a4        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_008_array
-                0x000000000800bcf4       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9ac       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_009
-                0x000000000800bd14        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9cc        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_009_array
-                0x000000000800bd1c        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9d4        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_010
-                0x000000000800bd28        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9e0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_sequence_010_array
-                0x000000000800bd30       0x34 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800b9e8       0x34 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_suite
-                0x000000000800bd64        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800ba1c        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.rt_test_suite_array
-                0x000000000800bd6c       0x2c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800ba24       0x2c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.serusbcfg
-                0x000000000800bd98        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800ba50        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.shellThread.str1.4
-                0x000000000800bda0       0x6d /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800be0d        0x3 
+                0x000000000800ba58       0x6d /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800bac5        0x3 
  .rodata.shell_local_commands
-                0x000000000800be10       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800bac8       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.states.7827
-                0x000000000800be50       0x40 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800bb08       0x40 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.str1.4
-                0x000000000800be90      0x95d /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800c7ed        0x3 
+                0x000000000800bb48      0x95d /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800c4a5        0x3 
  .rodata.test_execute.str1.4
-                0x000000000800c7f0       0xec /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c4a8       0xec /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0xf4 (size before relaxing)
  .rodata.test_println.str1.4
-                0x000000000800c8dc       0xec /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c594       0xec /tmp/cc2A8CYK.ltrans0.ltrans.o
                                           0x3 (size before relaxing)
  .rodata.usbcfg
-                0x000000000800c8dc       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c594       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_configuration_descriptor
-                0x000000000800c8ec        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c5a4        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_configuration_descriptor_data
-                0x000000000800c8f4       0x43 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800c937        0x1 
+                0x000000000800c5ac       0x43 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800c5ef        0x1 
  .rodata.vcom_device_descriptor
-                0x000000000800c938        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c5f0        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_device_descriptor_data
-                0x000000000800c940       0x12 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800c952        0x2 
+                0x000000000800c5f8       0x12 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800c60a        0x2 
  .rodata.vcom_string0
-                0x000000000800c954        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c60c        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_string1
-                0x000000000800c958       0x26 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000000800c97e        0x2 
+                0x000000000800c610       0x26 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x000000000800c636        0x2 
  .rodata.vcom_string2
-                0x000000000800c980       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c638       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_string3
-                0x000000000800c9b8        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c670        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.vcom_strings
-                0x000000000800c9c0       0x20 /tmp/cczK9oKh.ltrans0.ltrans.o
- .rodata.vmt.lto_priv.116
-                0x000000000800c9e0       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- .rodata.vmt.lto_priv.117
-                0x000000000800ca04       0x24 /tmp/cczK9oKh.ltrans0.ltrans.o
- .rodata.wa     0x000000000800ca28       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c678       0x20 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .rodata.vmt.lto_priv.111
+                0x000000000800c698       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .rodata.vmt.lto_priv.112
+                0x000000000800c6bc       0x24 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .rodata.wa     0x000000000800c6e0       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .rodata.zero_status
-                0x000000000800ca3c        0x2 /tmp/cczK9oKh.ltrans0.ltrans.o
-                0x000000000800ca40                . = ALIGN (0x4)
- *fill*         0x000000000800ca3e        0x2 
-                0x000000000800ca40                __rodata_end__ = .
+                0x000000000800c6f4        0x2 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                0x000000000800c6f8                . = ALIGN (0x4)
+ *fill*         0x000000000800c6f6        0x2 
+                0x000000000800c6f8                __rodata_end__ = .
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x000000000800ca40        0x8
-                0x000000000800ca40                __exidx_start = .
+.ARM.exidx      0x000000000800c6f8        0x8
+                0x000000000800c6f8                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
  .ARM.exidx.text._ZL9send2UARTP20BaseSequentialStreamiPPc
-                0x000000000800ca40        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c6f8        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .ARM.exidx.text._ZL7Thread1Pv
-                0x000000000800ca48        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c700        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                           0x8 (size before relaxing)
  .ARM.exidx.text.startup.main
-                0x000000000800ca48        0x0 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000000800c700        0x0 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                           0x8 (size before relaxing)
-                0x000000000800ca48                __exidx_end = .
+                0x000000000800c700                __exidx_end = .
 
-.rel.dyn        0x000000000800ca48        0x0
- .rel.iplt      0x000000000800ca48        0x0 build/obj/crt0_v7m.o
+.rel.dyn        0x000000000800c700        0x0
+ .rel.iplt      0x000000000800c700        0x0 build/obj/crt0_v7m.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -1619,149 +1605,148 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                __ram7_size__ = LENGTH (ram7)
                 0x0000000000000000                __ram7_end__ = (__ram7_start__ + __ram7_size__)
 
-.data           0x0000000020000800       0xa0 load address 0x000000000800ca48
+.data           0x0000000020000800       0xa0 load address 0x000000000800c700
                 0x0000000020000800                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_textdata, LOADADDR (.data))
                 [!provide]                        PROVIDE (_data, .)
-                0x000000000800ca48                _textdata_start = LOADADDR (.data)
+                0x000000000800c700                _textdata_start = LOADADDR (.data)
                 0x0000000020000800                _data_start = .
  *(.data)
  *(.data.*)
  .data._ZL6sd1cfg
-                0x0000000020000800        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.c1       0x000000002000080c        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.es1      0x0000000020000814        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.es2      0x0000000020000818        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.gmp1     0x000000002000081c       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020000800        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.c1       0x000000002000080c        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.es1      0x0000000020000814        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.es2      0x0000000020000818        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.gmp1     0x000000002000081c       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .data.linecoding
-                0x0000000020000838        0x7 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020000838        0x7 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *fill*         0x000000002000083f        0x1 
- .data.m1       0x0000000020000840       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.m2       0x0000000020000850       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.mb1      0x0000000020000860       0x28 /tmp/cczK9oKh.ltrans0.ltrans.o
- .data.mp1.lto_priv.115
-                0x0000000020000888       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .data.m1       0x0000000020000840       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.m2       0x0000000020000850       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.mb1      0x0000000020000860       0x28 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .data.mp1.lto_priv.110
+                0x0000000020000888       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .data.myobj.7337
-                0x0000000020000898        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020000898        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .data.myobj.7339
-                0x000000002000089c        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x000000002000089c        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *(.ramtext)
                 0x00000000200008a0                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_edata, .)
                 0x00000000200008a0                _data_end = .
 
-.igot.plt       0x00000000200008a0        0x0 load address 0x000000000800cae8
+.igot.plt       0x00000000200008a0        0x0 load address 0x000000000800c7a0
  .igot.plt      0x00000000200008a0        0x0 build/obj/crt0_v7m.o
 
-.bss            0x00000000200008a0     0x123c load address 0x000000000800cae8
+.bss            0x00000000200008a0     0x1234 load address 0x000000000800c7a0
                 0x00000000200008a0                . = ALIGN (0x4)
                 0x00000000200008a0                _bss_start = .
  *(.bss)
  *(.bss.*)
- .bss.I2CD1     0x00000000200008a0       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.SD1       0x00000000200008d8       0x7c /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.SDU1      0x0000000020000954      0x490 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.USBD1     0x0000000020000de4       0x88 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .bss.I2CD1     0x00000000200008a0       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.SD1       0x00000000200008d8       0x7c /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.SDU1      0x0000000020000954      0x490 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.USBD1     0x0000000020000de4       0x88 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *fill*         0x0000000020000e6c        0x4 
  .bss._ZL9waThread1
-                0x0000000020000e70      0x148 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020000e70      0x148 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss._pal_events
-                0x0000000020000fb8      0x100 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020000fb8      0x100 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss._stm32_dma_isr_redir
-                0x00000000200010b8       0x38 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.ch        0x00000000200010f0       0x74 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200010b8       0x38 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.ch        0x00000000200010f0       0x74 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ch_factory
-                0x0000000020001164       0x44 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001164       0x44 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ch_idle_thread_wa
-                0x00000000200011a8       0xd8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200011a8       0xd8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ch_memcore
-                0x0000000020001280        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001280        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.default_heap
-                0x0000000020001288       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.dma       0x00000000200012a4        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001288       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ep0_state
-                0x00000000200012ac       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200012a4       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ep0setup_buffer
-                0x00000000200012bc        0x8 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200012b4        0x8 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ep1instate
-                0x00000000200012c4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200012bc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ep1outstate
-                0x00000000200012d4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200012cc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.ep2instate
-                0x00000000200012e4       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.heap1     0x00000000200012f4       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200012dc       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.heap1     0x00000000200012ec       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.mb_buffer
-                0x0000000020001310       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.mp1.lto_priv.114
-                0x0000000020001320       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.mtx1      0x0000000020001330       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.objects   0x0000000020001340       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.sem1.lto_priv.112
-                0x0000000020001350        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.sem1.lto_priv.113
-                0x000000002000135c        0xc /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001308       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.mp1.lto_priv.109
+                0x0000000020001318       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.mtx1      0x0000000020001328       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.objects   0x0000000020001338       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.sem1.lto_priv.107
+                0x0000000020001348        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.sem1.lto_priv.108
+                0x0000000020001354        0xc /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.shell_terminated
-                0x0000000020001368        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x000000002000136c        0x4 
+                0x0000000020001360        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000020001364        0x4 
  .bss.test_buffer
-                0x0000000020001370      0x668 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.test_chp  0x00000000200019d8        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001368      0x668 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.test_chp  0x00000000200019d0        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_failure_message
-                0x00000000200019dc        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200019d4        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_global_fail
-                0x00000000200019e0        0x1 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x00000000200019e1        0x3 
+                0x00000000200019d8        0x1 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x00000000200019d9        0x3 
  .bss.test_heap
-                0x00000000200019e4       0x1c /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200019dc       0x1c /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_heap_buffer
-                0x0000000020001a00       0x80 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x00000000200019f8       0x80 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_local_fail
-                0x0000000020001a80        0x1 /tmp/cczK9oKh.ltrans0.ltrans.o
- *fill*         0x0000000020001a81        0x3 
+                0x0000000020001a78        0x1 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ *fill*         0x0000000020001a79        0x3 
  .bss.test_step
-                0x0000000020001a84        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001a7c        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_tokens_buffer
-                0x0000000020001a88       0x10 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001a80       0x10 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .bss.test_tokp
-                0x0000000020001a98        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.threads   0x0000000020001a9c       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.tr1       0x0000000020001ab0        0x4 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.vt1.7449  0x0000000020001ab4       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
- .bss.vt2.7450  0x0000000020001ac8       0x14 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000020001a90        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.threads   0x0000000020001a94       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.tr1       0x0000000020001aa8        0x4 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.vt1.7449  0x0000000020001aac       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .bss.vt2.7450  0x0000000020001ac0       0x14 /tmp/cc2A8CYK.ltrans0.ltrans.o
  *(COMMON)
-                0x0000000020001adc                . = ALIGN (0x4)
-                0x0000000020001adc                _bss_end = .
+                0x0000000020001ad4                . = ALIGN (0x4)
+                0x0000000020001ad4                _bss_end = .
                 [!provide]                        PROVIDE (end, .)
 
-.ram0_init      0x0000000020001adc        0x0 load address 0x000000000800cae8
-                0x0000000020001adc                . = ALIGN (0x4)
-                0x000000000800cae8                __ram0_init_text__ = LOADADDR (.ram0_init)
-                0x0000000020001adc                __ram0_init__ = .
+.ram0_init      0x0000000020001ad4        0x0 load address 0x000000000800c7a0
+                0x0000000020001ad4                . = ALIGN (0x4)
+                0x000000000800c7a0                __ram0_init_text__ = LOADADDR (.ram0_init)
+                0x0000000020001ad4                __ram0_init__ = .
  *(.ram0_init)
  *(.ram0_init.*)
-                0x0000000020001adc                . = ALIGN (0x4)
+                0x0000000020001ad4                . = ALIGN (0x4)
 
-.ram0           0x0000000020001adc        0x0 load address 0x000000000800cae8
-                0x0000000020001adc                . = ALIGN (0x4)
-                0x0000000020001adc                __ram0_clear__ = .
+.ram0           0x0000000020001ad4        0x0 load address 0x000000000800c7a0
+                0x0000000020001ad4                . = ALIGN (0x4)
+                0x0000000020001ad4                __ram0_clear__ = .
  *(.ram0_clear)
  *(.ram0_clear.*)
-                0x0000000020001adc                . = ALIGN (0x4)
-                0x0000000020001adc                __ram0_noinit__ = .
+                0x0000000020001ad4                . = ALIGN (0x4)
+                0x0000000020001ad4                __ram0_noinit__ = .
  *(.ram0)
  *(.ram0.*)
-                0x0000000020001adc                . = ALIGN (0x4)
-                0x0000000020001adc                __ram0_free__ = .
+                0x0000000020001ad4                . = ALIGN (0x4)
+                0x0000000020001ad4                __ram0_free__ = .
 
-.ram1_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram1_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram1_init_text__ = LOADADDR (.ram1_init)
+                0x000000000800c7a0                __ram1_init_text__ = LOADADDR (.ram1_init)
                 0x0000000000000000                __ram1_init__ = .
  *(.ram1_init)
  *(.ram1_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram1           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram1           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram1_clear__ = .
  *(.ram1_clear)
@@ -1773,15 +1758,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram1_free__ = .
 
-.ram2_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram2_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram2_init_text__ = LOADADDR (.ram2_init)
+                0x000000000800c7a0                __ram2_init_text__ = LOADADDR (.ram2_init)
                 0x0000000000000000                __ram2_init__ = .
  *(.ram2_init)
  *(.ram2_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram2           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram2           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram2_clear__ = .
  *(.ram2_clear)
@@ -1793,15 +1778,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram2_free__ = .
 
-.ram3_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram3_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram3_init_text__ = LOADADDR (.ram3_init)
+                0x000000000800c7a0                __ram3_init_text__ = LOADADDR (.ram3_init)
                 0x0000000000000000                __ram3_init__ = .
  *(.ram3_init)
  *(.ram3_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram3           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram3           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram3_clear__ = .
  *(.ram3_clear)
@@ -1813,15 +1798,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram3_free__ = .
 
-.ram4_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram4_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram4_init_text__ = LOADADDR (.ram4_init)
+                0x000000000800c7a0                __ram4_init_text__ = LOADADDR (.ram4_init)
                 0x0000000000000000                __ram4_init__ = .
  *(.ram4_init)
  *(.ram4_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram4           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram4           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram4_clear__ = .
  *(.ram4_clear)
@@ -1833,15 +1818,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram4_free__ = .
 
-.ram5_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram5_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram5_init_text__ = LOADADDR (.ram5_init)
+                0x000000000800c7a0                __ram5_init_text__ = LOADADDR (.ram5_init)
                 0x0000000000000000                __ram5_init__ = .
  *(.ram5_init)
  *(.ram5_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram5           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram5           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram5_clear__ = .
  *(.ram5_clear)
@@ -1853,15 +1838,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram5_free__ = .
 
-.ram6_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram6_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram6_init_text__ = LOADADDR (.ram6_init)
+                0x000000000800c7a0                __ram6_init_text__ = LOADADDR (.ram6_init)
                 0x0000000000000000                __ram6_init__ = .
  *(.ram6_init)
  *(.ram6_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram6           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram6           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram6_clear__ = .
  *(.ram6_clear)
@@ -1873,15 +1858,15 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram6_free__ = .
 
-.ram7_init      0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram7_init      0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x000000000800cae8                __ram7_init_text__ = LOADADDR (.ram7_init)
+                0x000000000800c7a0                __ram7_init_text__ = LOADADDR (.ram7_init)
                 0x0000000000000000                __ram7_init__ = .
  *(.ram7_init)
  *(.ram7_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram7           0x0000000000000000        0x0 load address 0x000000000800cae8
+.ram7           0x0000000000000000        0x0 load address 0x000000000800c7a0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram7_clear__ = .
  *(.ram7_clear)
@@ -1893,12 +1878,12 @@ LOAD /tmp/cczK9oKh.ltrans0.ltrans.o
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram7_free__ = .
 
-.heap           0x0000000020001adc     0x3524
-                0x0000000020001ae0                . = ALIGN (0x8)
- *fill*         0x0000000020001adc        0x4 
-                0x0000000020001ae0                __heap_base__ = .
+.heap           0x0000000020001ad4     0x352c
+                0x0000000020001ad8                . = ALIGN (0x8)
+ *fill*         0x0000000020001ad4        0x4 
+                0x0000000020001ad8                __heap_base__ = .
                 0x0000000020005000                . = (ORIGIN (HEAP_RAM) + LENGTH (HEAP_RAM))
- *fill*         0x0000000020001ae0     0x3520 
+ *fill*         0x0000000020001ad8     0x3528 
                 0x0000000020005000                __heap_end__ = .
                 0x0000000000000400                __process_stack_size__ = 0x400
                 0x0000000000000400                __main_stack_size__ = 0x400
@@ -1918,7 +1903,7 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000042       0x21 build/obj/chcoreasm_v7m.o
  .ARM.attributes
-                0x0000000000000063       0x31 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000000000063       0x31 /tmp/cc2A8CYK.ltrans0.ltrans.o
  .ARM.attributes
                 0x0000000000000094       0x1b /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memcpy.o)
  .ARM.attributes
@@ -1937,28 +1922,28 @@ OUTPUT(build/ch.elf elf32-littlearm)
                 0x00000000000001ab       0x2d /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
 
 .comment        0x0000000000000000       0x7e
- .comment       0x0000000000000000       0x7e /tmp/cczK9oKh.ltrans0.ltrans.o
+ .comment       0x0000000000000000       0x7e /tmp/cc2A8CYK.ltrans0.ltrans.o
                                          0x7f (size before relaxing)
 
-.debug_line     0x0000000000000000     0x6d97
+.debug_line     0x0000000000000000     0x6bac
  .debug_line    0x0000000000000000       0xdb build/obj/crt0_v7m.o
  .debug_line    0x00000000000000db       0x85 build/obj/vectors.o
  .debug_line    0x0000000000000160       0x97 build/obj/chcoreasm_v7m.o
- .debug_line    0x00000000000001f7     0x6ba0 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .debug_line    0x00000000000001f7     0x69b5 /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_info     0x0000000000000000    0x246d4
+.debug_info     0x0000000000000000    0x23cc5
  .debug_info    0x0000000000000000       0x26 build/obj/crt0_v7m.o
  .debug_info    0x0000000000000026       0x26 build/obj/vectors.o
  .debug_info    0x000000000000004c       0x26 build/obj/chcoreasm_v7m.o
- .debug_info    0x0000000000000072    0x24662 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .debug_info    0x0000000000000072    0x23c53 /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_abbrev   0x0000000000000000      0x97e
+.debug_abbrev   0x0000000000000000      0x969
  .debug_abbrev  0x0000000000000000       0x14 build/obj/crt0_v7m.o
  .debug_abbrev  0x0000000000000014       0x14 build/obj/vectors.o
  .debug_abbrev  0x0000000000000028       0x14 build/obj/chcoreasm_v7m.o
- .debug_abbrev  0x000000000000003c      0x942 /tmp/cczK9oKh.ltrans0.ltrans.o
+ .debug_abbrev  0x000000000000003c      0x92d /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_aranges  0x0000000000000000      0x9e0
+.debug_aranges  0x0000000000000000      0x9c0
  .debug_aranges
                 0x0000000000000000       0x20 build/obj/crt0_v7m.o
  .debug_aranges
@@ -1966,32 +1951,32 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000040       0x20 build/obj/chcoreasm_v7m.o
  .debug_aranges
-                0x0000000000000060      0x980 /tmp/cczK9oKh.ltrans0.ltrans.o
+                0x0000000000000060      0x960 /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_str      0x0000000000000000     0x4f08
+.debug_str      0x0000000000000000     0x4e0b
  .debug_str     0x0000000000000000       0x80 build/obj/crt0_v7m.o
  .debug_str     0x0000000000000080       0x50 build/obj/vectors.o
                                          0x7f (size before relaxing)
  .debug_str     0x00000000000000d0       0x54 build/obj/chcoreasm_v7m.o
                                          0x83 (size before relaxing)
- .debug_str     0x0000000000000124     0x4de4 /tmp/cczK9oKh.ltrans0.ltrans.o
-                                       0x520e (size before relaxing)
+ .debug_str     0x0000000000000124     0x4ce7 /tmp/cc2A8CYK.ltrans0.ltrans.o
+                                       0x50a2 (size before relaxing)
 
-.debug_loc      0x0000000000000000     0xe91f
- .debug_loc     0x0000000000000000     0xe91f /tmp/cczK9oKh.ltrans0.ltrans.o
+.debug_loc      0x0000000000000000     0xe20e
+ .debug_loc     0x0000000000000000     0xe20e /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_ranges   0x0000000000000000     0x4808
- .debug_ranges  0x0000000000000000     0x4808 /tmp/cczK9oKh.ltrans0.ltrans.o
+.debug_ranges   0x0000000000000000     0x4610
+ .debug_ranges  0x0000000000000000     0x4610 /tmp/cc2A8CYK.ltrans0.ltrans.o
 
-.debug_frame    0x0000000000000000     0x2648
- .debug_frame   0x0000000000000000     0x24cc /tmp/cczK9oKh.ltrans0.ltrans.o
- .debug_frame   0x00000000000024cc       0x38 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
- .debug_frame   0x0000000000002504       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
- .debug_frame   0x0000000000002534       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strcmp.o)
- .debug_frame   0x0000000000002568       0x48 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
- .debug_frame   0x00000000000025b0       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
- .debug_frame   0x00000000000025e4       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
- .debug_frame   0x0000000000002614       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
+.debug_frame    0x0000000000000000     0x25cc
+ .debug_frame   0x0000000000000000     0x2450 /tmp/cc2A8CYK.ltrans0.ltrans.o
+ .debug_frame   0x0000000000002450       0x38 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
+ .debug_frame   0x0000000000002488       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
+ .debug_frame   0x00000000000024b8       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strcmp.o)
+ .debug_frame   0x00000000000024ec       0x48 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
+ .debug_frame   0x0000000000002534       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
+ .debug_frame   0x0000000000002568       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
+ .debug_frame   0x0000000000002598       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
 
 Cross Reference Table
 
@@ -2000,7 +1985,6 @@ BusFault_Handler                                  build/obj/vectors.o
 DebugMon_Handler                                  build/obj/vectors.o
 HardFault_Handler                                 build/obj/vectors.o
 I2CD1                                             build/obj/hal_i2c_lld.o (symbol from plugin)
-                                                  build/obj/main.o (symbol from plugin)
 MemManage_Handler                                 build/obj/vectors.o
 NMI_Handler                                       build/obj/vectors.o
 PendSV_Handler                                    build/obj/vectors.o
@@ -2009,7 +1993,7 @@ SD1                                               build/obj/hal_serial_lld.o (sy
                                                   build/obj/main.o (symbol from plugin)
 SDU1                                              build/obj/usbcfg.o (symbol from plugin)
                                                   build/obj/main.o (symbol from plugin)
-SVC_Handler                                       /tmp/cczK9oKh.ltrans0.ltrans.o
+SVC_Handler                                       /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chcore_v7m.o (symbol from plugin)
                                                   build/obj/vectors.o
 SysTick_Handler                                   build/obj/vectors.o
@@ -2052,77 +2036,77 @@ Vector48                                          build/obj/vectors.o
 Vector4C                                          build/obj/vectors.o
 Vector50                                          build/obj/vectors.o
 Vector54                                          build/obj/vectors.o
-Vector58                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector58                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector5C                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector5C                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector60                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector60                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector64                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector64                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector68                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector68                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector6C                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector6C                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector70                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector70                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector74                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector74                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector78                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector78                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector7C                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector7C                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector80                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector80                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
-Vector84                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector84                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/vectors.o
 Vector88                                          build/obj/vectors.o
 Vector8C                                          build/obj/vectors.o
-Vector90                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector90                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/hal_usb_lld.o (symbol from plugin)
                                                   build/obj/vectors.o
 Vector94                                          build/obj/vectors.o
 Vector98                                          build/obj/vectors.o
-Vector9C                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+Vector9C                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
 VectorA0                                          build/obj/vectors.o
 VectorA4                                          build/obj/vectors.o
 VectorA8                                          build/obj/vectors.o
 VectorAC                                          build/obj/vectors.o
-VectorB0                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+VectorB0                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/hal_st_lld.o (symbol from plugin)
                                                   build/obj/vectors.o
 VectorB4                                          build/obj/vectors.o
 VectorB8                                          build/obj/vectors.o
-VectorBC                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+VectorBC                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/hal_i2c_lld.o (symbol from plugin)
                                                   build/obj/vectors.o
-VectorC0                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+VectorC0                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/hal_i2c_lld.o (symbol from plugin)
                                                   build/obj/vectors.o
 VectorC4                                          build/obj/vectors.o
 VectorC8                                          build/obj/vectors.o
 VectorCC                                          build/obj/vectors.o
 VectorD0                                          build/obj/vectors.o
-VectorD4                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+VectorD4                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/hal_serial_lld.o (symbol from plugin)
                                                   build/obj/vectors.o
 VectorD8                                          build/obj/vectors.o
 VectorDC                                          build/obj/vectors.o
-VectorE0                                          /tmp/cczK9oKh.ltrans0.ltrans.o
+VectorE0                                          /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/vectors.o
 VectorE4                                          build/obj/vectors.o
@@ -2132,28 +2116,28 @@ VectorF0                                          build/obj/vectors.o
 VectorF4                                          build/obj/vectors.o
 VectorF8                                          build/obj/vectors.o
 VectorFC                                          build/obj/vectors.o
-__core_init                                       /tmp/cczK9oKh.ltrans0.ltrans.o
+__core_init                                       /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
-__default_exit                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__default_exit                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
-__early_init                                      /tmp/cczK9oKh.ltrans0.ltrans.o
+__early_init                                      /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/board.o (symbol from plugin)
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
 __fini_array_end                                  build/obj/crt0_v7m.o
 __fini_array_start                                build/obj/crt0_v7m.o
-__heap_base__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__heap_base__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chmemcore.o (symbol from plugin)
-__heap_end__                                      /tmp/cczK9oKh.ltrans0.ltrans.o
+__heap_end__                                      /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chmemcore.o (symbol from plugin)
 __init_array_end                                  build/obj/crt0_v7m.o
 __init_array_start                                build/obj/crt0_v7m.o
-__init_ram_areas                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+__init_ram_areas                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
-__late_init                                       /tmp/cczK9oKh.ltrans0.ltrans.o
+__late_init                                       /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
 __main_stack_base__                               build/obj/crt0_v7m.o
@@ -2161,69 +2145,69 @@ __main_stack_end__                                build/obj/vectors.o
                                                   build/obj/crt0_v7m.o
 __process_stack_base__                            build/obj/crt0_v7m.o
 __process_stack_end__                             build/obj/crt0_v7m.o
-__ram0_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram0_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram0_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram0_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram0_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram1_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram1_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram1_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram1_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram2_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram2_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram2_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram2_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram3_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram3_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram3_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram3_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram4_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram4_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram4_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram4_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram5_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram5_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram5_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram5_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram6_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram6_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram6_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram6_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_clear__                                    /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram7_clear__                                    /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_init__                                     /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram7_init__                                     /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_init_text__                                /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram7_init_text__                                /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_noinit__                                   /tmp/cczK9oKh.ltrans0.ltrans.o
+__ram7_noinit__                                   /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
 _bss_end                                          build/obj/crt0_v7m.o
 _bss_start                                        build/obj/crt0_v7m.o
@@ -2247,7 +2231,7 @@ _pal_lld_init                                     build/obj/hal_pal_lld.o (symbo
 _pal_lld_setgroupmode                             build/obj/hal_pal_lld.o (symbol from plugin)
                                                   build/obj/hal_pal.o (symbol from plugin)
 _port_exit_from_isr                               build/obj/chcoreasm_v7m.o
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chcore_v7m.o (symbol from plugin)
 _port_irq_epilogue                                build/obj/chcore_v7m.o (symbol from plugin)
                                                   build/obj/hal_usb_lld.o (symbol from plugin)
@@ -2257,13 +2241,13 @@ _port_irq_epilogue                                build/obj/chcore_v7m.o (symbol
                                                   build/obj/stm32_dma.o (symbol from plugin)
                                                   build/obj/stm32_isr.o (symbol from plugin)
 _port_switch                                      build/obj/chcoreasm_v7m.o
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chschd.o (symbol from plugin)
 _port_switch_from_isr                             build/obj/chcoreasm_v7m.o
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chcore_v7m.o (symbol from plugin)
 _port_thread_start                                build/obj/chcoreasm_v7m.o
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chthreads.o (symbol from plugin)
 _scheduler_init                                   build/obj/chschd.o (symbol from plugin)
                                                   build/obj/chsys.o (symbol from plugin)
@@ -2538,7 +2522,7 @@ chRegFirstThread                                  build/obj/chregistry.o (symbol
                                                   build/obj/shell_cmd.o (symbol from plugin)
 chRegNextThread                                   build/obj/chregistry.o (symbol from plugin)
                                                   build/obj/shell_cmd.o (symbol from plugin)
-chSchDoReschedule                                 /tmp/cczK9oKh.ltrans0.ltrans.o
+chSchDoReschedule                                 /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chschd.o (symbol from plugin)
                                                   build/obj/chcoreasm_v7m.o
 chSchDoRescheduleAhead                            build/obj/chschd.o (symbol from plugin)
@@ -2668,7 +2652,7 @@ chThdEnqueueTimeoutS                              build/obj/chthreads.o (symbol 
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
                                                   build/obj/chmboxes.o (symbol from plugin)
-chThdExit                                         /tmp/cczK9oKh.ltrans0.ltrans.o
+chThdExit                                         /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/chthreads.o (symbol from plugin)
                                                   build/obj/rt_test_sequence_010.o (symbol from plugin)
                                                   build/obj/chcoreasm_v7m.o
@@ -2748,11 +2732,9 @@ i2cInit                                           build/obj/hal_i2c.o (symbol fr
 i2cMasterReceiveTimeout                           build/obj/hal_i2c.o (symbol from plugin)
 i2cMasterTransmitTimeout                          build/obj/hal_i2c.o (symbol from plugin)
 i2cObjectInit                                     build/obj/hal_i2c.o (symbol from plugin)
-                                                  build/obj/main.o (symbol from plugin)
                                                   build/obj/hal_i2c_lld.o (symbol from plugin)
 i2cReleaseBus                                     build/obj/hal_i2c.o (symbol from plugin)
 i2cStart                                          build/obj/hal_i2c.o (symbol from plugin)
-                                                  build/obj/main.o (symbol from plugin)
 i2cStop                                           build/obj/hal_i2c.o (symbol from plugin)
 i2c_lld_init                                      build/obj/hal_i2c_lld.o (symbol from plugin)
                                                   build/obj/hal_i2c.o (symbol from plugin)
@@ -2795,13 +2777,13 @@ iqResetI                                          build/obj/hal_queues.o (symbol
 irqDeinit                                         build/obj/stm32_isr.o (symbol from plugin)
 irqInit                                           build/obj/stm32_isr.o (symbol from plugin)
                                                   build/obj/hal_lld.o (symbol from plugin)
-main                                              /tmp/cczK9oKh.ltrans0.ltrans.o
+main                                              /tmp/cc2A8CYK.ltrans0.ltrans.o
                                                   build/obj/main.o (symbol from plugin)
                                                   build/obj/crt0_v7m.o
 memcpy                                            /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memcpy.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 memset                                            /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-memset.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 msObjectInit                                      build/obj/memstreams.o (symbol from plugin)
                                                   build/obj/chprintf.o (symbol from plugin)
 nullObjectInit                                    build/obj/nullstreams.o (symbol from plugin)
@@ -2981,17 +2963,17 @@ st_lld_init                                       build/obj/hal_st_lld.o (symbol
 stm32_clock_init                                  build/obj/hal_lld.o (symbol from plugin)
                                                   build/obj/board.o (symbol from plugin)
 strchr                                            /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strchr.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 strcmp                                            /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strcmp.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 strncmp                                           /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncmp.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 strncpy                                           /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strncpy.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 strpbrk                                           /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strpbrk.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 strspn                                            /usr/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/libg.a(lib_a-strspn.o)
-                                                  /tmp/cczK9oKh.ltrans0.ltrans.o
+                                                  /tmp/cc2A8CYK.ltrans0.ltrans.o
 test_buffer                                       build/obj/rt_test_root.o (symbol from plugin)
                                                   build/obj/rt_test_sequence_009.o (symbol from plugin)
 test_emit_token                                   build/obj/ch_test.o (symbol from plugin)
