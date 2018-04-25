@@ -18,6 +18,9 @@
 #define SIM868_SERIAL_EVENT_ID 1
 #define LEAST_SET_BIT(x) x &(-x)
 
+namespace sim868Serial
+{
+
 static const SerialConfig SIM868_SERIAL_CONFIG = {
     115200,          //Baud Rate
     USART_CR1_UE,    //CR1 Register
@@ -25,6 +28,7 @@ static const SerialConfig SIM868_SERIAL_CONFIG = {
     0                //CR3 Register
 };
 
-void initSIM868Serialhandler();
+static void initSIM868Serialhandler();
 
-void handleInput(const size_t &datalength);
+static void handleInput(const size_t &datalength);
+}

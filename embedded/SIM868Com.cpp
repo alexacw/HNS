@@ -14,30 +14,23 @@
 #include "chprintf.h"
 #include "SIM868Com.hpp"
 
-static uint8_t sdrxbuf[SERIAL_BUFFERS_SIZE];
-SerialConfig sim868serialconfig;
+static uint8_t sim868SerialRXBuf[SERIAL_BUFFERS_SIZE];
 
-void initSIM868Serialhandler()
+using namespace sim868Serial;
+
+static THD_WORKING_AREA(SIM868SerialThread_wa, 1024);
+
+static THD_FUNCTION(SIM868SerialThread, arg)
 {
-    palSetPadMode(GPIOA, GPIOA_USART1_TX, PAL_MODE_OUTPUT_PUSHPULL);
-    palSetPadMode(GPIOA, GPIOA_USART1_RX, PAL_MODE_INPUT_PULLDOWN);
-    sdStart(SIM868_SD, &SIM868_SERIAL_CONFIG);
-};
-
-static THD_WORKING_AREA(JudgeThread_wa, 1024);
-
-static THD_FUNCTION(JudgeThread, arg)
-{
-
     (void)arg;
     chRegSetThreadName("SIM868 COM");
 
-    memset((void *)sdrxbuf, 0, SERIAL_BUFFERS_SIZE);
+    memset((void *)sim868SerialRXBuf, 0, SERIAL_BUFFERS_SIZE);
 
     static const eventflags_t serial_wkup_flags =                 //Partially from SD driver
         CHN_INPUT_AVAILABLE | CHN_DISCONNECTED | SD_NOISE_ERROR | //Partially inherited from IO queue driver
         SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |
-        SD_BREAK_DETECTED;
+        SD_BREAK_DETECTED | SD_QUEUE_FULL_ERROR;
 
     event_listener_t serial_listener;
     static eventflags_t pending_flags;
@@ -45,18 +38,31 @@ static THD_FUNCTION(JudgeThread, arg)
     chEvtRegisterMaskWithFlags(chnGetEventSource(SIM868_SD), &serial_listener,
                                EVENT_MASK(SIM868_SERIAL_EVENT_ID), serial_wkup_flags); //setup event listening
 
+    static bool waitingForInput = false;
+
     while (!chThdShouldTerminateX())
     {
-
         chEvtWaitAny(SIM868_SERIAL_EVENT_ID);                     //wait for selected serial events
         pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flag
 
         if (pending_flags & CHN_INPUT_AVAILABLE)
         {
-            handleInput(sdAsynchronousRead(SIM868_SD, sdrxbuf, (size_t)SERIAL_BUFFERS_SIZE));
+            handleInput(sdAsynchronousRead(SIM868_SD, sim868SerialRXBuf, (size_t)SERIAL_BUFFERS_SIZE));
         }
-
-        chIQResetI(&(sdp)->iqueue);
-        memset((void *)sdrxbuf, 0, JUDGE_BUFFER_SIZE); //Flush RX buffer
+        iqResetI(&(SIM868_SD)->iqueue);
+        memset((void *)sim868SerialRXBuf, 0, SERIAL_BUFFERS_SIZE); //Flush RX buffer
     }
 }
+
+void sim868Serial::handleInput(const size_t &datalength)
+{
+}
+
+void sim868Serial::initSIM868Serialhandler()
+{
+    palSetPadMode(GPIOA, GPIOA_USART1_TX, PAL_MODE_OUTPUT_PUSHPULL);
+    palSetPadMode(GPIOA, GPIOA_USART1_RX, PAL_MODE_INPUT_PULLDOWN);
+    sdStart(SIM868_SD, &SIM868_SERIAL_CONFIG);
+    chThdCreateStatic(SIM868SerialThread_wa, sizeof(SIM868SerialThread_wa), //Start sim868 serial thread
+                      NORMALPRIO + 5, SIM868SerialThread, NULL);
+};

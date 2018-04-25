@@ -31,6 +31,8 @@
 #define _CHIBIOS_RT_CONF_
 #define _CHIBIOS_RT_CONF_VER_5_0_
 
+#define CH_CFG_USE_QUEUES TRUE
+
 /*===========================================================================*/
 /**
  * @name System timers settings
