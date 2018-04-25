@@ -26,3 +26,5 @@ static const SerialConfig SIM868_SERIAL_CONFIG = {
 };
 
 void initSIM868Serialhandler();
+
+void handleInput(const size_t &datalength);

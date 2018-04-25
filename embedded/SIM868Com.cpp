@@ -51,59 +51,12 @@ static THD_FUNCTION(JudgeThread, arg)
         chEvtWaitAny(SIM868_SERIAL_EVENT_ID);                     //wait for selected serial events
         pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flag
 
-        do
+        if (pending_flags & CHN_INPUT_AVAILABLE)
         {
+            handleInput(sdAsynchronousRead(SIM868_SD, sdrxbuf, (size_t)SERIAL_BUFFERS_SIZE));
+        }
 
-            current_flag = LEAST_SET_BIT(pending_flags); //isolates single flag to work on
-            pending_flags &= ~current_flag;              //removes isolated flag
-
-            switch (current_flag)
-            {
-
-            case CHN_INPUT_AVAILABLE:            //Serial data available
-                chThdSleep(MS2ST(JUDGEACQTIME)); //Acquire data packet, release CPU
-                if ((!pending_flags))
-                {
-                    chMtxLock(&inqueue_mutex); //Operation non-atomic, lock resource
-                    datalength = sdAsynchronousRead(SERIAL_JUDGE, &sdrxbuf,
-                                                    (size_t)JUDGE_BUFFER_SIZE); //Non-blocking data read
-                    chMtxUnlock(&inqueue_mutex);                                //Release resource
-                    judgedecode();
-                }
-
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case CHN_DISCONNECTED:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case SD_NOISE_ERROR:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case SD_PARITY_ERROR:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case SD_FRAMING_ERROR:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case SD_OVERRUN_ERROR:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            case SD_BREAK_DETECTED:
-                FLUSH_I_QUEUE(SERIAL_JUDGE);
-                break;
-
-            default:
-                break;
-            }
-
-        } while (pending_flags);
-
-        FLUSH_I_QUEUE(SERIAL_JUDGE);
+        chIQResetI(&(sdp)->iqueue);
         memset((void *)sdrxbuf, 0, JUDGE_BUFFER_SIZE); //Flush RX buffer
     }
+}
