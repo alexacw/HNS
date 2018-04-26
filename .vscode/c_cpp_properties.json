@@ -58,7 +58,15 @@
                 "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx",
                 "${workspaceRoot}/embedded/os/common/oslib/include",
                 "${workspaceRoot}/embedded/os/hal/boards/MAPLEMINI_STM32_F103",
-                "${workspaceRoot}/embedded/os/hal/ports/common/ARMCMx"
+                "${workspaceRoot}/embedded/os/hal/ports/common/ARMCMx",
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/DMAv1",
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/GPIOv1",
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/I2Cv1",
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/USARTv1",
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/USBv1",
+                "${workspaceFolder}/embedded/os/various/shell",
+                "${workspaceFolder}/embedded/os/hal/lib/streams",
+                "${workspaceFolder}/embedded"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
