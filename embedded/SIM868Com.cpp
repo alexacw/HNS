@@ -23,7 +23,7 @@ static THD_WORKING_AREA(SIM868SerialThread_wa, 1024);
 static THD_FUNCTION(SIM868SerialThread, arg)
 {
     (void)arg;
-    chRegSetThreadName("SIM868 COM");
+    chRegSetThreadName("SIM868_COM");
 
     memset((void *)sim868SerialRXBuf, 0, SERIAL_BUFFERS_SIZE);
 
@@ -42,14 +42,16 @@ static THD_FUNCTION(SIM868SerialThread, arg)
 
     while (!chThdShouldTerminateX())
     {
-        chEvtWaitAny(SIM868_SERIAL_EVENT_ID);                     //wait for selected serial events
+        chEvtWaitAny(SIM868_SERIAL_EVENT_ID);
+        chEvtWaitOneTimeout(SIM868_SERIAL_EVENT_ID, 100);         //wait for selected serial events
         pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flag
 
         if (pending_flags & CHN_INPUT_AVAILABLE)
         {
             handleInput(sdAsynchronousRead(SIM868_SD, sim868SerialRXBuf, (size_t)SERIAL_BUFFERS_SIZE));
         }
-        iqResetI(&(SIM868_SD)->iqueue);
+        else
+            iqResetI(&(SIM868_SD)->iqueue);
         memset((void *)sim868SerialRXBuf, 0, SERIAL_BUFFERS_SIZE); //Flush RX buffer
     }
 }

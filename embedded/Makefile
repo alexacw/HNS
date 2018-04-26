@@ -2,10 +2,6 @@
 # Build global options
 # NOTE: Can be overridden externally.
 #
-
-# En/disable usage of maplemini bootloader support
-USE_MAPLEMINI_BOOTLOADER ?= 0
-
 # Compiler options here.
 ifeq ($(USE_OPT),)
   USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -DUSE_MAPLEMINI_BOOTLOADER=${USE_MAPLEMINI_BOOTLOADER}
@@ -109,12 +105,8 @@ include $(CHIBIOS)/os/various/shell/shell.mk
 
 include $(CHIBIOS)/os/various/cpp_wrappers/chcpp.mk
 
-# Define linker script file here
-ifeq ($(USE_MAPLEMINI_BOOTLOADER),1)
-  LDSCRIPT = $(STARTUPLD)/STM32F103xB_maplemini_bootloader.ld
-else
-  LDSCRIPT = $(STARTUPLD)/STM32F103xB.ld
-endif
+# linker script specified here
+LDSCRIPT = $(STARTUPLD)/STM32F103x8.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -212,9 +204,6 @@ CPPWARN = -Wall -Wextra -Wundef
 
 # List all user C define here, like -D_DEBUG=1
 UDEFS =
-ifeq ($(USE_MAPLEMINI_BOOTLOADER),1)
-  UDEFS += -DCORTEX_VTOR_INIT=0x5000
-endif
 
 # Define ASM defines here
 UADEFS =
