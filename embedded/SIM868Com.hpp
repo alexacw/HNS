@@ -30,10 +30,3 @@ static const SerialConfig SIM868_SERIAL_CONFIG = {
 
 static void initSIM868Serialhandler();
 
-/**
- * @brief read a line from serial, dataPtr should be allocated with sufficient space
- * 
- * return the number of bytes received as a line (end with CR or LF) in the given time  
- * 
- */
-static size_t serialSendNReadTimeout(uint8_t *sendMsg, uint32_t sendMsgLength, uint8_t readDataPtr[SERIAL_BUFFERS_SIZE], const sysinterval_t &timeout);

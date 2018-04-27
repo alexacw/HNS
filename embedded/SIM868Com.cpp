@@ -90,8 +90,6 @@ static size_t getline(uint8_t line[SERIAL_BUFFERS_SIZE])
 }
 }
 
-static size_t serialSendNReadTimeout(uint8_t *sendMsg, uint32_t sendMsgLength, uint8_t readDataPtr[SERIAL_BUFFERS_SIZE], const sysinterval_t &timeout){};
-
 static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 {
@@ -103,8 +101,7 @@ THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 
     event_listener_t serial_listener;
     static eventflags_t pending_flags;
-    static eventflags_t current_flag;
-    chEvtRegisterMaskWithFlags(chnGetEventSource(&SD1), &serial_listener,
+    chEvtRegisterMaskWithFlags(chnGetEventSource(&SIM868_SD), &serial_listener,
                                SIM868_SERIAL_EVENT_MASK, SIM868_SERIAL_WK_FLAGS); //setup event listening
 
     while (!chThdShouldTerminateX())
