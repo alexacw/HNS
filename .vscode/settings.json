@@ -1,6 +1,15 @@
 {
     "files.associations": {
         "hal.h": "c",
-        "board.h": "c"
+        "board.h": "c",
+        "array": "cpp",
+        "hal_uart.h": "c",
+        "*.ipp": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "slist": "cpp",
+        "system_error": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
     }
 }

@@ -79,21 +79,17 @@
 //   chprintf(chp, "\r\n\nstopped\r\n");
 // }
 
-static void send2UART(BaseSequentialStream *chp, int argc, char *argv[])
-{
-	(void)argv;
-	(void)argc;
+static void send2UART(BaseSequentialStream *chp, int argc, char *argv[]) {
+	(void) argv;
+	(void) argc;
 	chprintf(chp, "\r\n\nreceived\r\n");
-};
+}
+;
 
-static const ShellCommand commands[] =
-	{
-		{"send", send2UART},
-		{NULL, NULL}};
+static const ShellCommand commands[] = { { NULL, NULL } };
 
 static const ShellConfig shell_cfg1 =
-	{
-		(BaseSequentialStream *)&SDU1, commands};
+		{ (BaseSequentialStream *) &SDU1, commands };
 
 /*===========================================================================*/
 /* Generic code.                                                             */
@@ -103,13 +99,11 @@ static const ShellConfig shell_cfg1 =
  * Blinker thread, times are in milliseconds.
  */
 static THD_WORKING_AREA(waThread1, 128);
-static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
-{
+static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg) {
 
-	(void)arg;
+	(void) arg;
 	chRegSetThreadName("blinker");
-	while (true)
-	{
+	while (true) {
 		systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 100 : 300;
 		palClearPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
@@ -122,17 +116,14 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 #define USART_CR1_PARITY_SET (1 << 10) /* CR1 parity bit enable */
 #define USART_CR1_EVEN_PARITY (0 << 9) /* CR1 even parity */
 
-static SerialConfig sd1cfg = {
-	9600, /* 115200 baud rate */
-	USART_CR1_9BIT_WORD | USART_CR1_PARITY_SET | USART_CR1_EVEN_PARITY,
-	USART_CR2_STOP1_BITS | USART_CR2_LINEN,
-	0};
+static SerialConfig sd1cfg = { 9600, /* 115200 baud rate */
+USART_CR1_9BIT_WORD | USART_CR1_PARITY_SET | USART_CR1_EVEN_PARITY,
+		USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
 
 /*
  * Application entry point.
  */
-int main(void)
-{
+int main(void) {
 
 	/*
 	 * System initializations.
@@ -173,20 +164,15 @@ int main(void)
 	/*
 	 * Normal main() thread activity, spawning shells.
 	 */
-	while (true)
-	{
-		if (SDU1.config->usbp->state == USB_ACTIVE)
-		{
+	while (true) {
+		if (SDU1.config->usbp->state == USB_ACTIVE) {
 			thread_t *shelltp = chThdCreateFromHeap(NULL,
-													SHELL_WA_SIZE,
-													"shell",
-													NORMALPRIO + 1,
-													shellThread,
-													(void *)&shell_cfg1);
+			SHELL_WA_SIZE, "shell",
+			NORMALPRIO + 1, shellThread, (void *) &shell_cfg1);
 			chThdWait(shelltp); /* Waiting termination.             */
 		}
 		chThdSleepMilliseconds(300);
 
-		sdWrite(&SD1, (uint8_t *)"Button Pressed!\r\n", 17);
+		sdWrite(&SD1, (uint8_t * )"Button Pressed!\r\n", 17);
 	}
 }
