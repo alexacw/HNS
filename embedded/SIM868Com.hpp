@@ -22,11 +22,16 @@
 #define SIM868_SERIAL_WK_FLAGS SD_BREAK_DETECTED
 
 static const SerialConfig SIM868_SERIAL_CONFIG = {
-    9600,            //Baud Rate
-    USART_CR1_UE,    //CR1 Register
-    USART_CR2_LINEN, //CR2 Register
-    0                //CR3 Register
+    9600,         //Baud Rate
 };
 
-static void initSIM868Serialhandler();
+void initSIM868Serialhandler(void);
 
+/**
+      * @brief store the first line received to the data pointer,
+      * then free line from the buffer
+      * 
+      * @param data 
+      * @return uint32_t 
+     */
+size_t readBufGetline(uint8_t line[SERIAL_BUFFERS_SIZE]);
