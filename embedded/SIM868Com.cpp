@@ -5,14 +5,10 @@
 #include "hal.h"
 #include "SIM868Com.hpp"
 
-static uint8_t data[SERIAL_BUFFERS_SIZE];
-static uint32_t readpos = 0;
-static uint32_t writepos = 0;
-static mutex_t mu;
 static void readBufclear(void)
 {
     chMtxLock(&mu);
-    memset(data, 0, SERIAL_BUFFERS_SIZE);
+    memset(data, 0, SIM868_MSG_BUF_SIZE);
     readpos = 0;
     writepos = 0;
     chMtxUnlock(&mu);
@@ -23,14 +19,14 @@ static void readBufInit(void)
     chMtxObjectInit(&mu);
     readBufclear();
 }
-static void readBufWriteFromSD(SerialDriver *sd)
+static void readBuffedMsg(SerialDriver *sd)
 {
     chMtxLock(&mu);
     //read till end of buffer if available, writepos = position for next write
     bool rwasbehind = readpos > writepos;
     uint32_t startWrtiePos = writepos;
-    writepos += sdAsynchronousRead(sd, &data[writepos], SERIAL_BUFFERS_SIZE - writepos);
-    if (writepos == SERIAL_BUFFERS_SIZE)
+    writepos += sdAsynchronousRead(sd, &data[writepos], SIM868_MSG_BUF_SIZE - writepos);
+    if (writepos == SIM868_MSG_BUF_SIZE)
     {
         uint32_t writepos = sdAsynchronousRead(sd, data, startWrtiePos);
         if (rwasbehind || readpos < writepos)
@@ -39,49 +35,59 @@ static void readBufWriteFromSD(SerialDriver *sd)
     chMtxUnlock(&mu);
 }
 
-size_t readBufGetline(uint8_t line[SERIAL_BUFFERS_SIZE])
+void readBufPopline()
 {
     chMtxLock(&mu);
-    //discard prefix line endings
+    int state = 0;
     while (readpos != writepos)
     {
         if (data[readpos] == '\n' || data[readpos] == '\r')
         {
+            if (state == 1)
+                state = 2;
             readpos++;
-            if (readpos == SERIAL_BUFFERS_SIZE)
+            if (readpos == SIM868_MSG_BUF_SIZE)
                 readpos = 0;
         }
         else
-            break;
-    }
-    //search for line ending
-    size_t i = readpos; // i = position of the first line ending found;
-
-    while (i != writepos && i != SERIAL_BUFFERS_SIZE)
-    {
-        if (data[i] == '\n' || data[i] == '\r')
         {
-            break;
+            if (state == 2)
+                break;
+            else
+            {
+                if (state == 0)
+                    state = 1;
+                readpos++;
+                if (readpos == SIM868_MSG_BUF_SIZE)
+                    readpos = 0;
+            }
         }
-        i = (i + 1) % SERIAL_BUFFERS_SIZE;
     }
-
-    size_t size;
-    if (i > readpos)
-    {
-        size = i - readpos;
-        memcpy(line, &data[readpos], size);
-    }
-    else
-    {
-        //FIXME:
-        memcpy(line, &data[readpos], SERIAL_BUFFERS_SIZE - readpos);
-        memcpy(&line[SERIAL_BUFFERS_SIZE - readpos], data, i);
-        size = SERIAL_BUFFERS_SIZE + i - readpos;
-    }
-
     chMtxUnlock(&mu);
-    return size;
+}
+
+int readBufFindWord(char *word, int size)
+{
+    chMtxLock(&mu);
+    uint32_t tempReadpos = readpos;
+    while (tempReadpos != writepos)
+    {
+        int i = 0;
+        for (; i < size && data[tempReadpos + i] == word[i]; i++)
+            ;
+        if (i == size)
+        {
+            chMtxUnlock(&mu);
+            return tempReadpos;
+        }
+        tempReadpos++;
+        if (tempReadpos == SIM868_MSG_BUF_SIZE)
+        {
+            tempReadpos = 0;
+        }
+    }
+    return -1;
+    chMtxUnlock(&mu);
 }
 
 static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
@@ -93,21 +99,21 @@ THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
     event_listener_t serial_listener;
     static eventflags_t pending_flags;
     chEvtRegisterMaskWithFlags(chnGetEventSource(&SIM868_SD), &serial_listener,
-                               SIM868_SERIAL_EVENT_MASK, SIM868_SERIAL_WK_FLAGS | CHN_INPUT_AVAILABLE); //setup event listening
+                               SIM868_SERIAL_EVENT_MASK, CHN_INPUT_AVAILABLE); //setup event listening
 
-    while (true)
+    while (chThdShouldTerminateX())
     {
         chEvtWaitAny(SIM868_SERIAL_EVENT_MASK);                   //wait for selected serial events
         pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
 
-        readBufWriteFromSD(&SIM868_SD);
+        readBuffedMsg(&SIM868_SD);
     }
 };
 
 void initSIM868Serialhandler()
 {
     readBufInit();
-    palSetPadMode(GPIOA, GPIOA_USART1_TX, PAL_MODE_OUTPUT_PUSHPULL);
+    palSetPadMode(GPIOA, GPIOA_USART1_TX, PAL_MODE_STM32_ALTERNATE_PUSHPULL);
     palSetPadMode(GPIOA, GPIOA_USART1_RX, PAL_MODE_INPUT_PULLUP);
     sdStart(&SIM868_SD, &SIM868_SERIAL_CONFIG);
     chThdCreateStatic(SIM868SerialReadThread_wa, sizeof(SIM868SerialReadThread_wa), //Start Judge RX thread

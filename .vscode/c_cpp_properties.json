@@ -69,7 +69,8 @@
                 "${workspaceRoot}/embedded/os/common/ext/ST/STM32F1xx",
                 "${workspaceRoot}/embedded/os/common/ext/ARM/CMSIS/Core/Include",
                 "${workspaceRoot}/embedded/board",
-                "${workspaceRoot}/embedded"
+                "${workspaceRoot}/embedded",
+                "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

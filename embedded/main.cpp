@@ -38,50 +38,30 @@
 
 #define SHELL_WA_SIZE THD_WORKING_AREA_SIZE(2048)
 
-// /* Can be measured using dd if=/dev/xxxx of=/dev/null bs=512 count=10000.*/
-// static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[])
-// {
-//   static uint8_t buf[] =
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-//       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+/* Can be measured using dd if=/dev/xxxx of=/dev/null bs=512 count=10000.*/
+static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	static uint8_t buf[] =
+		"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 
-//   (void)argv;
-//   if (argc > 0)
-//   {
-//     chprintf(chp, "Usage: write\r\n");
-//     return;
-//   }
+	(void)argv;
+	if (argc > 0)
+	{
+		chprintf(chp, "Usage: write\r\n");
+		return;
+	}
 
-//   while (chnGetTimeout((BaseChannel *)chp, TIME_IMMEDIATE) == Q_TIMEOUT)
-//   {
-// #if 1
-//     /* Writing in channel mode.*/
-//     chnWrite(&SDU1, buf, sizeof buf - 1);
-// #else
-//     /* Writing in buffer mode.*/
-//     (void)obqGetEmptyBufferTimeout(&SDU1.obqueue, TIME_INFINITE);
-//     memcpy(SDU1.obqueue.ptr, buf, SERIAL_USB_BUFFERS_SIZE);
-//     obqPostFullBuffer(&SDU1.obqueue, SERIAL_USB_BUFFERS_SIZE);
-// #endif
-//   }
-//   chprintf(chp, "\r\n\nstopped\r\n");
-// }
+	while (chnGetTimeout((BaseChannel *)chp, TIME_IMMEDIATE) == Q_TIMEOUT)
+	{
+		/* Writing in channel mode.*/
+		chnWrite(&SDU1, buf, sizeof buf - 1);
+	}
+	chprintf(chp, "\r\n\nstopped\r\n");
+}
 
-static const ShellCommand commands[] = {{NULL, NULL}};
+static const ShellCommand commands[] = {
+	{"write", cmd_write},
+	{NULL, NULL}};
 
 static const ShellConfig shell_cfg1 =
 	{(BaseSequentialStream *)&SDU1, commands};
@@ -89,8 +69,6 @@ static const ShellConfig shell_cfg1 =
 /*===========================================================================*/
 /* Generic code.                                                             */
 /*===========================================================================*/
-
-static uint8_t newlinbuf[SERIAL_BUFFERS_SIZE];
 /*
  * Blinker thread, times are in milliseconds.
  */
@@ -107,11 +85,6 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		chThdSleepMilliseconds(time);
 		palSetPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
-		// uint32_t size = readBufGetline(newlinbuf);
-		// if (size > 0&&serusbcfg.usbp->state == USB_ACTIVE)
-		// {
-		// 	streamWrite(&SDU1, newlinbuf, size);
-		// }
 	}
 }
 
