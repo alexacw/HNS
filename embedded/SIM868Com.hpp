@@ -20,6 +20,9 @@
 #define SIM868_SERIAL_EVENT_MASK EVENT_MASK(SIM868_SERIAL_EVENT_ID)
 #define SIM868_MSG_BUF_SIZE 256
 
+namespace SIM868Com
+{
+
 static const SerialConfig SIM868_SERIAL_CONFIG = {
     9600, //Baud Rate
 };
@@ -30,17 +33,13 @@ static uint32_t writepos = 0;
 
 void initSIM868Serialhandler(void);
 
-/**
-      * @brief store the first line received to the data pointer,
-      * then free line from the buffer
-      * 
-      * @param data 
-      * @return uint32_t 
-     */
+bool initHTTP();
+bool initGPS();
+
+int waitWordTimeout(char *word, int size, int sec);
 void readBufPopline();
 
 int readBufFindWord(char *word, int size);
 
-bool waitForOK(sysinterval_t timeout);
-
 static mutex_t mu;
+}

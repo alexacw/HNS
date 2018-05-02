@@ -5,6 +5,9 @@
 #include "hal.h"
 #include "SIM868Com.hpp"
 
+namespace SIM868Com
+{
+
 static void readBufclear(void)
 {
     chMtxLock(&mu);
@@ -119,3 +122,4 @@ void initSIM868Serialhandler()
     chThdCreateStatic(SIM868SerialReadThread_wa, sizeof(SIM868SerialReadThread_wa), //Start Judge RX thread
                       NORMALPRIO, SIM868SerialReadThreadFunc, NULL);
 };
+}

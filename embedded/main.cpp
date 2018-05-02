@@ -125,7 +125,7 @@ int main(void)
 	 */
 	shellInit();
 
-	initSIM868Serialhandler();
+	SIM868Com::initSIM868Serialhandler();
 
 	/*
 	 * Creates the blinker thread.
