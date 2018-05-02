@@ -2,4 +2,5 @@
 *.d
 *.bin
 *.lst
+*.dep
 build/
