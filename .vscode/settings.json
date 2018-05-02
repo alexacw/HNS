@@ -10,6 +10,7 @@
         "slist": "cpp",
         "system_error": "cpp",
         "initializer_list": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "*.tcc": "cpp"
     }
 }

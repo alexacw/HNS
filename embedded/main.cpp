@@ -85,6 +85,9 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		chThdSleepMilliseconds(time);
 		palSetPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
+		static char temp[] = "received ok";
+		sdAsynchronousWrite(&SD1, (uint8_t *)temp, sizeof(temp) - 1);
+		chnWrite(&SDU1, (uint8_t *)temp, sizeof(temp) - 1);
 	}
 }
 
@@ -125,7 +128,8 @@ int main(void)
 	 */
 	shellInit();
 
-	SIM868Com::initSIM868Serialhandler();
+	SIM868Com::initSerial();
+	SIM868Com::startSerialRead();
 
 	/*
 	 * Creates the blinker thread.

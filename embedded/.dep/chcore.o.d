@@ -6,13 +6,15 @@ build/obj/chcore.o: \
  /home/acw/Desktop/HNS/embedded/os/license/chcustomer.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/chrestrictions.h \
  /home/acw/Desktop/HNS/embedded/os/common/ports/ARMCMx/compilers/GCC/chtypes.h \
- /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
- /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
- /usr/include/newlib/stdint.h \
- /usr/include/newlib/machine/_default_types.h \
- /usr/include/newlib/sys/features.h /usr/include/newlib/sys/_intsup.h \
- /usr/include/newlib/sys/_stdint.h \
- /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h \
+ /usr/lib/gcc/arm-none-eabi/7.2.1/include/stddef.h \
+ /usr/lib/gcc/arm-none-eabi/7.2.1/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/_newlib_version.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h \
+ /usr/lib/gcc/arm-none-eabi/7.2.1/include/stdbool.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/chsystypes.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/chdebug.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/chtime.h \
@@ -71,21 +73,23 @@ chconf.h:
 
 /home/acw/Desktop/HNS/embedded/os/common/ports/ARMCMx/compilers/GCC/chtypes.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h:
+/usr/lib/gcc/arm-none-eabi/7.2.1/include/stddef.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h:
+/usr/lib/gcc/arm-none-eabi/7.2.1/include/stdint.h:
 
-/usr/include/newlib/stdint.h:
+/usr/arm-none-eabi/include/stdint.h:
 
-/usr/include/newlib/machine/_default_types.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
 
-/usr/include/newlib/sys/features.h:
+/usr/arm-none-eabi/include/sys/features.h:
 
-/usr/include/newlib/sys/_intsup.h:
+/usr/arm-none-eabi/include/_newlib_version.h:
 
-/usr/include/newlib/sys/_stdint.h:
+/usr/arm-none-eabi/include/sys/_intsup.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h:
+/usr/arm-none-eabi/include/sys/_stdint.h:
+
+/usr/lib/gcc/arm-none-eabi/7.2.1/include/stdbool.h:
 
 /home/acw/Desktop/HNS/embedded/os/rt/include/chsystypes.h:
 

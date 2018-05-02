@@ -1,3 +1,6 @@
+
+#ifndef _SIM868COM_
+#define _SIM868COM_
 #include <stdio.h>
 #include <string.h>
 
@@ -27,19 +30,29 @@ static const SerialConfig SIM868_SERIAL_CONFIG = {
     9600, //Baud Rate
 };
 
+static thread_t *readThreadPtr = NULL;
+static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
+
 static uint8_t data[SIM868_MSG_BUF_SIZE];
 static uint32_t readpos = 0;
 static uint32_t writepos = 0;
 
-void initSIM868Serialhandler(void);
+void initSerial();
+void startSerialRead();
+void stopSerialRead();
 
 bool initHTTP();
 bool initGPS();
 
 int waitWordTimeout(char *word, int size, int sec);
-void readBufPopline();
 
-int readBufFindWord(char *word, int size);
+void readBufInit();
+void readBufclear();
+void readBuffedMsg(SerialDriver *sd);
+void readBufPopline();
+int readBufFindWord(const char *word);
 
 static mutex_t mu;
 }
+
+#endif
