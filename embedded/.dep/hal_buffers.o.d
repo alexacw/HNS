@@ -1,29 +1,20 @@
 build/obj/hal_buffers.o: \
  /home/acw/Desktop/HNS/embedded/os/hal/src/hal_buffers.c \
- /usr/arm-none-eabi/include/string.h /usr/arm-none-eabi/include/_ansi.h \
- /usr/arm-none-eabi/include/newlib.h \
- /usr/arm-none-eabi/include/_newlib_version.h \
- /usr/arm-none-eabi/include/sys/config.h \
- /usr/arm-none-eabi/include/machine/ieeefp.h \
- /usr/arm-none-eabi/include/sys/features.h \
- /usr/arm-none-eabi/include/sys/reent.h \
- /usr/arm-none-eabi/include/_ansi.h \
- /usr/lib/gcc/arm-none-eabi/7.2.1/include/stddef.h \
- /usr/arm-none-eabi/include/sys/_types.h \
- /usr/arm-none-eabi/include/machine/_types.h \
- /usr/arm-none-eabi/include/machine/_default_types.h \
- /usr/arm-none-eabi/include/sys/lock.h \
- /usr/arm-none-eabi/include/sys/cdefs.h \
- /usr/arm-none-eabi/include/xlocale.h \
- /usr/arm-none-eabi/include/strings.h \
- /usr/arm-none-eabi/include/sys/string.h \
+ /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
+ /usr/include/newlib/newlib.h /usr/include/newlib/sys/config.h \
+ /usr/include/newlib/machine/ieeefp.h /usr/include/newlib/sys/features.h \
+ /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
+ /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
+ /usr/include/newlib/machine/_default_types.h \
+ /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/cdefs.h \
+ /usr/include/newlib/sys/string.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal.h \
  /home/acw/Desktop/HNS/embedded/os/hal/osal/rt/osal.h \
- /usr/lib/gcc/arm-none-eabi/7.2.1/include/stdint.h \
- /usr/arm-none-eabi/include/stdint.h \
- /usr/arm-none-eabi/include/sys/_intsup.h \
- /usr/arm-none-eabi/include/sys/_stdint.h \
- /usr/lib/gcc/arm-none-eabi/7.2.1/include/stdbool.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h \
+ /usr/include/newlib/sys/_stdint.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/ch.h chconf.h \
  /home/acw/Desktop/HNS/embedded/os/rt/include/chchecks.h \
  /home/acw/Desktop/HNS/embedded/os/license/chlicense.h \
@@ -120,55 +111,49 @@ build/obj/hal_buffers.o: \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_serial_usb.h \
  /home/acw/Desktop/HNS/embedded/os/hal/include/hal_usb_cdc.h
 
-/usr/arm-none-eabi/include/string.h:
+/usr/include/newlib/string.h:
 
-/usr/arm-none-eabi/include/_ansi.h:
+/usr/include/newlib/_ansi.h:
 
-/usr/arm-none-eabi/include/newlib.h:
+/usr/include/newlib/newlib.h:
 
-/usr/arm-none-eabi/include/_newlib_version.h:
+/usr/include/newlib/sys/config.h:
 
-/usr/arm-none-eabi/include/sys/config.h:
+/usr/include/newlib/machine/ieeefp.h:
 
-/usr/arm-none-eabi/include/machine/ieeefp.h:
+/usr/include/newlib/sys/features.h:
 
-/usr/arm-none-eabi/include/sys/features.h:
+/usr/include/newlib/sys/reent.h:
 
-/usr/arm-none-eabi/include/sys/reent.h:
+/usr/include/newlib/_ansi.h:
 
-/usr/arm-none-eabi/include/_ansi.h:
+/usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h:
 
-/usr/lib/gcc/arm-none-eabi/7.2.1/include/stddef.h:
+/usr/include/newlib/sys/_types.h:
 
-/usr/arm-none-eabi/include/sys/_types.h:
+/usr/include/newlib/machine/_types.h:
 
-/usr/arm-none-eabi/include/machine/_types.h:
+/usr/include/newlib/machine/_default_types.h:
 
-/usr/arm-none-eabi/include/machine/_default_types.h:
+/usr/include/newlib/sys/lock.h:
 
-/usr/arm-none-eabi/include/sys/lock.h:
+/usr/include/newlib/sys/cdefs.h:
 
-/usr/arm-none-eabi/include/sys/cdefs.h:
-
-/usr/arm-none-eabi/include/xlocale.h:
-
-/usr/arm-none-eabi/include/strings.h:
-
-/usr/arm-none-eabi/include/sys/string.h:
+/usr/include/newlib/sys/string.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/include/hal.h:
 
 /home/acw/Desktop/HNS/embedded/os/hal/osal/rt/osal.h:
 
-/usr/lib/gcc/arm-none-eabi/7.2.1/include/stdint.h:
+/usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h:
 
-/usr/arm-none-eabi/include/stdint.h:
+/usr/include/newlib/stdint.h:
 
-/usr/arm-none-eabi/include/sys/_intsup.h:
+/usr/include/newlib/sys/_intsup.h:
 
-/usr/arm-none-eabi/include/sys/_stdint.h:
+/usr/include/newlib/sys/_stdint.h:
 
-/usr/lib/gcc/arm-none-eabi/7.2.1/include/stdbool.h:
+/usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h:
 
 /home/acw/Desktop/HNS/embedded/os/rt/include/ch.h:
 
