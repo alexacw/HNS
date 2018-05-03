@@ -85,9 +85,13 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		chThdSleepMilliseconds(time);
 		palSetPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
-		static char temp[] = "received ok";
-		sdAsynchronousWrite(&SD1, (uint8_t *)temp, sizeof(temp) - 1);
-		chnWrite(&SDU1, (uint8_t *)temp, sizeof(temp) - 1);
+		static char ok[] = "OK\0";
+		if (SIM868Com::readBufFindWord(ok) >= 0)
+		{
+			static char temp[] = "received ok";
+			sdWrite(&SD1, (uint8_t *)temp, sizeof(temp) - 1);
+			SIM868Com::readBufclear();
+		}
 	}
 }
 
