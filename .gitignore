@@ -4,4 +4,3 @@
 *.lst
 *.dep
 build/
-embedded/.dep/
