@@ -1,8 +1,8 @@
 /**********************************************************************************
- * ¹¤³ÌÃû  :GSM
- * ÃèÊö    :Í¨¹ı´®¿Ú²âÊÔÄ£¿éËùÓĞ¹¦ÄÜ
- * ÊµÑéÆ½Ì¨:STM32F10X
- * ¿â°æ±¾  :
+ * å·¥ç¨‹å  :GSM
+ * æè¿°    :é€šè¿‡ä¸²å£æµ‹è¯•æ¨¡å—æ‰€æœ‰åŠŸèƒ½
+ * å®éªŒå¹³å°:STM32F10X
+ * åº“ç‰ˆæœ¬  :
 
 **********************************************************************************/
 
@@ -13,803 +13,816 @@
 #include "timer.h"
 #include "string.h"
 
+#define Buf1_Max 200 //ä¸²å£1ç¼“å­˜é•¿åº¦
+#define Buf2_Max 200 //ä¸²å£2ç¼“å­˜é•¿åº¦
 
-#define Buf1_Max 200 					  //´®¿Ú1»º´æ³¤¶È
-#define Buf2_Max 200 					  //´®¿Ú2»º´æ³¤¶È
-
-/*************  ±¾µØ±äÁ¿ÉùÃ÷	**************/
+/*************  æœ¬åœ°å˜é‡å£°æ˜	**************/
 u16 USART_RX_STA;
-u8 Uart1_Buf[Buf1_Max];//´®¿Ú1Êı¾İ»º´æÇø
-u8 Uart2_Buf[Buf2_Max];//´®¿Ú2Êı¾İ»º´æÇø
-u8 First_Int = 0,shijian=0;
-u16 Times=0;      //ÑÓÊ±±äÁ¿
-u8 Time_UART1=0;  //´®¿Ú1¼ÆÊ±Æ÷
-u8 Time_UART2=0;  //´®¿Ú2¼ÆÊ±Æ÷
-u8 Time_miao=0;
+u8 Uart1_Buf[Buf1_Max]; //ä¸²å£1æ•°æ®ç¼“å­˜åŒº
+u8 Uart2_Buf[Buf2_Max]; //ä¸²å£2æ•°æ®ç¼“å­˜åŒº
+u8 First_Int = 0, shijian = 0;
+u16 Times = 0;		 //å»¶æ—¶å˜é‡
+u8 Time_UART1 = 0; //ä¸²å£1è®¡æ—¶å™¨
+u8 Time_UART2 = 0; //ä¸²å£2è®¡æ—¶å™¨
+u8 Time_miao = 0;
 
-u8 Timer0_start=0;	//¶¨Ê±Æ÷0ÑÓÊ±Æô¶¯¼ÆÊıÆ÷
-u8 Uart2_Start=0;	  //´®¿Ú2¿ªÊ¼½ÓÊÕÊı¾İ
-u8 Uart2_End=0;	    //´®¿Ú2½ÓÊÕÊı¾İ½áÊø
+u8 Timer0_start = 0; //å®šæ—¶å™¨0å»¶æ—¶å¯åŠ¨è®¡æ•°å™¨
+u8 Uart2_Start = 0;	//ä¸²å£2å¼€å§‹æ¥æ”¶æ•°æ®
+u8 Uart2_End = 0;		 //ä¸²å£2æ¥æ”¶æ•°æ®ç»“æŸ
 
-/*************	±¾µØº¯ÊıÉùÃ÷	**************/
-void GPIO_config(void);//GPIO¶Ë¿ÚÅäÖÃ
-void Timer0Init(void);//¶¨Ê±Æ÷0³õÊ¼»¯
-void CLR_Buf2(void);//Çå³ı´®¿Ú2½ÓÊÕ»º´æ
-u8 GSM_send_cmd(u8 *cmd,u8 *ack,u8 wait_time);//Ä£¿éÖ¸Áî·¢ËÍº¯Êı
-void GSM_test(void);//Ä£¿é²âÊÔÖ÷³ÌĞò
-void GSM_mtest(void);//Ä£¿éĞÅÏ¢¼ì²â
-u8 GSM_gsminfo(void);//GSMĞÅÏ¢ÏÔÊ¾(ĞÅºÅÖÊÁ¿,µç³ØµçÁ¿,ÈÕÆÚÊ±¼ä)
-u8 GSM_call_test(void);//²¦ºÅ²âÊÔ³ÌĞò
-u8 GSM_sms_test(void);//¶ÌĞÅ²âÊÔ³ÌĞò
-u8 GSM_gprs_test(void);//GPRSÊı¾İ´«Êä²âÊÔ³ÌĞò
-u8 change_str_Data(u8 *p,u8 len);//×Ö·û×ªÕûĞÍ
-void change_Data_str(int n, char str[]);//ÕûĞÍ×ª×Ö·û
+/*************	æœ¬åœ°å‡½æ•°å£°æ˜	**************/
+void GPIO_config(void);													 //GPIOç«¯å£é…ç½®
+void Timer0Init(void);													 //å®šæ—¶å™¨0åˆå§‹åŒ–
+void CLR_Buf2(void);														 //æ¸…é™¤ä¸²å£2æ¥æ”¶ç¼“å­˜
+u8 GSM_send_cmd(u8 *cmd, u8 *ack, u8 wait_time); //æ¨¡å—æŒ‡ä»¤å‘é€å‡½æ•°
+void GSM_test(void);														 //æ¨¡å—æµ‹è¯•ä¸»ç¨‹åº
+void GSM_mtest(void);														 //æ¨¡å—ä¿¡æ¯æ£€æµ‹
+u8 GSM_gsminfo(void);														 //GSMä¿¡æ¯æ˜¾ç¤º(ä¿¡å·è´¨é‡,ç”µæ± ç”µé‡,æ—¥æœŸæ—¶é—´)
+u8 GSM_call_test(void);													 //æ‹¨å·æµ‹è¯•ç¨‹åº
+u8 GSM_sms_test(void);													 //çŸ­ä¿¡æµ‹è¯•ç¨‹åº
+u8 GSM_gprs_test(void);													 //GPRSæ•°æ®ä¼ è¾“æµ‹è¯•ç¨‹åº
+u8 change_str_Data(u8 *p, u8 len);							 //å­—ç¬¦è½¬æ•´å‹
+void change_Data_str(int n, char str[]);				 //æ•´å‹è½¬å­—ç¬¦
 void Swap(char *ch1, char *ch2);
-void change_hex_str(u8 dest[],u8 src[],u8 len);//Ê®Áù½øÖÆ×ª×Ö·û´®
-u8 GSM_jz_test(void);//»ùÕ¾¶¨Î»
-u8 GSM_tts_test(void);//TTSÎÄ±¾ÓïÒô²âÊÔ³ÌĞò
+void change_hex_str(u8 dest[], u8 src[], u8 len); //åå…­è¿›åˆ¶è½¬å­—ç¬¦ä¸²
+u8 GSM_jz_test(void);															//åŸºç«™å®šä½
+u8 GSM_tts_test(void);														//TTSæ–‡æœ¬è¯­éŸ³æµ‹è¯•ç¨‹åº
 
-/*************  Íâ²¿º¯ÊıºÍ±äÁ¿ÉùÃ÷*****************/
-
-
-
+/*************  å¤–éƒ¨å‡½æ•°å’Œå˜é‡å£°æ˜*****************/
 
 /*******************************************************************************
-* º¯ÊıÃû : main 
-* ÃèÊö   : Ö÷º¯Êı
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : ´®¿Ú2¸ºÔğÓëGSMÄ£¿éÍ¨ĞÅ£¬´®¿Ú1ÓÃÓÚ´®¿Úµ÷ÊÔ£¬¿ÉÒÔ±ÜÃâÔÚÏÂÔØ³ÌĞòÊ±Êı¾İ
-					 »¹·¢ËÍµ½Ä£¿é
+* å‡½æ•°å : main 
+* æè¿°   : ä¸»å‡½æ•°
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : ä¸²å£2è´Ÿè´£ä¸GSMæ¨¡å—é€šä¿¡ï¼Œä¸²å£1ç”¨äºä¸²å£è°ƒè¯•ï¼Œå¯ä»¥é¿å…åœ¨ä¸‹è½½ç¨‹åºæ—¶æ•°æ®
+					 è¿˜å‘é€åˆ°æ¨¡å—
 *******************************************************************************/
 int main(void)
 {
 	SysTick_Init_Config();
 	GPIO_Config();
-	
+
 	USART1_Init_Config(115200);
 	USART2_Init_Config(115200);
 	Timer2_Init_Config();
-	UART1_SendString("GSMÄ£¿é¶ÌĞÅ²âÊÔ³ÌĞò\r\n");//´òÓ¡ĞÅÏ¢
-	UART1_SendString("GSMÄ£¿éÔÚ×¢²áÍøÂç\r\n");
-  GSM_test(); //GSM²âÊÔ³ÌĞò
-	while(1)
+	UART1_SendString("GSMæ¨¡å—çŸ­ä¿¡æµ‹è¯•ç¨‹åº\r\n"); //æ‰“å°ä¿¡æ¯
+	UART1_SendString("GSMæ¨¡å—åœ¨æ³¨å†Œç½‘ç»œ\r\n");
+	GSM_test(); //GSMæµ‹è¯•ç¨‹åº
+	while (1)
 	{
 	}
 }
 /*******************************************************************************
-* º¯ÊıÃû  : USART1_IRQHandler
-* ÃèÊö    : ´®¿Ú1ÖĞ¶Ï·şÎñ³ÌĞò
-* ÊäÈë    : ÎŞ
-* ·µ»Ø    : ÎŞ 
-* ËµÃ÷    : 1)¡¢Ö»Æô¶¯ÁËUSART1ÖĞ¶Ï½ÓÊÕ£¬Î´Æô¶¯USART1ÖĞ¶Ï·¢ËÍ¡£
-*           2)¡¢½ÓÊÕµ½0x0d 0x0a(»Ø³µ¡¢"\r\n")´ú±íÖ¡Êı¾İ½ÓÊÕÍê³É
+* å‡½æ•°å  : USART1_IRQHandler
+* æè¿°    : ä¸²å£1ä¸­æ–­æœåŠ¡ç¨‹åº
+* è¾“å…¥    : æ— 
+* è¿”å›    : æ—  
+* è¯´æ˜    : 1)ã€åªå¯åŠ¨äº†USART1ä¸­æ–­æ¥æ”¶ï¼Œæœªå¯åŠ¨USART1ä¸­æ–­å‘é€ã€‚
+*           2)ã€æ¥æ”¶åˆ°0x0d 0x0a(å›è½¦ã€"\r\n")ä»£è¡¨å¸§æ•°æ®æ¥æ”¶å®Œæˆ
 *******************************************************************************/
-void USART1_IRQHandler(void)                	
+void USART1_IRQHandler(void)
 {
-		u8 res;
+	u8 res;
 
-		res=USART_ReceiveData(USART1);
-		Time_UART1=0;
-		if((USART_RX_STA&0x8000)==0)//½ÓÊÕÎ´Íê³É
-		{
-			if(USART_RX_STA&0x4000)//½ÓÊÕµ½ÁË0x0d
-			{
-				if(res!=0x0a)USART_RX_STA=0;//½ÓÊÕ´íÎó,ÖØĞÂ¿ªÊ¼
-				else USART_RX_STA|=0x8000;	//½ÓÊÕÍê³ÉÁË 
-			}else //»¹Ã»ÊÕµ½0X0D
-			{	
-				if(res==0x0d)USART_RX_STA|=0x4000;
-				else
-				{
-					Uart1_Buf[USART_RX_STA&0X3FFF]=res;
-					USART_RX_STA++;
-					if(USART_RX_STA>(Buf1_Max-1))USART_RX_STA=0;//½ÓÊÕÊı¾İ´íÎó,ÖØĞÂ¿ªÊ¼½ÓÊÕ	  
-				}		 
-			}
-		}  
-
-} 
-/*******************************************************************************
-* º¯ÊıÃû  : USART2_IRQHandler
-* ÃèÊö    : ´®¿Ú1ÖĞ¶Ï·şÎñ³ÌĞò
-* ÊäÈë    : ÎŞ
-* ·µ»Ø    : ÎŞ 
-* ËµÃ÷    : 
-*******************************************************************************/
-void USART2_IRQHandler(void)                	
-{
-			u8 Res=0;
-      Time_UART2=0;
-			Res= USART_ReceiveData(USART2);		//½«½ÓÊÕµ½µÄ×Ö·û´®´æµ½»º´æÖĞ
-			Uart2_Buf[First_Int]= Res; 
-			First_Int++;                			//»º´æÖ¸ÕëÏòºóÒÆ¶¯
-			if(First_Int > Buf2_Max)       		//Èç¹û»º´æÂú,½«»º´æÖ¸ÕëÖ¸Ïò»º´æµÄÊ×µØÖ·
-			{
-				First_Int = 0;
-			}
-} 	
-
-/*******************************************************************************
-* º¯ÊıÃû  : TIM2_IRQHandler
-* ÃèÊö    : ¶¨Ê±Æ÷2ÖĞ¶Ï¶Ï·şÎñº¯Êı
-* ÊäÈë    : ÎŞ
-* Êä³ö    : ÎŞ
-* ·µ»Ø    : ÎŞ 
-* ËµÃ÷    : ÎŞ
-*******************************************************************************/
-void TIM2_IRQHandler(void)   //TIM3ÖĞ¶Ï
-{
-	static u8 flag =1;
-
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)  //¼ì²éTIM3¸üĞÂÖĞ¶Ï·¢ÉúÓë·ñ
+	res = USART_ReceiveData(USART1);
+	Time_UART1 = 0;
+	if ((USART_RX_STA & 0x8000) == 0) //æ¥æ”¶æœªå®Œæˆ
 	{
-		
-		TIM_ClearITPendingBit(TIM2, TIM_IT_Update  );  //Çå³ıTIMx¸üĞÂÖĞ¶Ï±êÖ¾ 
-
-		if(flag)
+		if (USART_RX_STA & 0x4000) //æ¥æ”¶åˆ°äº†0x0d
 		{
-			LED4_ON(); 
-			flag=0;
+			if (res != 0x0a)
+				USART_RX_STA = 0; //æ¥æ”¶é”™è¯¯,é‡æ–°å¼€å§‹
+			else
+				USART_RX_STA |= 0x8000; //æ¥æ”¶å®Œæˆäº†
+		}
+		else //è¿˜æ²¡æ”¶åˆ°0X0D
+		{
+			if (res == 0x0d)
+				USART_RX_STA |= 0x4000;
+			else
+			{
+				Uart1_Buf[USART_RX_STA & 0X3FFF] = res;
+				USART_RX_STA++;
+				if (USART_RX_STA > (Buf1_Max - 1))
+					USART_RX_STA = 0; //æ¥æ”¶æ•°æ®é”™è¯¯,é‡æ–°å¼€å§‹æ¥æ”¶
+			}
+		}
+	}
+}
+/*******************************************************************************
+* å‡½æ•°å  : USART2_IRQHandler
+* æè¿°    : ä¸²å£1ä¸­æ–­æœåŠ¡ç¨‹åº
+* è¾“å…¥    : æ— 
+* è¿”å›    : æ—  
+* è¯´æ˜    : 
+*******************************************************************************/
+void USART2_IRQHandler(void)
+{
+	u8 Res = 0;
+	Time_UART2 = 0;
+	Res = USART_ReceiveData(USART2); //å°†æ¥æ”¶åˆ°çš„å­—ç¬¦ä¸²å­˜åˆ°ç¼“å­˜ä¸­
+	Uart2_Buf[First_Int] = Res;
+	First_Int++;							//ç¼“å­˜æŒ‡é’ˆå‘åç§»åŠ¨
+	if (First_Int > Buf2_Max) //å¦‚æœç¼“å­˜æ»¡,å°†ç¼“å­˜æŒ‡é’ˆæŒ‡å‘ç¼“å­˜çš„é¦–åœ°å€
+	{
+		First_Int = 0;
+	}
+}
+
+/*******************************************************************************
+* å‡½æ•°å  : TIM2_IRQHandler
+* æè¿°    : å®šæ—¶å™¨2ä¸­æ–­æ–­æœåŠ¡å‡½æ•°
+* è¾“å…¥    : æ— 
+* è¾“å‡º    : æ— 
+* è¿”å›    : æ—  
+* è¯´æ˜    : æ— 
+*******************************************************************************/
+void TIM2_IRQHandler(void) //TIM3ä¸­æ–­
+{
+	static u8 flag = 1;
+
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET) //æ£€æŸ¥TIM3æ›´æ–°ä¸­æ–­å‘ç”Ÿä¸å¦
+	{
+
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update); //æ¸…é™¤TIMxæ›´æ–°ä¸­æ–­æ ‡å¿—
+
+		if (flag)
+		{
+			LED4_ON();
+			flag = 0;
 		}
 		else
 		{
-			LED4_OFF(); 
-			flag=1;
+			LED4_OFF();
+			flag = 1;
 		}
-		if(Time_miao>=1)Time_miao++;//Time_miao==1Ê±Æô¶¯¼ÆÊı£¬Òç³ö×Ô¶¯Í£Ö¹
-		if(Timer0_start)
-		Times++;
-		if(Times > (shijian))
+		if (Time_miao >= 1)
+			Time_miao++; //Time_miao==1æ—¶å¯åŠ¨è®¡æ•°ï¼Œæº¢å‡ºè‡ªåŠ¨åœæ­¢
+		if (Timer0_start)
+			Times++;
+		if (Times > (shijian))
 		{
 			Timer0_start = 0;
 			Times = 0;
 		}
 		Time_UART2++;
-		if(USART_RX_STA&(~0x8000))//ÕıÔÚ½ÓÊÕ×´Ì¬ÖĞ
+		if (USART_RX_STA & (~0x8000)) //æ­£åœ¨æ¥æ”¶çŠ¶æ€ä¸­
 		{
 			Time_UART1++;
-			if(Time_UART1>=200)USART_RX_STA=0;//½ÓÊÕ³¬Ê±£¬¸´Î»½ÓÊÕ
+			if (Time_UART1 >= 200)
+				USART_RX_STA = 0; //æ¥æ”¶è¶…æ—¶ï¼Œå¤ä½æ¥æ”¶
 		}
-	}	
+	}
 }
 
 /*******************************************************************************
-* º¯ÊıÃû : CLR_Buf2
-* ÃèÊö   : Çå³ı´®¿Ú2»º´æÊı¾İ
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : CLR_Buf2
+* æè¿°   : æ¸…é™¤ä¸²å£2ç¼“å­˜æ•°æ®
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void CLR_Buf2(void)
 {
 	u16 k;
-	for(k=0;k<Buf2_Max;k++)      //½«»º´æÄÚÈİÇåÁã
+	for (k = 0; k < Buf2_Max; k++) //å°†ç¼“å­˜å†…å®¹æ¸…é›¶
 	{
 		Uart2_Buf[k] = 0x00;
 	}
-    First_Int = 0;              //½ÓÊÕ×Ö·û´®µÄÆğÊ¼´æ´¢Î»ÖÃ
+	First_Int = 0; //æ¥æ”¶å­—ç¬¦ä¸²çš„èµ·å§‹å­˜å‚¨ä½ç½®
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_send_cmd
-* ÃèÊö   : ·¢ËÍATÖ¸Áîº¯Êı
-* ÊäÈë   : ·¢ËÍÊı¾İµÄÖ¸Õë¡¢·¢ËÍµÈ´ıÊ±¼ä(µ¥Î»£ºS)
-* Êä³ö   : 
-* ·µ»Ø   : 0:Õı³£  1:´íÎó
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_send_cmd
+* æè¿°   : å‘é€ATæŒ‡ä»¤å‡½æ•°
+* è¾“å…¥   : å‘é€æ•°æ®çš„æŒ‡é’ˆã€å‘é€ç­‰å¾…æ—¶é—´(å•ä½ï¼šS)
+* è¾“å‡º   : 
+* è¿”å›   : 0:æ­£å¸¸  1:é”™è¯¯
+* æ³¨æ„   : 
 *******************************************************************************/
 
-u8 GSM_send_cmd(u8 *cmd,u8 *ack,u8 wait_time)         
+u8 GSM_send_cmd(u8 *cmd, u8 *ack, u8 wait_time)
 {
-	u8 res=1;
+	u8 res = 1;
 	//u8 *c;
-	//c = cmd;										//±£´æ×Ö·û´®µØÖ·µ½c
-	CLR_Buf2(); 
-	for (; *cmd!='\0';cmd++)
+	//c = cmd;										//ä¿å­˜å­—ç¬¦ä¸²åœ°å€åˆ°c
+	CLR_Buf2();
+	for (; *cmd != '\0'; cmd++)
 	{
-		while(USART_GetFlagStatus(USART2, USART_FLAG_TC)==RESET);
-	  USART_SendData(USART2,*cmd);
+		while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET)
+			;
+		USART_SendData(USART2, *cmd);
 	}
-	UART2_SendLR();	
-	if(wait_time==0)return res;
+	UART2_SendLR();
+	if (wait_time == 0)
+		return res;
 	Times = 0;
 	shijian = wait_time;
 	Timer0_start = 1;
-	while(Timer0_start&res)                    
+	while (Timer0_start & res)
 	{
-		if(strstr((const char*)Uart2_Buf,(char*)ack)==NULL)
-			 res=1;
+		if (strstr((const char *)Uart2_Buf, (char *)ack) == NULL)
+			res = 1;
 		else
 		{
-			 res=0;
+			res = 0;
 		}
-
 	}
 	return res;
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_test
-* ÃèÊö   : GSMÖ÷²âÊÔ³ÌĞò
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_test
+* æè¿°   : GSMä¸»æµ‹è¯•ç¨‹åº
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void GSM_test(void)
 {
-	u8 sim_ready=0;
-	while(GSM_send_cmd((u8*)"AT",(u8*)"OK",5))//²éÑ¯ÊÇ·ñÓ¦µ½ATÖ¸Áî
+	u8 sim_ready = 0;
+	while (GSM_send_cmd((u8 *)"AT", (u8 *)"OK", 5)) //æŸ¥è¯¢æ˜¯å¦åº”åˆ°ATæŒ‡ä»¤
 	{
-		UART1_SendString("Î´¼ì²âµ½Ä£¿é\r\n");
+		UART1_SendString("æœªæ£€æµ‹åˆ°æ¨¡å—\r\n");
 		Delay_nMs(800);
-		UART1_SendString("ÕıÔÚ³¢ÊÔÁ¬½Ó\r\n");
-		Delay_nMs(400);  
-	} 	 
-	GSM_send_cmd((u8*)"ATE0",(u8*)"OK",200);//²»»ØÏÔ
-	GSM_mtest();
-	if(GSM_gsminfo()==0)
-	{
-		sim_ready=1;
-		UART1_SendString("ÇëÑ¡Ôñ:Ñ¡ÔñÏàÓ¦µÄÖĞÎÄ+»Ø³µ£¬ÔÙ·¢ËÍ\r\n"); 				    	 
-		UART1_SendString("²¦ºÅ\t"); 				    	 
-		UART1_SendString("¶ÌĞÅ\t");				    	 
-		UART1_SendString("GPRS\t");
-		UART1_SendString("¶¨Î»\t");
-		UART1_SendString("ÓïÒô\r\n");
+		UART1_SendString("æ­£åœ¨å°è¯•è¿æ¥\r\n");
+		Delay_nMs(400);
 	}
-	while(1)
+	GSM_send_cmd((u8 *)"ATE0", (u8 *)"OK", 200); //ä¸å›æ˜¾
+	GSM_mtest();
+	if (GSM_gsminfo() == 0)
 	{
-		if(sim_ready)
+		sim_ready = 1;
+		UART1_SendString("è¯·é€‰æ‹©:é€‰æ‹©ç›¸åº”çš„ä¸­æ–‡+å›è½¦ï¼Œå†å‘é€\r\n");
+		UART1_SendString("æ‹¨å·\t");
+		UART1_SendString("çŸ­ä¿¡\t");
+		UART1_SendString("GPRS\t");
+		UART1_SendString("å®šä½\t");
+		UART1_SendString("è¯­éŸ³\r\n");
+	}
+	while (1)
+	{
+		if (sim_ready)
 		{
-			if(USART_RX_STA&0x8000)
+			if (USART_RX_STA & 0x8000)
 			{
-				USART_RX_STA=0;
-				if(strstr((char*)Uart1_Buf,"²¦ºÅ"))
-					GSM_call_test();	//µç»°²âÊÔ
-				else
-				if(strstr((char*)Uart1_Buf,"¶ÌĞÅ"))
-					GSM_sms_test();		//¶ÌĞÅ²âÊÔ
-				else
-				if(strstr((char*)Uart1_Buf,"GPRS"))
-					GSM_gprs_test();	//GPRS²âÊÔ
-				else
-				if(strstr((char*)Uart1_Buf,"¶¨Î»"))
-				  GSM_jz_test();		//»ùÕ¾²âÊÔ
-				else				if(strstr((char*)Uart1_Buf,"ÓïÒô"))
-					GSM_tts_test();		//ÓïÒô²âÊÔ
-				
-				UART1_SendString("ÇëÑ¡Ôñ:Ñ¡ÔñÏàÓ¦µÄÖĞÎÄ+»Ø³µ£¬ÔÙ·¢ËÍ\r\n"); 				    	 
-				UART1_SendString("²¦ºÅ\t"); 				    	 
-				UART1_SendString("¶ÌĞÅ\t");				    	 
+				USART_RX_STA = 0;
+				if (strstr((char *)Uart1_Buf, "æ‹¨å·"))
+					GSM_call_test(); //ç”µè¯æµ‹è¯•
+				else if (strstr((char *)Uart1_Buf, "çŸ­ä¿¡"))
+					GSM_sms_test(); //çŸ­ä¿¡æµ‹è¯•
+				else if (strstr((char *)Uart1_Buf, "GPRS"))
+					GSM_gprs_test(); //GPRSæµ‹è¯•
+				else if (strstr((char *)Uart1_Buf, "å®šä½"))
+					GSM_jz_test(); //åŸºç«™æµ‹è¯•
+				else if (strstr((char *)Uart1_Buf, "è¯­éŸ³"))
+					GSM_tts_test(); //è¯­éŸ³æµ‹è¯•
+
+				UART1_SendString("è¯·é€‰æ‹©:é€‰æ‹©ç›¸åº”çš„ä¸­æ–‡+å›è½¦ï¼Œå†å‘é€\r\n");
+				UART1_SendString("æ‹¨å·\t");
+				UART1_SendString("çŸ­ä¿¡\t");
 				UART1_SendString("GPRS\t");
-				UART1_SendString("¶¨Î»\t");
-				UART1_SendString("ÓïÒô\r\n");
+				UART1_SendString("å®šä½\t");
+				UART1_SendString("è¯­éŸ³\r\n");
 			}
-			
-		}			
-	} 	
+		}
+	}
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_mtest
-* ÃèÊö   : GSM/GPRSÖ÷²âÊÔ¿ØÖÆ²¿·Ö
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_mtest
+* æè¿°   : GSM/GPRSä¸»æµ‹è¯•æ§åˆ¶éƒ¨åˆ†
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void GSM_mtest()
 {
-	u8 *p1; 
-	UART1_SendString("\r\nNiRen-Elec GSM/GPRS ²âÊÔ³ÌĞò\r\n");  
-	CLR_Buf2(); 
-	if(GSM_send_cmd((u8*)"AT+CGMI",(u8*)"OK",5)==0)//²éÑ¯ÖÆÔìÉÌÃû³Æ
-	{ 
-		UART1_SendString("ÖÆÔìÉÌ:");
-		p1=(u8*)strstr((const char*)(Uart2_Buf+2),"\r\n");
-		UART1_Send_Len((char*)Uart2_Buf+2,p1-Uart2_Buf);
-		CLR_Buf2(); 		
-	} 
-	if(GSM_send_cmd("AT+CGMM","OK",5)==0)//²éÑ¯Ä£¿éÃû×Ö
-	{ 
-		UART1_SendString("Ä£¿éĞÍºÅ:");
-		p1=(u8*)strstr((const char*)(Uart2_Buf+2),"\r\n"); 
-		UART1_Send_Len((char*)Uart2_Buf+2,p1-Uart2_Buf);
+	u8 *p1;
+	UART1_SendString("\r\nNiRen-Elec GSM/GPRS æµ‹è¯•ç¨‹åº\r\n");
+	CLR_Buf2();
+	if (GSM_send_cmd((u8 *)"AT+CGMI", (u8 *)"OK", 5) == 0) //æŸ¥è¯¢åˆ¶é€ å•†åç§°
+	{
+		UART1_SendString("åˆ¶é€ å•†:");
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf + 2), "\r\n");
+		UART1_Send_Len((char *)Uart2_Buf + 2, p1 - Uart2_Buf);
 		CLR_Buf2();
-	} 
-	if(GSM_send_cmd("AT+CGSN","OK",5)==0)//²éÑ¯²úÆ·ĞòÁĞºÅ
-	{ 
-		UART1_SendString("²úÆ·ĞòÁĞºÅ:");
-		p1=(u8*)strstr((const char*)(Uart2_Buf+2),"\r\n"); 
-		UART1_Send_Len((char*)Uart2_Buf+2,p1-Uart2_Buf);
-		CLR_Buf2();		
 	}
-	if(GSM_send_cmd("AT+CNUM","+CNUM",2)==0)//²éÑ¯±¾»úºÅÂë
-	{ 
+	if (GSM_send_cmd("AT+CGMM", "OK", 5) == 0) //æŸ¥è¯¢æ¨¡å—åå­—
+	{
+		UART1_SendString("æ¨¡å—å‹å·:");
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf + 2), "\r\n");
+		UART1_Send_Len((char *)Uart2_Buf + 2, p1 - Uart2_Buf);
+		CLR_Buf2();
+	}
+	if (GSM_send_cmd("AT+CGSN", "OK", 5) == 0) //æŸ¥è¯¢äº§å“åºåˆ—å·
+	{
+		UART1_SendString("äº§å“åºåˆ—å·:");
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf + 2), "\r\n");
+		UART1_Send_Len((char *)Uart2_Buf + 2, p1 - Uart2_Buf);
+		CLR_Buf2();
+	}
+	if (GSM_send_cmd("AT+CNUM", "+CNUM", 2) == 0) //æŸ¥è¯¢æœ¬æœºå·ç 
+	{
 		u8 *p2;
-		UART1_SendString("±¾»úºÅÂë:");
-		p1=(u8*)strstr((const char*)(Uart2_Buf),"\""); 
-		p2=(u8*)strstr((const char*)(p1+1),"\"");
-    p1=(u8*)strstr((const char*)(p2+1),"\"");
-		UART1_Send_Len((char*)(p1+1),11);
-		CLR_Buf2();		
+		UART1_SendString("æœ¬æœºå·ç :");
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf), "\"");
+		p2 = (u8 *)strstr((const char *)(p1 + 1), "\"");
+		p1 = (u8 *)strstr((const char *)(p2 + 1), "\"");
+		UART1_Send_Len((char *)(p1 + 1), 11);
+		CLR_Buf2();
 	}
 	UART1_SendLR();
 }
 
 /*******************************************************************************
-* º¯ÊıÃû : GSM_gsminfo_gsminfo
-* ÃèÊö   : GSM/GPRS×´Ì¬ĞÅÏ¢¼ì²â(ĞÅºÅÖÊÁ¿,µç³ØµçÁ¿,ÈÕÆÚÊ±¼ä)
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_gsminfo_gsminfo
+* æè¿°   : GSM/GPRSçŠ¶æ€ä¿¡æ¯æ£€æµ‹(ä¿¡å·è´¨é‡,ç”µæ± ç”µé‡,æ—¥æœŸæ—¶é—´)
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 u8 GSM_gsminfo()
 {
 	u8 *p1;
 	u8 *p2;
-	u8 res=0;
+	u8 res = 0;
 	CLR_Buf2();
-	if(GSM_send_cmd("AT+CPIN?","OK",3))
+	if (GSM_send_cmd("AT+CPIN?", "OK", 3))
 	{
-    UART1_SendString("Çë¼ì²éÊÖ»ú¿¨ÊÇ·ñÓĞ²åÈë\r\n");
-		res|=1<<0;	//²éÑ¯SIM¿¨ÊÇ·ñÔÚÎ» 
+		UART1_SendString("è¯·æ£€æŸ¥æ‰‹æœºå¡æ˜¯å¦æœ‰æ’å…¥\r\n");
+		res |= 1 << 0; //æŸ¥è¯¢SIMå¡æ˜¯å¦åœ¨ä½
 	}
-	CLR_Buf2(); 
-	
-	if(GSM_send_cmd("AT+COPS?","OK",3)==0)		//²éÑ¯ÔËÓªÉÌÃû×Ö
-	{ 
-		p1=(u8*)strstr((const char*)(Uart2_Buf),"\""); 
-		if(p1)//ÓĞÓĞĞ§Êı¾İ
+	CLR_Buf2();
+
+	if (GSM_send_cmd("AT+COPS?", "OK", 3) == 0) //æŸ¥è¯¢è¿è¥å•†åå­—
+	{
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf), "\"");
+		if (p1) //æœ‰æœ‰æ•ˆæ•°æ®
 		{
-			p2=(u8*)strstr((const char*)(p1+1),"\"");				
-			UART1_SendString("ÔËÓªÉÌ:");
-			UART1_Send_Len((char*)p1+1,p2-p1-1);
+			p2 = (u8 *)strstr((const char *)(p1 + 1), "\"");
+			UART1_SendString("è¿è¥å•†:");
+			UART1_Send_Len((char *)p1 + 1, p2 - p1 - 1);
 			UART1_SendLR();
 		}
-	}else res|=1<<1;
+	}
+	else
+		res |= 1 << 1;
 	CLR_Buf2();
- 
-	if(GSM_send_cmd("AT+CSQ","OK",3)==0)		//²éÑ¯ĞÅºÅÖÊÁ¿
-	{ 
-		p1=(u8*)strstr((const char*)(Uart2_Buf),":");
-		if(p1)
-		{
-			p2=(u8*)strstr((const char*)(p1+1),",");
-			UART1_SendString("ĞÅºÅÖÊÁ¿:");
-			UART1_Send_Len((char*)p1+2,p2-p1-2);
-			UART1_SendLR();
-		}		
-	}else res|=1<<2;
 
-  if(GSM_send_cmd("AT+DDET=1","OK",3)==0)
+	if (GSM_send_cmd("AT+CSQ", "OK", 3) == 0) //æŸ¥è¯¢ä¿¡å·è´¨é‡
 	{
-		UART1_SendString("Ä£¿éÖ§³ÖDTMFÒôÆµ½âÂë£¬¿ÉÒÔÖ±½ÓÊ¶±ğ¶Ô·½Í¨»°¹ı³ÌÖĞ°´ÏÂµÄ°´¼ü");
-    UART1_SendLR();	
-	}else
-	{
-    UART1_SendString("Ä£¿é²»Ö§³ÖDTMFÒôÆµ½âÂë£¬²»¿ÉÒÔÊ¶±ğ¶Ô·½Í¨»°¹ı³ÌÖĞ°´ÏÂµÄ°´¼ü");
-    UART1_SendLR();	
+		p1 = (u8 *)strstr((const char *)(Uart2_Buf), ":");
+		if (p1)
+		{
+			p2 = (u8 *)strstr((const char *)(p1 + 1), ",");
+			UART1_SendString("ä¿¡å·è´¨é‡:");
+			UART1_Send_Len((char *)p1 + 2, p2 - p1 - 2);
+			UART1_SendLR();
+		}
 	}
-	if(GSM_send_cmd("AT+CTTS=?","OK",3)==0)
+	else
+		res |= 1 << 2;
+
+	if (GSM_send_cmd("AT+DDET=1", "OK", 3) == 0)
 	{
-		UART1_SendString("Ä£¿éÖ§³ÖTTS±¾µØÓïÒô£¬¿ÉÒÔÖ±½Ó½«ÎÄ±¾²¥·Å³ÉÓïÒô");
-    UART1_SendLR();	
+		UART1_SendString("æ¨¡å—æ”¯æŒDTMFéŸ³é¢‘è§£ç ï¼Œå¯ä»¥ç›´æ¥è¯†åˆ«å¯¹æ–¹é€šè¯è¿‡ç¨‹ä¸­æŒ‰ä¸‹çš„æŒ‰é”®");
+		UART1_SendLR();
 	}
 	else
 	{
-		UART1_SendString("Ä£¿é²»Ö§³ÖTTS±¾µØÓïÒô");
-    UART1_SendLR();			
+		UART1_SendString("æ¨¡å—ä¸æ”¯æŒDTMFéŸ³é¢‘è§£ç ï¼Œä¸å¯ä»¥è¯†åˆ«å¯¹æ–¹é€šè¯è¿‡ç¨‹ä¸­æŒ‰ä¸‹çš„æŒ‰é”®");
+		UART1_SendLR();
 	}
-	if(GSM_send_cmd("AT+CIPGSMLOC=?","OK",3)==0)
+	if (GSM_send_cmd("AT+CTTS=?", "OK", 3) == 0)
 	{
-		UART1_SendString("Ä£¿éÖ§³Ö»ùÕ¾¶¨Î»£¬¿ÉÒÔÖ±½Ó»ñÈ¡¶¨Î»ĞÅÏ¢");
-    UART1_SendLR();	
+		UART1_SendString("æ¨¡å—æ”¯æŒTTSæœ¬åœ°è¯­éŸ³ï¼Œå¯ä»¥ç›´æ¥å°†æ–‡æœ¬æ’­æ”¾æˆè¯­éŸ³");
+		UART1_SendLR();
 	}
 	else
 	{
-		UART1_SendString("Ä£¿é²»Ö§³Ö»ùÕ¾¶¨Î»");
-    UART1_SendLR();			
+		UART1_SendString("æ¨¡å—ä¸æ”¯æŒTTSæœ¬åœ°è¯­éŸ³");
+		UART1_SendLR();
+	}
+	if (GSM_send_cmd("AT+CIPGSMLOC=?", "OK", 3) == 0)
+	{
+		UART1_SendString("æ¨¡å—æ”¯æŒåŸºç«™å®šä½ï¼Œå¯ä»¥ç›´æ¥è·å–å®šä½ä¿¡æ¯");
+		UART1_SendLR();
+	}
+	else
+	{
+		UART1_SendString("æ¨¡å—ä¸æ”¯æŒåŸºç«™å®šä½");
+		UART1_SendLR();
 	}
 	CLR_Buf2();
-	
+
 	return res;
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_call_test
-* ÃèÊö   : ²¦ºÅ²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_call_test
+* æè¿°   : æ‹¨å·æµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 u8 GSM_call_test()
-{	
+{
 	u8 temp[50];
-	u16 len=0;
-	u16 i=0;
-	u8 mode=0;
-	u8 flag=0;
-  u8 *p1=NULL;
-	UART1_SendString("@@@@@@@@@@@²¦ºÅ²âÊÔ@@@@@@@@@@@\r\n");
-	UART1_SendString("²¦´òµç»°£ºÊäÈë¡°ÖÂµçxxxx+»Ø³µ¡±\r\n");
-	UART1_SendString("½ÓÌıµç»°£ºÊäÈë¡°½ÓÌı+»Ø³µ¡±\r\n");
-  UART1_SendString("¹Ò¶Ïµç»°£ºÊäÈë¡°¹Ò¶Ï+»Ø³µ¡±\r\n");
-	UART1_SendString("DTMFÓïÒô£ºÊäÈë¡°µ¥¸ö×Ö·û+»Ø³µ¡±\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÊäÈë¡°ÍË³ö+»Ø³µ¡±\r\n");
-	while(1)
+	u16 len = 0;
+	u16 i = 0;
+	u8 mode = 0;
+	u8 flag = 0;
+	u8 *p1 = NULL;
+	UART1_SendString("@@@@@@@@@@@æ‹¨å·æµ‹è¯•@@@@@@@@@@@\r\n");
+	UART1_SendString("æ‹¨æ‰“ç”µè¯ï¼šè¾“å…¥â€œè‡´ç”µxxxx+å›è½¦â€\r\n");
+	UART1_SendString("æ¥å¬ç”µè¯ï¼šè¾“å…¥â€œæ¥å¬+å›è½¦â€\r\n");
+	UART1_SendString("æŒ‚æ–­ç”µè¯ï¼šè¾“å…¥â€œæŒ‚æ–­+å›è½¦â€\r\n");
+	UART1_SendString("DTMFè¯­éŸ³ï¼šè¾“å…¥â€œå•ä¸ªå­—ç¬¦+å›è½¦â€\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šè¾“å…¥â€œé€€å‡º+å›è½¦â€\r\n");
+	while (1)
 	{
-		if(USART_RX_STA&0x8000)
+		if (USART_RX_STA & 0x8000)
 		{
-			len=USART_RX_STA&0X3FFF;
-			USART_RX_STA=0;
-			if(strstr((const char*)Uart1_Buf,"ÍË³ö"))return 0;
-			if(strstr((const char*)Uart1_Buf,"½ÓÌı"))mode=1;
+			len = USART_RX_STA & 0X3FFF;
+			USART_RX_STA = 0;
+			if (strstr((const char *)Uart1_Buf, "é€€å‡º"))
+				return 0;
+			if (strstr((const char *)Uart1_Buf, "æ¥å¬"))
+				mode = 1;
+			else if (strstr((const char *)Uart1_Buf, "æŒ‚æ–­"))
+				mode = 2;
+			else if (strstr((const char *)Uart1_Buf, "è‡´ç”µ"))
+				mode = 3;
+			else if (mode == 0)
+				mode = 0; //æ— æ•ˆ
 			else
-			if(strstr((const char*)Uart1_Buf,"¹Ò¶Ï"))mode=2;
-			else
-			if(strstr((const char*)Uart1_Buf,"ÖÂµç"))mode=3;
-			else
-			if(mode==0)mode=0;//ÎŞĞ§
-			else 
 			{
-				mode=4;
-				flag=1;
+				mode = 4;
+				flag = 1;
 			}
 		}
-		switch(mode)
+		switch (mode)
 		{
-			case 0://ÓĞÀ´µç
-				if(strstr((const char*)Uart2_Buf,"RING"))
-				{
-					CLR_Buf2();
-					UART1_SendString("ÓĞÀ´µç\r\n");
-				}
-				break;
-			case 1:
-						 if(GSM_send_cmd("ATA","OK",2)==0)//½ÓÌı
-						 {
-							UART1_SendString("½ÓÌı³É¹¦\r\n");
-						  mode=4; 
-						 }
-				break;
-			case 2:if(GSM_send_cmd("ATH","OK",2)==0)//¹Ò¶Ï
-							UART1_SendString("¹Ò¶Ï³É¹¦\r\n");		
-						 mode=0;
-				break;
-			case 3://²¦ºÅ
-						UART1_SendString("ÖÂµç:");
-						UART1_Send_Len((char*)Uart1_Buf+4,len-4);
-						strcpy((char*)temp,"ATD");
-						for(i=3;i<(len-4+3);i++)
-						temp[i]=Uart1_Buf[i+1];
-						temp[i++]=';';
-						temp[i++]='\0';
-						if(GSM_send_cmd(temp,"OK",8)==0)
-						{
-							UART1_SendString("²¦½Ğ³É¹¦\r\n");
-							mode=4;
-						}
-						else
-						{
-							UART1_SendString("ÇëÖØĞÂºô½Ğ\r\n");
-						  mode=0;
-						}
-			  break;
-			case 4://·¢ËÍDTMF
-				if(flag)
-				{
-				flag=0;
-				strcpy((char*)temp,"AT+VTS=");
-				temp[7]=Uart1_Buf[0];
-				temp[8]='\0';
-				GSM_send_cmd(temp,"OK",3);
-				}
-				if(strstr((const char*)Uart2_Buf,"DTMF:"))
-				{
-          Delay_nMs(10);
-					p1=(u8*)strstr((const char*)(Uart2_Buf),":");
-					UART1_SendString("¶Ô·½°´ÏÂ°´¼ü£º");
-					UART1_Data(*(p1+2));
-					UART1_SendLR();	
-					CLR_Buf2();
-				}
-				break;
+		case 0: //æœ‰æ¥ç”µ
+			if (strstr((const char *)Uart2_Buf, "RING"))
+			{
+				CLR_Buf2();
+				UART1_SendString("æœ‰æ¥ç”µ\r\n");
+			}
+			break;
+		case 1:
+			if (GSM_send_cmd("ATA", "OK", 2) == 0) //æ¥å¬
+			{
+				UART1_SendString("æ¥å¬æˆåŠŸ\r\n");
+				mode = 4;
+			}
+			break;
+		case 2:
+			if (GSM_send_cmd("ATH", "OK", 2) == 0) //æŒ‚æ–­
+				UART1_SendString("æŒ‚æ–­æˆåŠŸ\r\n");
+			mode = 0;
+			break;
+		case 3: //æ‹¨å·
+			UART1_SendString("è‡´ç”µ:");
+			UART1_Send_Len((char *)Uart1_Buf + 4, len - 4);
+			strcpy((char *)temp, "ATD");
+			for (i = 3; i < (len - 4 + 3); i++)
+				temp[i] = Uart1_Buf[i + 1];
+			temp[i++] = ';';
+			temp[i++] = '\0';
+			if (GSM_send_cmd(temp, "OK", 8) == 0)
+			{
+				UART1_SendString("æ‹¨å«æˆåŠŸ\r\n");
+				mode = 4;
+			}
+			else
+			{
+				UART1_SendString("è¯·é‡æ–°å‘¼å«\r\n");
+				mode = 0;
+			}
+			break;
+		case 4: //å‘é€DTMF
+			if (flag)
+			{
+				flag = 0;
+				strcpy((char *)temp, "AT+VTS=");
+				temp[7] = Uart1_Buf[0];
+				temp[8] = '\0';
+				GSM_send_cmd(temp, "OK", 3);
+			}
+			if (strstr((const char *)Uart2_Buf, "DTMF:"))
+			{
+				Delay_nMs(10);
+				p1 = (u8 *)strstr((const char *)(Uart2_Buf), ":");
+				UART1_SendString("å¯¹æ–¹æŒ‰ä¸‹æŒ‰é”®ï¼š");
+				UART1_Data(*(p1 + 2));
+				UART1_SendLR();
+				CLR_Buf2();
+			}
+			break;
 		}
-		
 	}
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_sms_test
-* ÃèÊö   : ¶ÌĞÅ²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_sms_test
+* æè¿°   : çŸ­ä¿¡æµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 u8 GSM_sms_test()
 {
-	u16 len=0;
-	u8 mode=0;
+	u16 len = 0;
+	u8 mode = 0;
 	u8 temp[50];
-	u8 *p,*p1;
-	u8 loc=0;
-	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@@@@@¶ÌĞÅ²âÊÔ@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
-	UART1_SendString("ÉèÖÃÖĞĞÄºÅ£ºÈç£ºÉèÖÃ+8613800756500£¬±ØĞèÉèÖÃºÃÖĞĞÄºÅ²ÅÄÜ·¢ËÍ¶ÌĞÅ\r\n");
-	UART1_SendString("·¢ËÍ¶ÌĞÅ£ºÇë°´ÒªÇóÊäÈëµç»°+ÄÚÈİ(·ÇÖĞÎÄ)£¬ÒÔ»Ø³µ½áÊø:Èç137xxxx+niren-electron\r\n");
-  UART1_SendString("²é¿´¶ÌĞÅ£º²é¿´£ºxx£¬xx´ú±í¶ÌĞÅµÄ´æ´¢Î»ÖÃ\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÊäÈë¡°ÍË³ö+»Ø³µ¡±\r\n");
-	GSM_send_cmd("AT+CMGF=1","OK",2);//ÉèÖÃ¶ÌĞÅ·¢ËÍÄ£Ê½
-  GSM_send_cmd("AT+CNMI=3,1,0,0,0","OK",2);//ÉèÖÃ¶ÌĞÅÉÏ±¨Ä£Ê½£¬ÉÏ±¨Î»ÖÃ
-  GSM_send_cmd("AT+CPMS=\"SM\",\"SM\",\"SM\"","OK",3);		//ËùÓĞ²Ù×÷ÔÚSIM¿¨ÖĞ½øĞĞ
-	while(1)
+	u8 *p, *p1;
+	u8 loc = 0;
+	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@@@@@çŸ­ä¿¡æµ‹è¯•@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
+	UART1_SendString("è®¾ç½®ä¸­å¿ƒå·ï¼šå¦‚ï¼šè®¾ç½®+8613800756500ï¼Œå¿…éœ€è®¾ç½®å¥½ä¸­å¿ƒå·æ‰èƒ½å‘é€çŸ­ä¿¡\r\n");
+	UART1_SendString("å‘é€çŸ­ä¿¡ï¼šè¯·æŒ‰è¦æ±‚è¾“å…¥ç”µè¯+å†…å®¹(éä¸­æ–‡)ï¼Œä»¥å›è½¦ç»“æŸ:å¦‚137xxxx+niren-electron\r\n");
+	UART1_SendString("æŸ¥çœ‹çŸ­ä¿¡ï¼šæŸ¥çœ‹ï¼šxxï¼Œxxä»£è¡¨çŸ­ä¿¡çš„å­˜å‚¨ä½ç½®\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šè¾“å…¥â€œé€€å‡º+å›è½¦â€\r\n");
+	GSM_send_cmd("AT+CMGF=1", "OK", 2);										 //è®¾ç½®çŸ­ä¿¡å‘é€æ¨¡å¼
+	GSM_send_cmd("AT+CNMI=3,1,0,0,0", "OK", 2);						 //è®¾ç½®çŸ­ä¿¡ä¸ŠæŠ¥æ¨¡å¼ï¼Œä¸ŠæŠ¥ä½ç½®
+	GSM_send_cmd("AT+CPMS=\"SM\",\"SM\",\"SM\"", "OK", 3); //æ‰€æœ‰æ“ä½œåœ¨SIMå¡ä¸­è¿›è¡Œ
+	while (1)
 	{
-		if(USART_RX_STA&0x8000)
+		if (USART_RX_STA & 0x8000)
 		{
-			len=USART_RX_STA&0X3FFF;
-			if(len>Buf2_Max-2)len=Buf2_Max-2;
-			USART_RX_STA=0;
-			if(strstr((const char*)Uart1_Buf,"ÍË³ö"))return 0;
-			if(strstr((const char*)Uart1_Buf,"ÉèÖÃ"))mode=3;//ÉèÖÃ¶ÌĞÅÖĞĞÄºÅ
+			len = USART_RX_STA & 0X3FFF;
+			if (len > Buf2_Max - 2)
+				len = Buf2_Max - 2;
+			USART_RX_STA = 0;
+			if (strstr((const char *)Uart1_Buf, "é€€å‡º"))
+				return 0;
+			if (strstr((const char *)Uart1_Buf, "è®¾ç½®"))
+				mode = 3; //è®¾ç½®çŸ­ä¿¡ä¸­å¿ƒå·
+			else if (strstr((const char *)Uart1_Buf, "æŸ¥çœ‹"))
+				mode = 2; //æŸ¥çœ‹çŸ­ä¿¡
+			else if (strstr((const char *)Uart1_Buf, "+"))
+				mode = 1; //å‘é€çŸ­ä¿¡
 			else
-			if(strstr((const char*)Uart1_Buf,"²é¿´"))mode=2;//²é¿´¶ÌĞÅ
-			else 
-      if(strstr((const char*)Uart1_Buf,"+"))mode=1;//·¢ËÍ¶ÌĞÅ
-			else
-			  mode=0;
-
+				mode = 0;
 		}
-		switch(mode)
+		switch (mode)
 		{
-			case 0:
-        if(strstr((const char*)Uart2_Buf,"+CMTI:"))
-				{
-          UART1_SendString("ÓĞĞÂ¶ÌĞÅ\r\n");
-					UART1_SendString("¶ÌĞÅÎ»ÖÃ: ");
-					p=(u8*)strstr((const char*)Uart2_Buf,",");
-					UART1_SendString((char*)p+1);
-					CLR_Buf2();
-				}
-				break;
-			case 1:
-				UART1_SendString("·¢ËÍ¶ÌĞÅ\r\n");
-				Uart1_Buf[len]='\0';//Ìí¼Ó½áÊø·û;
-				strcpy((char*)temp,(const char *)"AT+CMGS=\"+86");
-				loc=sizeof("AT+CMGS=\"+86");
-				p=(u8*)strstr((char*)Uart1_Buf,(char*)"+");//²éÕÒ·¢ËÍÄÚÈİ
-				Uart1_Buf[(p-Uart1_Buf)]='\0';//Ìí¼Ó½áÊø·û
-				strcpy((char*)(&temp[loc-1]),(const char*)Uart1_Buf);
-				loc=strlen((const char*)temp);
-			  temp[loc]='\"';
-				temp[loc+1]='\0';
-				GSM_send_cmd(temp,">",2);//·¢ËÍ½ÓÊÕ·½ºÅÂë
-        strcpy((char*)&temp,(const char*)(p+1));
-			  loc=strlen((const char*)temp);
-				temp[loc]='\32';
-				temp[loc+1]='\0';
-			  if(GSM_send_cmd(temp,"OK",20)==0)//·¢ËÍ¶ÌĞÅÄÚÈİ
-					UART1_SendString("·¢ËÍ¶ÌĞÅ³É¹¦\r\n");
-        else
-					UART1_SendString("·¢ËÍ¶ÌĞÅÊ§°Ü\r\n");
-        mode=0;
+		case 0:
+			if (strstr((const char *)Uart2_Buf, "+CMTI:"))
+			{
+				UART1_SendString("æœ‰æ–°çŸ­ä¿¡\r\n");
+				UART1_SendString("çŸ­ä¿¡ä½ç½®: ");
+				p = (u8 *)strstr((const char *)Uart2_Buf, ",");
+				UART1_SendString((char *)p + 1);
+				CLR_Buf2();
+			}
 			break;
-			case 2:
-				UART1_SendString("²é¿´¶ÌĞÅ\r\n");
-        Uart1_Buf[len]='\0';//Ìí¼Ó½áÊø·û;
-				p=(u8*)strstr((const char*)Uart1_Buf,"£º");
-				strcpy((char*)temp,(const char*)"AT+CMGR=");
-			  loc=strlen((const char*)temp);
-				strcpy((char*)(&temp[loc]),(const char*)(p+2));
-				loc=strlen((const char*)temp);
-			  if(GSM_send_cmd(temp,"OK",5)==0)
-				{
-					p=(u8*)strstr((const char*)(Uart2_Buf+2),"\r\n");
-					p1=(u8*)strstr((const char*)(p+2),"\r\n");
-					loc=p1-p;
-					UART1_SendString("¶ÌĞÅÄÚÈİ£º");
-					UART1_Send_Len((char*)p+2,loc);
-				}
-        CLR_Buf2();
-				mode=0;
-				break;
-			case 3:
-				UART1_SendString("ÉèÖÃÖĞĞÄºÅ\r\n");
-				Uart1_Buf[len]='\0';//Ìí¼Ó½áÊø·û;
-				strcpy((char*)temp,(const char *)"AT+CSCA=");
-			  loc=sizeof("AT+CSCA=");
-				strcpy((char*)(&temp[loc-1]),(const char*)&Uart1_Buf[4]);
-				if(GSM_send_cmd(temp,"OK",3)==0)
-					UART1_SendString("¶ÌĞÅÖĞĞÄºÅÉèÖÃ³É¹¦\r\n");
-				else
-					UART1_SendString("¶ÌĞÅÖĞĞÄºÅÉèÖÃ³É¹¦\r\n");
-				mode=0;
-				break;
+		case 1:
+			UART1_SendString("å‘é€çŸ­ä¿¡\r\n");
+			Uart1_Buf[len] = '\0'; //æ·»åŠ ç»“æŸç¬¦;
+			strcpy((char *)temp, (const char *)"AT+CMGS=\"+86");
+			loc = sizeof("AT+CMGS=\"+86");
+			p = (u8 *)strstr((char *)Uart1_Buf, (char *)"+"); //æŸ¥æ‰¾å‘é€å†…å®¹
+			Uart1_Buf[(p - Uart1_Buf)] = '\0';								//æ·»åŠ ç»“æŸç¬¦
+			strcpy((char *)(&temp[loc - 1]), (const char *)Uart1_Buf);
+			loc = strlen((const char *)temp);
+			temp[loc] = '\"';
+			temp[loc + 1] = '\0';
+			GSM_send_cmd(temp, ">", 2); //å‘é€æ¥æ”¶æ–¹å·ç 
+			strcpy((char *)&temp, (const char *)(p + 1));
+			loc = strlen((const char *)temp);
+			temp[loc] = '\32';
+			temp[loc + 1] = '\0';
+			if (GSM_send_cmd(temp, "OK", 20) == 0) //å‘é€çŸ­ä¿¡å†…å®¹
+				UART1_SendString("å‘é€çŸ­ä¿¡æˆåŠŸ\r\n");
+			else
+				UART1_SendString("å‘é€çŸ­ä¿¡å¤±è´¥\r\n");
+			mode = 0;
+			break;
+		case 2:
+			UART1_SendString("æŸ¥çœ‹çŸ­ä¿¡\r\n");
+			Uart1_Buf[len] = '\0'; //æ·»åŠ ç»“æŸç¬¦;
+			p = (u8 *)strstr((const char *)Uart1_Buf, "ï¼š");
+			strcpy((char *)temp, (const char *)"AT+CMGR=");
+			loc = strlen((const char *)temp);
+			strcpy((char *)(&temp[loc]), (const char *)(p + 2));
+			loc = strlen((const char *)temp);
+			if (GSM_send_cmd(temp, "OK", 5) == 0)
+			{
+				p = (u8 *)strstr((const char *)(Uart2_Buf + 2), "\r\n");
+				p1 = (u8 *)strstr((const char *)(p + 2), "\r\n");
+				loc = p1 - p;
+				UART1_SendString("çŸ­ä¿¡å†…å®¹ï¼š");
+				UART1_Send_Len((char *)p + 2, loc);
+			}
+			CLR_Buf2();
+			mode = 0;
+			break;
+		case 3:
+			UART1_SendString("è®¾ç½®ä¸­å¿ƒå·\r\n");
+			Uart1_Buf[len] = '\0'; //æ·»åŠ ç»“æŸç¬¦;
+			strcpy((char *)temp, (const char *)"AT+CSCA=");
+			loc = sizeof("AT+CSCA=");
+			strcpy((char *)(&temp[loc - 1]), (const char *)&Uart1_Buf[4]);
+			if (GSM_send_cmd(temp, "OK", 3) == 0)
+				UART1_SendString("çŸ­ä¿¡ä¸­å¿ƒå·è®¾ç½®æˆåŠŸ\r\n");
+			else
+				UART1_SendString("çŸ­ä¿¡ä¸­å¿ƒå·è®¾ç½®æˆåŠŸ\r\n");
+			mode = 0;
+			break;
 		}
 	}
 }
 
 /*******************************************************************************
-* º¯ÊıÃû : GSM_gprs_test
-* ÃèÊö   : GPRS²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   :  ÎªÁË±£³ÖÁ¬½Ó£¬Ã¿¿ÕÏĞ¸ô10Ãë·¢ËÍÒ»´ÎĞÄÌø
+* å‡½æ•°å : GSM_gprs_test
+* æè¿°   : GPRSæµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   :  ä¸ºäº†ä¿æŒè¿æ¥ï¼Œæ¯ç©ºé—²éš”10ç§’å‘é€ä¸€æ¬¡å¿ƒè·³
 *******************************************************************************/
 u8 GSM_gprs_test()
-{	
-  u16 len=0;
-	u8 mode=0;
+{
+	u16 len = 0;
+	u8 mode = 0;
 	u8 temp[200];
-	u8 flag=0;
-	u8 *p1,*p2;
-	UART1_SendString("@@@@@@@@@@@@@@GPRS²âÊÔ@@@@@@@@@@@@@@@@@@@@@\r\n");
-	UART1_SendString("ÉèÖÃ²ÎÊı£ºÉèÖÃ\"Ä£Ê½\",\"IP\",¶Ë¿Ú+»Ø³µ\r\nÈç£ºÉèÖÃ\"TCP\",\"125.89.18.79\",12345\r\n");
-	UART1_SendString("·¢ËÍÄÚÈİ£º·¢ËÍ+ÄÚÈİ+»Ø³µ\r\nÈç£º·¢ËÍÈ«ÇòÓ¥µç×Ó\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÍË³ö+»Ø³µ\r\n");
-	
-	while(1)
+	u8 flag = 0;
+	u8 *p1, *p2;
+	UART1_SendString("@@@@@@@@@@@@@@GPRSæµ‹è¯•@@@@@@@@@@@@@@@@@@@@@\r\n");
+	UART1_SendString("è®¾ç½®å‚æ•°ï¼šè®¾ç½®\"æ¨¡å¼\",\"IP\",ç«¯å£+å›è½¦\r\nå¦‚ï¼šè®¾ç½®\"TCP\",\"125.89.18.79\",12345\r\n");
+	UART1_SendString("å‘é€å†…å®¹ï¼šå‘é€+å†…å®¹+å›è½¦\r\nå¦‚ï¼šå‘é€å…¨çƒé¹°ç”µå­\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šé€€å‡º+å›è½¦\r\n");
+
+	while (1)
 	{
-		if(USART_RX_STA&0x8000)
+		if (USART_RX_STA & 0x8000)
 		{
-			len=USART_RX_STA&0X3FFF;
-			if(len>Buf2_Max-2)len=Buf2_Max-2;
-			USART_RX_STA=0;
-			if(strstr((const char*)Uart1_Buf,"ÍË³ö"))mode=4;//ÍË³ö
+			len = USART_RX_STA & 0X3FFF;
+			if (len > Buf2_Max - 2)
+				len = Buf2_Max - 2;
+			USART_RX_STA = 0;
+			if (strstr((const char *)Uart1_Buf, "é€€å‡º"))
+				mode = 4; //é€€å‡º
+			else if (strstr((const char *)Uart1_Buf, "è®¾ç½®"))
+				mode = 1; //è®¾ç½®é…ç½®
+			else if (strstr((const char *)Uart1_Buf, "å‘é€"))
+				mode = 2; //å‘é€å†…å®¹
 			else
-			if(strstr((const char*)Uart1_Buf,"ÉèÖÃ"))mode=1;//ÉèÖÃÅäÖÃ
-			else
-			if(strstr((const char*)Uart1_Buf,"·¢ËÍ"))mode=2;//·¢ËÍÄÚÈİ
-			else 												mode=0;			
+				mode = 0;
 		}
 		else
 		{
-			if(strstr((const char*)Uart2_Buf,"CONNECT OK")&&(flag==1))//Á¬½Ó³É¹¦
+			if (strstr((const char *)Uart2_Buf, "CONNECT OK") && (flag == 1)) //è¿æ¥æˆåŠŸ
 			{
-					UART1_SendString("Á¬½Ó³É¹¦\r\n");
-					Time_miao=1;
-					flag=2;
-					mode=3;
-					CLR_Buf2();
-			}else
-			if((flag==1)&&((strstr((const char*)Uart2_Buf,"CLOSED"))&&(Time_miao>10)))//Á¬½ÓÊ§°Ü»ò³¬Ê±
-			{
-					UART1_SendString("Á¬½ÓÊ§°Ü\r\n");
-					
-				  while(USART_GetFlagStatus(USART1, USART_FLAG_TC)==RESET); 
-					USART_SendData(USART1 ,Time_miao);//·¢ËÍµ±Ç°×Ö·û
-				
-					Time_miao=0;
-					flag=0;
-					mode=1; //ÖØĞÂÁ¬½Ó
-					CLR_Buf2();
-			}	
-			if((flag==2)&&(Time_miao>10))//Ã¿10ÃëÒ»¸öĞÄÌø°ü
-			{
-				Time_miao=1;
-				mode=3;
+				UART1_SendString("è¿æ¥æˆåŠŸ\r\n");
+				Time_miao = 1;
+				flag = 2;
+				mode = 3;
+				CLR_Buf2();
 			}
-	  }
-    switch(mode)
-		{
-			case 0:        
-						if(strstr((const char*)Uart2_Buf,"+IPD"))//ÅĞ¶ÏÉÏÎ»»úÊÇ·ñÓĞÊı¾İÏÂ·¢
-						{
-							UART1_SendString("ÓĞĞÂÄÚÈİ\r\n");
-							p1=(u8*)strstr((const char*)Uart2_Buf,",");
-							p2=(u8*)strstr((const char*)Uart2_Buf,":");
-							UART1_Send_Len((char*)(p2+1),change_str_Data((p1+1),(p2-p1-1)));
-							UART1_SendLR();
-							CLR_Buf2();
-						}
-			break;
-			case 1: 
-				     if(strstr((const char*)Uart1_Buf,"TCP")||strstr((const char*)Uart1_Buf,"UDP"))
-						 {
-                strcpy((char*)&temp,(const char*)"AT+CIPSTART=");
-							  memcpy((char*)&temp[12],(const char*)(&Uart1_Buf[4]),len-4);
-							  temp[len+12]='\0';
-							  GSM_send_cmd("AT+CIPCLOSE=1","CLOSE OK",2);	//¹Ø±ÕÁ¬½Ó
-								GSM_send_cmd("AT+CIPSHUT","SHUT OK",2);		//¹Ø±ÕÒÆ¶¯³¡¾°
- 							  GSM_send_cmd("AT+CGCLASS=\"B\"","OK",2);//ÉèÖÃGPRSÒÆ¶¯Ì¨Àà±ğÎªB,Ö§³Ö°ü½»»»ºÍÊı¾İ½»»» 
-								GSM_send_cmd("AT+CGDCONT=1,\"IP\",\"CMNET\"","OK",2);//ÉèÖÃPDPÉÏÏÂÎÄ,»¥ÁªÍø½ÓĞ­Òé,½ÓÈëµãµÈĞÅÏ¢
-								GSM_send_cmd("AT+CGATT=1","OK",2);//¸½×ÅGPRSÒµÎñ
-								GSM_send_cmd("AT+CIPCSGP=1,\"CMNET\"","OK",2);//ÉèÖÃÎªGPRSÁ¬½ÓÄ£Ê½
-								GSM_send_cmd("AT+CIPHEAD=1","OK",2);//ÉèÖÃ½ÓÊÕÊı¾İÏÔÊ¾IPÍ·(·½±ãÅĞ¶ÏÊı¾İÀ´Ô´,½öÔÚµ¥Â·Á¬½ÓÓĞĞ§)
-                GSM_send_cmd("AT+CIPMUX=0","OK",2);//ÉèÖÃµ¥Â·Á¬½Ó
-                if(GSM_send_cmd(temp,"OK",2 )==0)//·¢ÆğÁ¬½Ó
-								{
-                  UART1_SendString("ÕıÔÚ·¢ÆğÁ¬½Ó\r\n");
-									Time_miao=1;
-									flag=1;
-								}
-								else
-								{
-									UART1_SendString("ÊäÈë´íÎó£¬ÇëÖØÊä\r\n");
-									Time_miao=0;
-									flag=0;
-								}
-						 }
-						 else
-						 {
-							  UART1_SendString("ÊäÈë´íÎó£¬ÇëÖØÊä\r\n");
-						 }
-             mode=0;
-			break;
-			case 2:
-              if(flag==2)
-							{
-                UART1_SendString("¿ªÊ¼·¢ËÍ...........\r\n");
-								if(GSM_send_cmd("AT+CIPSEND",">",2)==0)
-								{
-										 Uart1_Buf[len]='\32';
-										 Uart1_Buf[len+1]='\0';
-										 if(GSM_send_cmd(&Uart1_Buf[4],"SEND OK",8)==0)
-										 { 								
-													UART1_SendString("·¢ËÍ³É¹¦\r\n");
-													Time_miao=1;
-										 }
-										 else
-											 UART1_SendString("·¢ËÍÊ§°Ü\r\n");
-										 
-								}else
-								{
-										 UART2_Data(0X1B);//ESC,È¡Ïû·¢ËÍ
-                     UART1_SendString("·¢ËÍÊ§°Ü\r\n");
-								}
-						  }else UART1_SendString("»¹Ã»Á¬½Ó\r\n");
-							mode=0;
-			break;
-			case 3:
-						if(GSM_send_cmd("AT+CIPSEND",">",2)==0)
-						{
-							UART2_Data(0x00);
-							UART2_Data(0X1A);//CTRL+Z,½áÊøÊı¾İ·¢ËÍ,Æô¶¯Ò»´Î´«Êä								
-							UART1_SendString("ĞÄÌø³É¹¦\r\n");
+			else if ((flag == 1) && ((strstr((const char *)Uart2_Buf, "CLOSED")) && (Time_miao > 10))) //è¿æ¥å¤±è´¥æˆ–è¶…æ—¶
+			{
+				UART1_SendString("è¿æ¥å¤±è´¥\r\n");
 
-								 
-						}else
-						{
-								 UART2_Data(0X1B);//ESC,È¡Ïû·¢ËÍ
-				         UART1_SendString("ĞÄÌøÊ§°Ü\r\n");
-						}
-				mode=0;
+				while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+					;
+				USART_SendData(USART1, Time_miao); //å‘é€å½“å‰å­—ç¬¦
+
+				Time_miao = 0;
+				flag = 0;
+				mode = 1; //é‡æ–°è¿æ¥
+				CLR_Buf2();
+			}
+			if ((flag == 2) && (Time_miao > 10)) //æ¯10ç§’ä¸€ä¸ªå¿ƒè·³åŒ…
+			{
+				Time_miao = 1;
+				mode = 3;
+			}
+		}
+		switch (mode)
+		{
+		case 0:
+			if (strstr((const char *)Uart2_Buf, "+IPD")) //åˆ¤æ–­ä¸Šä½æœºæ˜¯å¦æœ‰æ•°æ®ä¸‹å‘
+			{
+				UART1_SendString("æœ‰æ–°å†…å®¹\r\n");
+				p1 = (u8 *)strstr((const char *)Uart2_Buf, ",");
+				p2 = (u8 *)strstr((const char *)Uart2_Buf, ":");
+				UART1_Send_Len((char *)(p2 + 1), change_str_Data((p1 + 1), (p2 - p1 - 1)));
+				UART1_SendLR();
+				CLR_Buf2();
+			}
 			break;
-			case 4:
-						GSM_send_cmd("AT+CIPCLOSE=1","CLOSE OK",5);	//¹Ø±ÕÁ¬½Ó
-						GSM_send_cmd("AT+CIPSHUT","SHUT OK",5);		//¹Ø±ÕÒÆ¶¯³¡¾°
-						return 1;
-		}      
+		case 1:
+			if (strstr((const char *)Uart1_Buf, "TCP") || strstr((const char *)Uart1_Buf, "UDP"))
+			{
+				strcpy((char *)&temp, (const char *)"AT+CIPSTART=");
+				memcpy((char *)&temp[12], (const char *)(&Uart1_Buf[4]), len - 4);
+				temp[len + 12] = '\0';
+				GSM_send_cmd("AT+CIPCLOSE=1", "CLOSE OK", 2);						//å…³é—­è¿æ¥
+				GSM_send_cmd("AT+CIPSHUT", "SHUT OK", 2);								//å…³é—­ç§»åŠ¨åœºæ™¯
+				GSM_send_cmd("AT+CGCLASS=\"B\"", "OK", 2);							//è®¾ç½®GPRSç§»åŠ¨å°ç±»åˆ«ä¸ºB,æ”¯æŒåŒ…äº¤æ¢å’Œæ•°æ®äº¤æ¢
+				GSM_send_cmd("AT+CGDCONT=1,\"IP\",\"CMNET\"", "OK", 2); //è®¾ç½®PDPä¸Šä¸‹æ–‡,äº’è”ç½‘æ¥åè®®,æ¥å…¥ç‚¹ç­‰ä¿¡æ¯
+				GSM_send_cmd("AT+CGATT=1", "OK", 2);										//é™„ç€GPRSä¸šåŠ¡
+				GSM_send_cmd("AT+CIPCSGP=1,\"CMNET\"", "OK", 2);				//è®¾ç½®ä¸ºGPRSè¿æ¥æ¨¡å¼
+				GSM_send_cmd("AT+CIPHEAD=1", "OK", 2);									//è®¾ç½®æ¥æ”¶æ•°æ®æ˜¾ç¤ºIPå¤´(æ–¹ä¾¿åˆ¤æ–­æ•°æ®æ¥æº,ä»…åœ¨å•è·¯è¿æ¥æœ‰æ•ˆ)
+				GSM_send_cmd("AT+CIPMUX=0", "OK", 2);										//è®¾ç½®å•è·¯è¿æ¥
+				if (GSM_send_cmd(temp, "OK", 2) == 0)										//å‘èµ·è¿æ¥
+				{
+					UART1_SendString("æ­£åœ¨å‘èµ·è¿æ¥\r\n");
+					Time_miao = 1;
+					flag = 1;
+				}
+				else
+				{
+					UART1_SendString("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡è¾“\r\n");
+					Time_miao = 0;
+					flag = 0;
+				}
+			}
+			else
+			{
+				UART1_SendString("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡è¾“\r\n");
+			}
+			mode = 0;
+			break;
+		case 2:
+			if (flag == 2)
+			{
+				UART1_SendString("å¼€å§‹å‘é€...........\r\n");
+				if (GSM_send_cmd("AT+CIPSEND", ">", 2) == 0)
+				{
+					Uart1_Buf[len] = '\32';
+					Uart1_Buf[len + 1] = '\0';
+					if (GSM_send_cmd(&Uart1_Buf[4], "SEND OK", 8) == 0)
+					{
+						UART1_SendString("å‘é€æˆåŠŸ\r\n");
+						Time_miao = 1;
+					}
+					else
+						UART1_SendString("å‘é€å¤±è´¥\r\n");
+				}
+				else
+				{
+					UART2_Data(0X1B); //ESC,å–æ¶ˆå‘é€
+					UART1_SendString("å‘é€å¤±è´¥\r\n");
+				}
+			}
+			else
+				UART1_SendString("è¿˜æ²¡è¿æ¥\r\n");
+			mode = 0;
+			break;
+		case 3:
+			if (GSM_send_cmd("AT+CIPSEND", ">", 2) == 0)
+			{
+				UART2_Data(0x00);
+				UART2_Data(0X1A); //CTRL+Z,ç»“æŸæ•°æ®å‘é€,å¯åŠ¨ä¸€æ¬¡ä¼ è¾“
+				UART1_SendString("å¿ƒè·³æˆåŠŸ\r\n");
+			}
+			else
+			{
+				UART2_Data(0X1B); //ESC,å–æ¶ˆå‘é€
+				UART1_SendString("å¿ƒè·³å¤±è´¥\r\n");
+			}
+			mode = 0;
+			break;
+		case 4:
+			GSM_send_cmd("AT+CIPCLOSE=1", "CLOSE OK", 5); //å…³é—­è¿æ¥
+			GSM_send_cmd("AT+CIPSHUT", "SHUT OK", 5);			//å…³é—­ç§»åŠ¨åœºæ™¯
+			return 1;
+		}
 	}
 }
 /*******************************************************************************
-* º¯ÊıÃû : change_str_Data
-* ÃèÊö   : ×Ö·û´®×ªÕûĞÍ
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : change_str_Data
+* æè¿°   : å­—ç¬¦ä¸²è½¬æ•´å‹
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
-u8 change_str_Data(u8 *p,u8 len)
+u8 change_str_Data(u8 *p, u8 len)
 {
-  u8 i=0;
-	u8 value=0;
-	for(i=0;i<len;i++)
+	u8 i = 0;
+	u8 value = 0;
+	for (i = 0; i < len; i++)
 	{
-    value=value*10;
-		value+=(*(p++)-'0');
+		value = value * 10;
+		value += (*(p++) - '0');
 	}
 	return value;
 }
 /*******************************************************************************
-* º¯ÊıÃû : Swap
-* ÃèÊö   : ½»»»
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Swap
+* æè¿°   : äº¤æ¢
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void Swap(char *ch1, char *ch2)
 {
@@ -818,53 +831,53 @@ void Swap(char *ch1, char *ch2)
 	*ch2 = tmp;
 }
 /*******************************************************************************
-* º¯ÊıÃû : Convert
-* ÃèÊö   : ×ª»¯³ÉÕûĞÍ
-* ÊäÈë   : n:Òª×ª»»µÄÕûĞÍÊı¾İ ,str:±£´æµÄ×Ö·û
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Convert
+* æè¿°   : è½¬åŒ–æˆæ•´å‹
+* è¾“å…¥   : n:è¦è½¬æ¢çš„æ•´å‹æ•°æ® ,str:ä¿å­˜çš„å­—ç¬¦
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void change_Data_str(int n, char str[])
 {
 	int i, len;
-	for(i = 0; n != 0; ++i)
+	for (i = 0; n != 0; ++i)
 	{
 		str[i] = n % 10 + '0';
 		n /= 10;
 	}
 	str[i] = '\0';
 	len = i;
-	/* ·­×ª */
-	for(i = 0; i < len/2; ++i)
-		Swap(str+i, str+len-i-1);
+	/* ç¿»è½¬ */
+	for (i = 0; i < len / 2; ++i)
+		Swap(str + i, str + len - i - 1);
 	str[len] = '\0';
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_JZ_test
-* ÃèÊö   : »ùÕ¾¶¨Î»²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_JZ_test
+* æè¿°   : åŸºç«™å®šä½æµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 /*
 u8 GSM_jz_test()
 {
   u8 *p1,*p2,*p3;
-	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@»ùÕ¾¶¨Î»²âÊÔ@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÍË³ö+»Ø³µ\r\n");
+	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@åŸºç«™å®šä½æµ‹è¯•@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šé€€å‡º+å›è½¦\r\n");
 	GSM_send_cmd("AT+SAPBR=3,1,\"Contype\",\"GPRS\"","OK",2);
 	GSM_send_cmd("AT+SAPBR=3,1,\"APN\",\"CMNET\"","OK",2);
-  if(GSM_send_cmd("AT+SAPBR=1,1","OK",5))//¼¤»î
+  if(GSM_send_cmd("AT+SAPBR=1,1","OK",5))//æ¿€æ´»
 	{
-		//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//¹Ø±Õ
-		UART1_SendString("´ò¿ªÊ§°Ü£¬ÇëÈ·ÈÏÄ£¿éÊÇ·ñÓĞ¸Ã¹¦ÄÜ\r\n");
+		//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//å…³é—­
+		UART1_SendString("æ‰“å¼€å¤±è´¥ï¼Œè¯·ç¡®è®¤æ¨¡å—æ˜¯å¦æœ‰è¯¥åŠŸèƒ½\r\n");
 		return 1;		
 	}
 	if(GSM_send_cmd("AT+SAPBR=2,1","OK",5))
 	{
-    UART1_SendString("»ñÈ¡±¾µØIP´íÎó\r\n");
+    UART1_SendString("è·å–æœ¬åœ°IPé”™è¯¯\r\n");
 		return 2;
 	}
   Time_miao=1;
@@ -873,40 +886,40 @@ u8 GSM_jz_test()
     if(USART_RX_STA&0x8000)
 		{
 			USART_RX_STA=0;
-			if(strstr(Uart1_Buf,"ÍË³ö"))//ÍË³ö
+			if(strstr(Uart1_Buf,"é€€å‡º"))//é€€å‡º
 			{
-				 GSM_send_cmd("AT+SAPBR=0,1","OK",2);//¹Ø±Õ
+				 GSM_send_cmd("AT+SAPBR=0,1","OK",2);//å…³é—­
 				 return 0;
 			}
 			else
-			UART1_SendString("ÊäÈë´íÎó\r\n");
+			UART1_SendString("è¾“å…¥é”™è¯¯\r\n");
 		}
-    if(GSM_send_cmd("AT+CIPGSMLOC=1,1","OK",10)==0)//»ñÈ¡¾­Î³¶ÈºÍÊ±¼ä
+    if(GSM_send_cmd("AT+CIPGSMLOC=1,1","OK",10)==0)//è·å–ç»çº¬åº¦å’Œæ—¶é—´
 		{
         Time_miao=1;
  			  p1=(u8*)strstr((const char*)(Uart2_Buf),",");
 				p3=(u8*)strstr(p1,"\r\n");
-				if(p1)//ÓĞĞ§Êı¾İ
+				if(p1)//æœ‰æ•ˆæ•°æ®
 				{	
 					p2=(u8*)strtok((char*)(p1),",");
-          UART1_SendString("¾­¶È:");UART1_SendString(p2);UART1_SendData('\t');
+          UART1_SendString("ç»åº¦:");UART1_SendString(p2);UART1_SendData('\t');
 					
 					p2=(u8*)strtok(NULL,",");
-          UART1_SendString("Î³¶È:");UART1_SendString(p2);UART1_SendData('\t');
+          UART1_SendString("çº¬åº¦:");UART1_SendString(p2);UART1_SendData('\t');
 					
 					p2=(u8*)strtok(NULL,",");
-          UART1_SendString("ÈÕÆÚ:");UART1_SendString(p2);UART1_SendData('\t');
+          UART1_SendString("æ—¥æœŸ:");UART1_SendString(p2);UART1_SendData('\t');
 					
 					p2=(u8*)strtok(NULL,",");
-					*p3='\0';//²åÈë½áÊø·û
-          UART1_SendString("Ê±¼ä:");UART1_SendString(p2);UART1_SendLR();
+					*p3='\0';//æ’å…¥ç»“æŸç¬¦
+          UART1_SendString("æ—¶é—´:");UART1_SendString(p2);UART1_SendLR();
 				}
 		}
 		if(Time_miao>11)
 		{
       Time_miao=0;
-			//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//¹Ø±Õ
-			UART1_SendString("´ò¿ªÊ§°Ü£¬ÇëÈ·ÈÏÄ£¿éÊÇ·ñÓĞ¸Ã¹¦ÄÜ\r\n");
+			//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//å…³é—­
+			UART1_SendString("æ‰“å¼€å¤±è´¥ï¼Œè¯·ç¡®è®¤æ¨¡å—æ˜¯å¦æœ‰è¯¥åŠŸèƒ½\r\n");
 			return 1;
 		}
 	}
@@ -915,143 +928,152 @@ u8 GSM_jz_test()
 */
 
 /*******************************************************************************
-* º¯ÊıÃû : change_hex_str
-* ÃèÊö   : Ê®Áù½øÖÆ×ª»»³É×Ö·û´® Èç0xAC->'A''C';
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : change_hex_str
+* æè¿°   : åå…­è¿›åˆ¶è½¬æ¢æˆå­—ç¬¦ä¸² å¦‚0xAC->'A''C';
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
-void change_hex_str(u8 dest[],u8 src[],u8 len)
+void change_hex_str(u8 dest[], u8 src[], u8 len)
 {
-    u8 i=0;
-    u8 temp_h;
-    u8 temp_l;
-    for(i=0;i<len;i++)
-    {
-        temp_h=src[i]>>4;
-        temp_l=src[i]&0X0F;
-        if(temp_h>9)
-            dest[2*i]=(src[i]>>4)+55;
-        else
-            dest[2*i]=(src[i]>>4)+48;
-        if(temp_l>9)
-            dest[2*i+1]=(src[i]&0X0F)+55;
-        else
-            dest[2*i+1]=(src[i]&0X0F)+48;
-    }
-		dest[2*len]='\0';
+	u8 i = 0;
+	u8 temp_h;
+	u8 temp_l;
+	for (i = 0; i < len; i++)
+	{
+		temp_h = src[i] >> 4;
+		temp_l = src[i] & 0X0F;
+		if (temp_h > 9)
+			dest[2 * i] = (src[i] >> 4) + 55;
+		else
+			dest[2 * i] = (src[i] >> 4) + 48;
+		if (temp_l > 9)
+			dest[2 * i + 1] = (src[i] & 0X0F) + 55;
+		else
+			dest[2 * i + 1] = (src[i] & 0X0F) + 48;
+	}
+	dest[2 * len] = '\0';
 }
 /*******************************************************************************
-* º¯ÊıÃû : GSM_jz_test
-* ÃèÊö   : »ùÕ¾¶¨Î»²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_jz_test
+* æè¿°   : åŸºç«™å®šä½æµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 u8 GSM_jz_test()
 {
-  u8 *p1,*p2,*p3;
-	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@»ùÕ¾¶¨Î»²âÊÔ@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÍË³ö+»Ø³µ\r\n");
-	GSM_send_cmd("AT+SAPBR=3,1,\"Contype\",\"GPRS\"","OK",2);
-	GSM_send_cmd("AT+SAPBR=3,1,\"APN\",\"CMNET\"","OK",2);
-  if(GSM_send_cmd("AT+SAPBR=1,1","OK",5))//¼¤»î
+	u8 *p1, *p2, *p3;
+	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@åŸºç«™å®šä½æµ‹è¯•@@@@@@@@@@@@@@@@@@@@@@@@@\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šé€€å‡º+å›è½¦\r\n");
+	GSM_send_cmd("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", "OK", 2);
+	GSM_send_cmd("AT+SAPBR=3,1,\"APN\",\"CMNET\"", "OK", 2);
+	if (GSM_send_cmd("AT+SAPBR=1,1", "OK", 5)) //æ¿€æ´»
 	{
-	
-		UART1_SendString("´ò¿ªÊ§°Ü£¬ÇëÈ·ÈÏÄ£¿éÊÇ·ñÓĞ¸Ã¹¦ÄÜ\r\n");
-		return 1;		
+
+		UART1_SendString("æ‰“å¼€å¤±è´¥ï¼Œè¯·ç¡®è®¤æ¨¡å—æ˜¯å¦æœ‰è¯¥åŠŸèƒ½\r\n");
+		return 1;
 	}
-	if(GSM_send_cmd("AT+SAPBR=2,1","OK",5))
+	if (GSM_send_cmd("AT+SAPBR=2,1", "OK", 5))
 	{
-    UART1_SendString("»ñÈ¡±¾µØIP´íÎó\r\n");
+		UART1_SendString("è·å–æœ¬åœ°IPé”™è¯¯\r\n");
 		return 2;
 	}
-  Time_miao=1;
-	while(1)
+	Time_miao = 1;
+	while (1)
 	{
-    if(USART_RX_STA&0x8000)
+		if (USART_RX_STA & 0x8000)
 		{
-			USART_RX_STA=0;
-			if(strstr((const char*)Uart1_Buf,"ÍË³ö"))//ÍË³ö
+			USART_RX_STA = 0;
+			if (strstr((const char *)Uart1_Buf, "é€€å‡º")) //é€€å‡º
 			{
-				 GSM_send_cmd("AT+SAPBR=0,1","OK",2);//¹Ø±Õ
-				 return 0;
+				GSM_send_cmd("AT+SAPBR=0,1", "OK", 2); //å…³é—­
+				return 0;
 			}
 			else
-			UART1_SendString("ÊäÈë´íÎó\r\n");
+				UART1_SendString("è¾“å…¥é”™è¯¯\r\n");
 		}
-    if(GSM_send_cmd("AT+CIPGSMLOC=1,1","OK",10)==0)//»ñÈ¡¾­Î³¶ÈºÍÊ±¼ä
+		if (GSM_send_cmd("AT+CIPGSMLOC=1,1", "OK", 10) == 0) //è·å–ç»çº¬åº¦å’Œæ—¶é—´
 		{
-        Time_miao=1;
- 			  p1=(u8*)strstr((const char*)(Uart2_Buf),",");
-				p3=(u8*)strstr((const char*)p1,"\r\n");
-				if(p1)//ÓĞĞ§Êı¾İ
-				{	
-					p2=(u8*)strtok((char*)(p1),",");
-          UART1_SendString("¾­¶È:");UART1_SendString((char *)p2);UART1_Data('\t');
-					
-					p2=(u8*)strtok(NULL,",");
-          UART1_SendString("Î³¶È:");UART1_SendString((char *)p2);UART1_Data('\t');
-					
-					p2=(u8*)strtok(NULL,",");
-          UART1_SendString("ÈÕÆÚ:");UART1_SendString((char *)p2);UART1_Data('\t');
-					
-					p2=(u8*)strtok(NULL,",");
-					*p3='\0';//²åÈë½áÊø·û
-          UART1_SendString("Ê±¼ä:");UART1_SendString((char *)p2);UART1_SendLR();
-				}
+			Time_miao = 1;
+			p1 = (u8 *)strstr((const char *)(Uart2_Buf), ",");
+			p3 = (u8 *)strstr((const char *)p1, "\r\n");
+			if (p1) //æœ‰æ•ˆæ•°æ®
+			{
+				p2 = (u8 *)strtok((char *)(p1), ",");
+				UART1_SendString("ç»åº¦:");
+				UART1_SendString((char *)p2);
+				UART1_Data('\t');
+
+				p2 = (u8 *)strtok(NULL, ",");
+				UART1_SendString("çº¬åº¦:");
+				UART1_SendString((char *)p2);
+				UART1_Data('\t');
+
+				p2 = (u8 *)strtok(NULL, ",");
+				UART1_SendString("æ—¥æœŸ:");
+				UART1_SendString((char *)p2);
+				UART1_Data('\t');
+
+				p2 = (u8 *)strtok(NULL, ",");
+				*p3 = '\0'; //æ’å…¥ç»“æŸç¬¦
+				UART1_SendString("æ—¶é—´:");
+				UART1_SendString((char *)p2);
+				UART1_SendLR();
+			}
 		}
-		if(Time_miao>11)
+		if (Time_miao > 11)
 		{
-      Time_miao=0;
-			//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//¹Ø±Õ
-			UART1_SendString("´ò¿ªÊ§°Ü£¬ÇëÈ·ÈÏÄ£¿éÊÇ·ñÓĞ¸Ã¹¦ÄÜ\r\n");
+			Time_miao = 0;
+			//sim900a_send_cmd("AT+SAPBR=0,1","OK",2);//å…³é—­
+			UART1_SendString("æ‰“å¼€å¤±è´¥ï¼Œè¯·ç¡®è®¤æ¨¡å—æ˜¯å¦æœ‰è¯¥åŠŸèƒ½\r\n");
 			return 1;
 		}
 	}
 }
-#define MAXlen 200 //¶¨Òå×î¶à²¥·ÅµÄ×Ö½ÚÊı
+#define MAXlen 200 //å®šä¹‰æœ€å¤šæ’­æ”¾çš„å­—èŠ‚æ•°
 /*******************************************************************************
-* º¯ÊıÃû : GSM_tts_test
-* ÃèÊö   : TTSÎÄ±¾ÓïÒô²âÊÔ´úÂë
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : GSM_tts_test
+* æè¿°   : TTSæ–‡æœ¬è¯­éŸ³æµ‹è¯•ä»£ç 
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 u8 GSM_tts_test()
 {
-  u16 len=0;
-  u8 temp_src[]="ÄãºÃ¸ĞĞ»Äã¹ºÂòÈ«ÇòÓ¥µç×ÓGSM¿ª·¢°å";
-	u8 temp[MAXlen+15];
-	u8 loc=0;
-	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@TTSÎÄ±¾ÓïÒô²âÊÔ@@@@@@@@@@@@@@@@@@@@@@@\r\n");
-	UART1_SendString("ÍË³ö²âÊÔ£ºÍË³ö+»Ø³µ\r\n");
-	UART1_SendString("ÓïÒô²¥·Å£ºÖ±½ÓÊäÈë²¥·ÅµÄÄÚÈİ+»Ø³µ\r\n");
-  UART1_SendString("×¢Òâ£º×î´óÖ§³Ö100¸ö×Ö½Ú\r\n");
-	if(GSM_send_cmd("AT+CTTS=?","OK",2))
+	u16 len = 0;
+	u8 temp_src[] = "ä½ å¥½æ„Ÿè°¢ä½ è´­ä¹°å…¨çƒé¹°ç”µå­GSMå¼€å‘æ¿";
+	u8 temp[MAXlen + 15];
+	u8 loc = 0;
+	UART1_SendString("@@@@@@@@@@@@@@@@@@@@@TTSæ–‡æœ¬è¯­éŸ³æµ‹è¯•@@@@@@@@@@@@@@@@@@@@@@@\r\n");
+	UART1_SendString("é€€å‡ºæµ‹è¯•ï¼šé€€å‡º+å›è½¦\r\n");
+	UART1_SendString("è¯­éŸ³æ’­æ”¾ï¼šç›´æ¥è¾“å…¥æ’­æ”¾çš„å†…å®¹+å›è½¦\r\n");
+	UART1_SendString("æ³¨æ„ï¼šæœ€å¤§æ”¯æŒ100ä¸ªå­—èŠ‚\r\n");
+	if (GSM_send_cmd("AT+CTTS=?", "OK", 2))
 	{
-		 UART1_SendString("´íÎó£ºÇë²éÑ¯Ä£¿éÊÇ·ñ¾ß±¸¸Ã¹¦ÄÜ\r\n");
-		 return 1;
+		UART1_SendString("é”™è¯¯ï¼šè¯·æŸ¥è¯¢æ¨¡å—æ˜¯å¦å…·å¤‡è¯¥åŠŸèƒ½\r\n");
+		return 1;
 	}
-	strcpy((char*)&temp,(const char*)"AT+CTTS=2,\"");
-	loc=sizeof("AT+CTTS=2,\"");
-  len=strlen((const char*)temp_src);
-	strcpy((char*)&temp[loc-1],(const char*)temp_src);
-	temp[loc+len-1]='\"';
-	temp[loc+len]='\0';
-  GSM_send_cmd(temp,"OK",3);
-	while(1)
+	strcpy((char *)&temp, (const char *)"AT+CTTS=2,\"");
+	loc = sizeof("AT+CTTS=2,\"");
+	len = strlen((const char *)temp_src);
+	strcpy((char *)&temp[loc - 1], (const char *)temp_src);
+	temp[loc + len - 1] = '\"';
+	temp[loc + len] = '\0';
+	GSM_send_cmd(temp, "OK", 3);
+	while (1)
 	{
-		if(USART_RX_STA&0x8000)
+		if (USART_RX_STA & 0x8000)
 		{
-      len=USART_RX_STA&0X3FFF;
-			if(len>(MAXlen/2))len=(MAXlen/2);
-      USART_RX_STA=0;
-			if((len==4)&&(strstr((const char*)Uart1_Buf,"ÍË³ö")))//ÍË³ö	
-			return 0;
+			len = USART_RX_STA & 0X3FFF;
+			if (len > (MAXlen / 2))
+				len = (MAXlen / 2);
+			USART_RX_STA = 0;
+			if ((len == 4) && (strstr((const char *)Uart1_Buf, "é€€å‡º"))) //é€€å‡º
+				return 0;
 			UART2_SendString("AT+CTTS=2,\"");
 			/*
       UART2_SendData('A');
@@ -1066,10 +1088,10 @@ u8 GSM_tts_test()
 			UART2_SendData(',');
 			UART2_SendData('\"');
       */
-			Uart1_Buf[len]='\"';
-			Uart1_Buf[len+1]='\0';
-			if(GSM_send_cmd(Uart1_Buf,"OK",2))
-				UART1_SendString("µÈ´ıÉÏÒ»Ö¡Êı¾İ²¥·ÅÍê±Ï\r\n");
+			Uart1_Buf[len] = '\"';
+			Uart1_Buf[len + 1] = '\0';
+			if (GSM_send_cmd(Uart1_Buf, "OK", 2))
+				UART1_SendString("ç­‰å¾…ä¸Šä¸€å¸§æ•°æ®æ’­æ”¾å®Œæ¯•\r\n");
 		}
 	}
 }

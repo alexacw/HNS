@@ -42,15 +42,18 @@ void initSerial();
 void startSerialRead();
 void stopSerialRead();
 
-bool initHTTP();
-bool initGPS();
-
 void readBufInit();
 void readBufclear();
 void readBuffedMsg(SerialDriver *sd);
 void readBufPopline();
 int readBufFindWord(const char *word);
 int waitWordTimeout(const char *word, int sec);
+
+unsigned int SendStr(const char *);
+unsigned int SendChar(const char);
+
+bool initHTTP();
+bool initGPS();
 }
 
 #endif

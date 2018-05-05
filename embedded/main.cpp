@@ -88,14 +88,10 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		static int pos;
 		if ((pos = SIM868Com::waitWordTimeout("OK", 1)) >= 0)
 		{
-			static char temp[] = "found OK at ";
-			static char posc;
-			posc = '0' + pos;
-			static char eol = '\n';
-			sdWrite(&SD1, (uint8_t *)temp, sizeof(temp) - 1);
-			sdWrite(&SD1, (uint8_t *)&posc, 1);
-			sdWrite(&SD1, (uint8_t *)&eol, 1);
 			SIM868Com::readBufclear();
+			SIM868Com::SendStr("found OK at ");
+			SIM868Com::SendChar('0' + pos);
+			SIM868Com::SendStr("\r\n");
 		}
 	}
 }

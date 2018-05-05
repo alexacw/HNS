@@ -182,5 +182,35 @@ int waitWordTimeout(const char *word, int sec)
         waitCount--;
     }
     return -1;
-}
+};
+
+unsigned int SendStr(const char *data)
+{
+    if (data != NULL)
+    {
+        static uint32_t size;
+        for (size = 0; data[size] != '\0'; size++)
+            ;
+        return sdWriteI(&SIM868_SD, (uint8_t *)data, size);
+    }
+    else
+        return 0;
+};
+
+unsigned int SendChar(const char letter)
+{
+
+    return sdWriteI(&SIM868_SD, (const uint8_t *)&letter, 1);
+};
+
+bool initHTTP()
+{
+    return false;
+};
+
+bool initGPS()
+{
+    SendStr("AT+CGNSPWR=1\r\n");
+    return true;
+};
 }
