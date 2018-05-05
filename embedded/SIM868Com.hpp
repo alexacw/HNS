@@ -36,6 +36,7 @@ static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 static uint8_t data[SIM868_MSG_BUF_SIZE];
 static uint32_t readpos = 0;
 static uint32_t writepos = 0;
+static mutex_t mu;
 
 void initSerial();
 void startSerialRead();
@@ -44,15 +45,12 @@ void stopSerialRead();
 bool initHTTP();
 bool initGPS();
 
-int waitWordTimeout(char *word, int size, int sec);
-
 void readBufInit();
 void readBufclear();
 void readBuffedMsg(SerialDriver *sd);
 void readBufPopline();
 int readBufFindWord(const char *word);
-
-static mutex_t mu;
+int waitWordTimeout(const char *word, int sec);
 }
 
 #endif

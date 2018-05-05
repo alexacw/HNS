@@ -166,4 +166,21 @@ void stopSerialRead()
     chThdTerminate(readThreadPtr);
     chMtxUnlock(&mu);
 };
+
+int waitWordTimeout(const char *word, int sec)
+{
+    static int waitCount;
+    static int wordPos;
+    waitCount = sec;
+    while (waitCount >= 0)
+    {
+        if ((wordPos = SIM868Com::readBufFindWord(word)) >= 0)
+        {
+            return wordPos;
+        }
+        chThdSleepMilliseconds(100);
+        waitCount--;
+    }
+    return -1;
+}
 }
