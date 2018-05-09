@@ -26,15 +26,39 @@ void readBufInit(void)
 	chMtxUnlock(&mu);
 }
 
-void readBuffedMsg(SerialDriver *sd)
+void readBuffedMsg()
 {
 	chMtxLock(&mu);
 	//read till end of buffer if available
-	writepos += sdAsynchronousRead(sd, &data[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
+	writepos += sdAsynchronousRead(&SIM868_SD, &data[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
 	//this jsut to facilitate c string operation
 	data[writepos] = '\0';
 	chMtxUnlock(&mu);
 }
+
+bool readBufWaitLine(int sec)
+{
+	static int waitCount;
+	waitCount = sec * 10;
+	while (waitCount >= 0)
+	{
+		chMtxLock(&mu);
+		static uint8_t *dataPtr = data;
+		while (*dataPtr != '\0')
+		{
+			if (*dataPtr == '\r' || *dataPtr == '\n')
+			{
+				chMtxUnlock(&mu);
+				return true;
+			}
+			dataPtr++;
+		}
+		chMtxUnlock(&mu);
+		chThdSleepMilliseconds(100);
+		waitCount--;
+	}
+	return false;
+};
 
 /**
  * @brief 
@@ -45,24 +69,20 @@ void readBuffedMsg(SerialDriver *sd)
 int readBufFindWord(const char *word)
 {
 	chMtxLock(&mu);
-	uint32_t tempReadpos = 0;
-	while (tempReadpos != writepos)
+	uint32_t wordStartPos = 0;
+	while (wordStartPos != writepos)
 	{
 		int i = 0;
-		while (word[i] != '\0' && data[(tempReadpos + i) % SIM868_MSG_BUF_SIZE] == word[i])
+		while (word[i] != '\0' && data[(wordStartPos + i)] == word[i])
 		{
 			i++;
 		}
 		if (word[i] == '\0' && i != 0)
 		{
 			chMtxUnlock(&mu);
-			return tempReadpos;
+			return wordStartPos;
 		}
-		tempReadpos++;
-		if (tempReadpos == SIM868_MSG_BUF_SIZE)
-		{
-			tempReadpos = 0;
-		}
+		wordStartPos++;
 	}
 	chMtxUnlock(&mu);
 	return -1;
@@ -75,16 +95,22 @@ static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 	chRegSetThreadName("SIM868SerialRead");
 
 	static event_listener_t serial_listener;
-	//static eventflags_t pending_flags;
+	static const eventflags_t tolis = CHN_INPUT_AVAILABLE | CHN_DISCONNECTED | SD_NOISE_ERROR | //Partially inherited from IO queue driver
+									  SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |
+									  SD_BREAK_DETECTED;
 	chEvtRegisterMaskWithFlags(chnGetEventSource(&SIM868_SD), &serial_listener,
 							   SIM868_SERIAL_EVENT_MASK, CHN_INPUT_AVAILABLE); //setup event listening
 
 	while (!chThdShouldTerminateX())
 	{
-		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK); //wait for selected serial events
-		//pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
-		chEvtGetAndClearFlagsI(&serial_listener); //get event flags
-		readBuffedMsg(&SIM868_SD);
+		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK);										  //wait for selected serial events
+		static eventflags_t pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
+		if (pending_flags & !CHN_INPUT_AVAILABLE)
+		{
+			iqResetI(&(&SIM868_SD)->iqueue);
+		}
+		else if (pending_flags & ~CHN_INPUT_AVAILABLE)
+			readBuffedMsg();
 	}
 };
 
@@ -168,40 +194,36 @@ unsigned int SendChar(const char letter)
 	return sdWriteI(&SIM868_SD, (const uint8_t *)&letter, 1);
 };
 
-bool initHTTP()
+bool initIP()
 {
 	int trialCount = 0;
 	while (trialCount <= 10)
 	{
 		trialCount++;
+		readBufclear();
 		SendStr("AT+SAPBR=0,1\r\n"); //关闭 GPRS 上下文.
 		if (waitWordTimeout("OK", 10) < 0)
-			break;
+			continue;
 		readBufclear();
 		chThdSleepMilliseconds(1000 * trialCount);
 
 		SendStr("AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n");
 		if (waitWordTimeout("OK", 10) < 0)
-			break;
+			continue;
 		readBufclear();
 
 		SendStr("AT+SAPBR=3,1,\"APN\",\"cmhk\"\r\n");
 		if (waitWordTimeout("OK", 10) < 0)
-			break;
+			continue;
 		readBufclear();
 
 		SendStr("AT+SAPBR=1,1\r\n"); //激活一个 GPRS 上下文
 		if (waitWordTimeout("OK", 10) < 0)
-			break;
+			continue;
 		readBufclear();
 
 		SendStr("AT+SAPBR=2,1\r\n"); //查询 GPRS 上下文
-		if (waitWordTimeout("OK", 10) < 0)
-			break;
-		readBufclear();
-
-		SendStr("AT+HTTPINIT\r\n"); //init HTTP
-		if (waitWordTimeout("OK", 10) < 0)
+		if (waitWordTimeout("OK", 10) >= 0)
 		{
 			readBufclear();
 			return true;
@@ -210,19 +232,50 @@ bool initHTTP()
 	return false;
 };
 
-bool termHTTP()
+bool HTTP_getFromURL(const char *url)
+{
+	int trialCount = 0;
+	while (trialCount <= 10)
+	{
+		trialCount++;
+		readBufclear();
+		SendStr("AT+HTTPINIT\r\n"); //init HTTP
+		if (waitWordTimeout("OK", 10) < 0)
+		{
+			SendStr("AT+HTTPTERM\r\n");
+			waitWordTimeout("OK", 10);
+			continue;
+		}
+
+		SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
+		SendStr(url);
+		SendStr("\"\r\n");
+		if (waitWordTimeout("OK", 10) < 0)
+		{
+			continue;
+		}
+
+		SendStr("AT+HTTPACTION=0"); //start get request
+		if (waitWordTimeout("200", 20) >= 0)
+		{
+			readBufclear();
+			SendStr("AT+HTTPTERM\r\n");
+			waitWordTimeout("OK", 10);
+
+			return true;
+		}
+	}
+	return false;
+};
+
+bool termIP()
 {
 	int trialCount = 0;
 	while (trialCount <= 5)
 	{
 		trialCount++;
-		SendStr("AT+HTTPTERM\r\n"); //关闭 GPRS 上下文.
-		if (waitWordTimeout("OK", 10) < 0)
-			break;
-		readBufclear();
-
-		SendStr("AT+SAPBR=0,1\r\n"); //init HTTP
-		if (waitWordTimeout("OK", 10) < 0)
+		SendStr("AT+SAPBR=0,1\r\n"); //terminate IP
+		if (waitWordTimeout("OK", 10) >= 0)
 		{
 			readBufclear();
 			return true;
@@ -233,6 +286,7 @@ bool termHTTP()
 
 bool initGPS()
 {
+	//TODO:
 	int trialCount = 10;
 	while (trialCount > 0)
 	{

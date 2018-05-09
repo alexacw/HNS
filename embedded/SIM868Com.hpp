@@ -33,7 +33,14 @@ static const SerialConfig SIM868_SERIAL_CONFIG = {
 static thread_t *readThreadPtr = NULL;
 static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 
+/**
+ * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
+ */
 static uint8_t data[SIM868_MSG_BUF_SIZE];
+/**
+ * @brief the position of the data array which reading from the serial port should write to, also means its the end of the received message
+ * 
+ */
 static uint32_t writepos = 0;
 static mutex_t mu;
 
@@ -43,8 +50,8 @@ void stopSerialRead();
 
 void readBufInit();
 void readBufclear();
-void readBuffedMsg(SerialDriver *sd);
-bool readBufWaitLine();	//wait until \n or \r is received
+void readBuffedMsg();
+bool readBufWaitLine(int sec); //wait until \n or \r is received
 int readBufFindWord(const char *word);
 int waitWordTimeout(const char *word, int sec);
 int waitWordStopWordTimeout(const char *word, const char *termword, int sec);
@@ -52,8 +59,9 @@ int waitWordStopWordTimeout(const char *word, const char *termword, int sec);
 unsigned int SendStr(const char *);
 unsigned int SendChar(const char);
 
-bool initHTTP();
-bool termHTTP();
+bool initIP();
+bool termIP();
+bool HTTP_getFromURL(const char *url);
 bool initGPS();
 } // namespace SIM868Com
 
