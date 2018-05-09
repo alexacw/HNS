@@ -70,7 +70,8 @@
                 "${workspaceRoot}/embedded/os/common/ext/ARM/CMSIS/Core/Include",
                 "${workspaceRoot}/embedded/board",
                 "${workspaceRoot}/embedded",
-                "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx"
+                "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx",
+                "${workspaceFolder}/embedded/os/hal/lib/peripherals/flash"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -115,5 +116,5 @@
             }
         }
     ],
-    "version": 3
+    "version": 4
 }
