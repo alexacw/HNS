@@ -9,6 +9,24 @@
 namespace SIM868Com
 {
 
+const SerialConfig SIM868_SERIAL_CONFIG = {
+	9600, //Baud Rate
+};
+
+thread_t *readThreadPtr = NULL;
+THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
+
+/**
+	 * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
+	 */
+uint8_t data[SIM868_MSG_BUF_SIZE];
+/**
+	 * @brief the position of the data array which reading from the serial port should write to, also means its the end of the received message
+	 *
+	 */
+uint32_t writepos = 0;
+mutex_t mu;
+
 void readBufclear(void)
 {
 	chMtxLock(&mu);
@@ -61,11 +79,11 @@ bool readBufWaitLine(int sec)
 };
 
 /**
- * @brief 
- * 
- * @param word the word to find, a standard c string terminated by \0
- * @return int the starting position of the found word in the read queue
- */
+	 * @brief
+	 *
+	 * @param word the word to find, a standard c string terminated by \0
+	 * @return int the starting position of the found word in the read queue
+	 */
 int readBufFindWord(const char *word)
 {
 	chMtxLock(&mu);
@@ -96,14 +114,13 @@ static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 
 	static event_listener_t serial_listener;
 	static const eventflags_t tolis = CHN_INPUT_AVAILABLE | CHN_DISCONNECTED | SD_NOISE_ERROR | //Partially inherited from IO queue driver
-									  SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |
-									  SD_BREAK_DETECTED;
+									  SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR | SD_BREAK_DETECTED;
 	chEvtRegisterMaskWithFlags(chnGetEventSource(&SIM868_SD), &serial_listener,
 							   SIM868_SERIAL_EVENT_MASK, tolis); //setup event listening
 
 	while (!chThdShouldTerminateX())
 	{
-		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK);										  //wait for selected serial events
+		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK); //wait for selected serial events
 		static eventflags_t pending_flags;
 		pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
 		if (pending_flags & !CHN_INPUT_AVAILABLE)
@@ -125,10 +142,8 @@ void initSerial()
 
 void startSerialRead()
 {
-	readThreadPtr = chThdCreateStatic(SIM868SerialReadThread_wa,
-									  sizeof(SIM868SerialReadThread_wa),
-									  NORMALPRIO,
-									  SIM868SerialReadThreadFunc,
+	readThreadPtr = chThdCreateStatic(SIM868SerialReadThread_wa, sizeof(SIM868SerialReadThread_wa),
+									  NORMALPRIO, SIM868SerialReadThreadFunc,
 									  NULL);
 };
 

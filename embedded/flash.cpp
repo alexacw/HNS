@@ -42,6 +42,8 @@ static void flashUnlock(void)
 	}
 }
 
+flashStorage::flashStorageContent_t flashStorage::content;
+
 bool flashStorage::writeFlashAll()
 {
 	flashUnlock();
@@ -95,4 +97,9 @@ bool flashStorage::writeFlashAll()
 		return false;
 	else
 		return true;
+};
+
+bool flashStorage::readFlashAll()
+{
+	content = *(flashStorageContent_t *)FlASH_START_ADDRESS;
 };

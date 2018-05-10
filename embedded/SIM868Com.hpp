@@ -26,23 +26,19 @@
 namespace SIM868Com
 {
 
-static const SerialConfig SIM868_SERIAL_CONFIG = {
-	9600, //Baud Rate
-};
-
-static thread_t *readThreadPtr = NULL;
-static THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
+extern thread_t *readThreadPtr;
+extern THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 
 /**
  * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
  */
-static uint8_t data[SIM868_MSG_BUF_SIZE];
+extern uint8_t data[SIM868_MSG_BUF_SIZE];
 /**
  * @brief the position of the data array which reading from the serial port should write to, also means its the end of the received message
  * 
  */
-static uint32_t writepos = 0;
-static mutex_t mu;
+extern uint32_t writepos;
+extern mutex_t mu;
 
 void initSerial();
 void startSerialRead();

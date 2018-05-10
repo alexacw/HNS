@@ -54,10 +54,12 @@ namespace flashStorage
  * @brief the struct which should contains all data the flash contains with the same memory mapping 
  * 
  */
-static struct flashStorageContent_t
+struct flashStorageContent_t
 {
 	uint32_t deviceID = 1234;
-} content;
+};
+
+extern flashStorageContent_t content;
 
 bool writeFlashAll();
 bool readFlashAll();

@@ -20,6 +20,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "ch.h"
 #include "hal.h"
@@ -60,8 +61,42 @@ static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[])
 	chprintf(chp, "\r\n\nstopped\r\n");
 }
 
+static void setDeviceID(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	if (argc == 1)
+	{
+		uint32_t tempLong = strtol(argv[0], NULL, 0);
+		flashStorage::content.deviceID = tempLong;
+		if (tempLong != 0)
+		{
+			flashStorage::content.deviceID = tempLong;
+			if (flashStorage::writeFlashAll() && tempLong != 0)
+				chprintf(chp, "write device id to flash success\r\n");
+			else
+				chprintf(chp, "write to flash failed\r\n");
+		}
+		else
+			chprintf(chp, "invalid input, id must be positive integer\r\n");
+	}
+	else
+	{
+		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
+		return;
+	}
+}
+
+static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	chprintf(chp, "Device ID: %ld\r\n", flashStorage::content.deviceID);
+	return;
+}
+
 static const ShellCommand commands[] = {
 	{"write", cmd_write},
+	{"setID", setDeviceID},
+	{"hnsInfo", readDeviceInfo},
 	{NULL, NULL}};
 
 static const ShellConfig shell_cfg1 =
@@ -113,6 +148,8 @@ int main(void)
 	halInit();
 	chSysInit();
 
+	flashStorage::readFlashAll();
+
 	/*
 	 * Initializes a serial-over-USB CDC driver.
 	 */
@@ -136,11 +173,6 @@ int main(void)
 
 	SIM868Com::initSerial();
 	SIM868Com::startSerialRead();
-
-	if (flashStorage::writeFlashAll())
-	{
-		SIM868Com::SendStr("dfgsdfg");
-	}
 
 	/*
 	 * Creates the blinker thread.
