@@ -31,6 +31,7 @@
 #include "usbcfg.h"
 
 #include "SIM868Com.hpp"
+#include "flash.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */
@@ -135,6 +136,11 @@ int main(void)
 
 	SIM868Com::initSerial();
 	SIM868Com::startSerialRead();
+
+	if (flashStorage::writeFlashAll())
+	{
+		SIM868Com::SendStr("dfgsdfg");
+	}
 
 	/*
 	 * Creates the blinker thread.

@@ -106,7 +106,7 @@ include $(CHIBIOS)/os/various/shell/shell.mk
 include $(CHIBIOS)/os/various/cpp_wrappers/chcpp.mk
 
 # linker script specified here
-LDSCRIPT = $(STARTUPLD)/STM32F103x8.ld
+LDSCRIPT = STM32F103xb.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -126,6 +126,7 @@ CSRC = $(STARTUPSRC) \
 # setting.
 CPPSRC = $(CHCPPSRC) \
           SIM868Com.cpp \
+	   	  flash.cpp \
           main.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.

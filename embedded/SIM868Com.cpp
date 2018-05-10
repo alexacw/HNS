@@ -99,12 +99,13 @@ static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 									  SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |
 									  SD_BREAK_DETECTED;
 	chEvtRegisterMaskWithFlags(chnGetEventSource(&SIM868_SD), &serial_listener,
-							   SIM868_SERIAL_EVENT_MASK, CHN_INPUT_AVAILABLE); //setup event listening
+							   SIM868_SERIAL_EVENT_MASK, tolis); //setup event listening
 
 	while (!chThdShouldTerminateX())
 	{
 		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK);										  //wait for selected serial events
-		static eventflags_t pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
+		static eventflags_t pending_flags;
+		pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
 		if (pending_flags & !CHN_INPUT_AVAILABLE)
 		{
 			iqResetI(&(&SIM868_SD)->iqueue);
