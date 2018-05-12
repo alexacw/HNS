@@ -1,0 +1,25 @@
+var hal__buffers_8c =
+[
+    [ "ibqObjectInit", "group___h_a_l___b_u_f_f_e_r_s.html#ga8228911a509c211b33c0d94f01f013da", null ],
+    [ "ibqResetI", "group___h_a_l___b_u_f_f_e_r_s.html#gabb11859756f526b7f2150aaef6a4667c", null ],
+    [ "ibqGetEmptyBufferI", "group___h_a_l___b_u_f_f_e_r_s.html#ga0b5f942ed2f58af87b90b58d88966f53", null ],
+    [ "ibqPostFullBufferI", "group___h_a_l___b_u_f_f_e_r_s.html#ga3e94f93761d76e5b8d75b67ab1bcaa6b", null ],
+    [ "ibqGetFullBufferTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#ga5b16c0f5c9cb7f4304df4e70af40c02c", null ],
+    [ "ibqGetFullBufferTimeoutS", "group___h_a_l___b_u_f_f_e_r_s.html#gab15c822e09c04d8ab8a6173dc5c86b04", null ],
+    [ "ibqReleaseEmptyBuffer", "group___h_a_l___b_u_f_f_e_r_s.html#gae58b92c83d5d109aeec8a2e80837012a", null ],
+    [ "ibqReleaseEmptyBufferS", "group___h_a_l___b_u_f_f_e_r_s.html#ga84bd11d1a8f4125aac9261d6eda50857", null ],
+    [ "ibqGetTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#ga859bacae2b4ad1161da126d212e6411d", null ],
+    [ "ibqReadTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#ga8c8686084d410ebb3fe9054f9bc7cf14", null ],
+    [ "obqObjectInit", "group___h_a_l___b_u_f_f_e_r_s.html#ga6538ad79607b2ee78c20a560a9ffc17a", null ],
+    [ "obqResetI", "group___h_a_l___b_u_f_f_e_r_s.html#gaddd8be7bc7d1c4c18ca709aff412f79c", null ],
+    [ "obqGetFullBufferI", "group___h_a_l___b_u_f_f_e_r_s.html#ga4f4a4180bc16647e80899247699cdafb", null ],
+    [ "obqReleaseEmptyBufferI", "group___h_a_l___b_u_f_f_e_r_s.html#ga6ed8626a2cd0efe7a609d83d2d608bb3", null ],
+    [ "obqGetEmptyBufferTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#gad06376f56b87558676adf1dd1cd78210", null ],
+    [ "obqGetEmptyBufferTimeoutS", "group___h_a_l___b_u_f_f_e_r_s.html#ga5fd1a9f207211fdbd50a42d711826aa2", null ],
+    [ "obqPostFullBuffer", "group___h_a_l___b_u_f_f_e_r_s.html#ga20c627381b219fd9110b70986eae9794", null ],
+    [ "obqPostFullBufferS", "group___h_a_l___b_u_f_f_e_r_s.html#ga76b1e20bacea1453e16338e6fd12e6cf", null ],
+    [ "obqPutTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#gaecf5ce8d6ea3b4a19f4cb02448700350", null ],
+    [ "obqWriteTimeout", "group___h_a_l___b_u_f_f_e_r_s.html#ga69e07631a69497c38e353746bb662203", null ],
+    [ "obqTryFlushI", "group___h_a_l___b_u_f_f_e_r_s.html#ga517f391c5db3974d78bfab7493d5cbe9", null ],
+    [ "obqFlush", "group___h_a_l___b_u_f_f_e_r_s.html#ga2c7e05612398a84c67cbf1240dcf0a7b", null ]
+];

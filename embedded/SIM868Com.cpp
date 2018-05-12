@@ -14,8 +14,6 @@ const SerialConfig SIM868_SERIAL_CONFIG = {
 };
 
 thread_t *readThreadPtr = NULL;
-THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
-
 /**
 	 * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
 	 */
@@ -105,6 +103,8 @@ int readBufFindWord(const char *word)
 	chMtxUnlock(&mu);
 	return -1;
 }
+
+THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 
 //Serial listenser
 static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)

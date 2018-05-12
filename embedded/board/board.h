@@ -52,6 +52,9 @@
 #define GPIOD_OSC_IN 0
 #define GPIOD_OSC_OUT 1
 
+#define GPIOA_CAN_RX 11
+#define GPIOA_CAN_TX 12
+
 /* J1 connector */
 
 // pin 1:       AV+
@@ -182,9 +185,10 @@
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
-void boardInit(void);
+    void boardInit(void);
 #ifdef __cplusplus
 }
 #endif

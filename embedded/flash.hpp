@@ -22,17 +22,11 @@
  *	}
  */
 
-#include <stdio.h>
-#include <string.h>
-
 #include "ch.h"
 #include "hal.h"
 
 #include <stdio.h>
 #include <string.h>
-
-#include "ch.h"
-#include "hal.h"
 
 #include "shell.h"
 #include "chprintf.h"
