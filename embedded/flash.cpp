@@ -102,4 +102,5 @@ bool flashStorage::writeFlashAll()
 bool flashStorage::readFlashAll()
 {
 	content = *(flashStorageContent_t *)FlASH_START_ADDRESS;
+	return true;
 };

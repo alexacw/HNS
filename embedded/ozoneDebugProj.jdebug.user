@@ -1,7 +1,18 @@
-OpenWindow="Memory Content1", DockArea=BOTTOM, x=0, y=0, w=1560, h=317, FilterBarShown=0, 
-OpenWindow="Registers", DockArea=RIGHT, x=0, y=0, w=299, h=1347, FilterBarShown=0, 
-OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=1559, h=317, FilterBarShown=0, 
-OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=299, h=1347, FilterBarShown=1, 
+OpenWindow="Watched Data", DockArea=BOTTOM, x=3, y=0, w=734, h=299, FilterBarShown=0, 
+OpenWindow="Memory Content1", DockArea=BOTTOM, x=3, y=0, w=734, h=299, FilterBarShown=0, 
+OpenWindow="Memory Usage", DockArea=RIGHT, x=0, y=0, w=566, h=647, FilterBarShown=0, 
+OpenWindow="Registers", DockArea=RIGHT, x=0, y=0, w=566, h=647, FilterBarShown=0, 
+OpenWindow="Global Data", DockArea=RIGHT, x=0, y=0, w=566, h=647, FilterBarShown=1, 
+OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=590, h=316, FilterBarShown=0, 
+OpenWindow="Functions", DockArea=LEFT, x=0, y=1, w=414, h=354, FilterBarShown=1, 
+OpenWindow="Call Stack", DockArea=BOTTOM, x=2, y=0, w=521, h=316, FilterBarShown=0, 
+OpenWindow="Code Profile", DockArea=LEFT, x=0, y=0, w=414, h=304, FilterBarShown=1, 
+OpenWindow="J-Link Control Panel", DockArea=BOTTOM, x=0, y=0, w=650, h=316, FilterBarShown=0, 
+OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=566, h=647, FilterBarShown=0, ExecCountersShown=0
 OpenToolbar="Debug", Floating=0, x=0, y=0
-TableHeader="Registers", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Description"], ColWidths=[170;143;427]
-TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Class";"Source"], ColWidths=[81;102;66;81;77;233]
+TableHeader="Watched Data", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Size";"Refresh";"Type";"Access";"Scope"], ColWidths=[238;84;95;48;67;205;64;196]
+TableHeader="Registers", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Description"], ColWidths=[125;77;364]
+TableHeader="Global Data", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Access";"Scope"], ColWidths=[165;84;84;48;220;64;119]
+TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Class";"Source"], ColWidths=[57;69;48;57;55;113]
+TableHeader="Call Stack", SortCol="Function", SortOrder="ASCENDING", VisibleCols=["Function";"Stack Info";"Source"], ColWidths=[125;100;296]
+TableHeader="Code Profile", SortCol="File / Function", SortOrder="ASCENDING", VisibleCols=["Source Coverage";"File / Function";"Inst. Coverage";"Run Count";"Fetch Count";"Load"], ColWidths=[118;100;105;82;90;145]
