@@ -29,6 +29,7 @@ static THD_FUNCTION(listener, arg)
 	{
 		if (canReceiveTimeout(&CAND1, CAN_ANY_MAILBOX, &rxbuf, TIME_INFINITE) == MSG_OK)
 		{
+			sdWrite(&SD1, (uint8_t *)&rxbuf, sizeof(rxbuf));
 		}
 	}
 };
