@@ -5,6 +5,7 @@
 #include "hal.h"
 #include "math.h"
 #include "SIM868Com.hpp"
+#include "usbcfg.h"
 
 namespace SIM868Com
 {
@@ -17,7 +18,7 @@ thread_t *readThreadPtr = NULL;
 /**
 	 * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
 	 */
-uint8_t data[SIM868_MSG_BUF_SIZE];
+uint8_t readBuf[SIM868_MSG_BUF_SIZE];
 /**
 	 * @brief the position of the data array which reading from the serial port should write to, also means its the end of the received message
 	 *
@@ -28,9 +29,9 @@ mutex_t mu;
 void readBufclear(void)
 {
 	chMtxLock(&mu);
-	memset(data, 0, SIM868_MSG_BUF_SIZE);
+	memset(readBuf, 0, SIM868_MSG_BUF_SIZE);
 	writepos = 0;
-	data[0] = '\0';
+	readBuf[0] = '\0';
 	chMtxUnlock(&mu);
 }
 
@@ -46,9 +47,9 @@ void readBuffedMsg()
 {
 	chMtxLock(&mu);
 	//read till end of buffer if available
-	writepos += sdAsynchronousRead(&SIM868_SD, &data[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
+	writepos += sdAsynchronousRead(&SIM868_SD, &readBuf[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
 	//this jsut to facilitate c string operation
-	data[writepos] = '\0';
+	readBuf[writepos] = '\0';
 	chMtxUnlock(&mu);
 }
 
@@ -59,7 +60,7 @@ bool readBufWaitLine(int sec)
 	while (waitCount >= 0)
 	{
 		chMtxLock(&mu);
-		static uint8_t *dataPtr = data;
+		static uint8_t *dataPtr = readBuf;
 		while (*dataPtr != '\0')
 		{
 			if (*dataPtr == '\r' || *dataPtr == '\n')
@@ -82,26 +83,12 @@ bool readBufWaitLine(int sec)
 	 * @param word the word to find, a standard c string terminated by \0
 	 * @return int the starting position of the found word in the read queue
 	 */
-int readBufFindWord(const char *word)
+const char *readBufFindWord(const char *word)
 {
 	chMtxLock(&mu);
-	uint32_t wordStartPos = 0;
-	while (wordStartPos != writepos)
-	{
-		int i = 0;
-		while (word[i] != '\0' && data[(wordStartPos + i)] == word[i])
-		{
-			i++;
-		}
-		if (word[i] == '\0' && i != 0)
-		{
-			chMtxUnlock(&mu);
-			return wordStartPos;
-		}
-		wordStartPos++;
-	}
+	const char *result = strstr(word, (const char *)SIM868Com::readBuf);
 	chMtxUnlock(&mu);
-	return -1;
+	return result;
 }
 
 THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
@@ -154,41 +141,41 @@ void stopSerialRead()
 	chMtxUnlock(&mu);
 };
 
-int waitWordTimeout(const char *word, int sec)
+const char *waitWordTimeout(const char *word, int sec)
 {
 	static int waitCount;
-	static int wordPos;
+	static const char *wordPos;
 	waitCount = sec * 10;
 	while (waitCount >= 0)
 	{
-		if ((wordPos = SIM868Com::readBufFindWord(word)) >= 0)
+		if ((wordPos = SIM868Com::readBufFindWord(word)))
 		{
 			return wordPos;
 		}
 		chThdSleepMilliseconds(100);
 		waitCount--;
 	}
-	return -1;
+	return NULL;
 };
-int waitWordStopWordTimeout(const char *word, const char *termword, int sec)
+const char *waitWordStopWordTimeout(const char *word, const char *termword, int sec)
 {
 	static int waitCount;
-	static int wordPos;
+	static const char *wordPos;
 	waitCount = sec * 10;
 	while (waitCount >= 0)
 	{
-		if ((wordPos = SIM868Com::readBufFindWord(word)) >= 0)
+		if ((wordPos = SIM868Com::readBufFindWord(word)))
 		{
 			return wordPos;
 		}
 		else if (SIM868Com::readBufFindWord(termword) >= 0)
 		{
-			return -1;
+			return NULL;
 		}
 		chThdSleepMilliseconds(100);
 		waitCount--;
 	}
-	return -1;
+	return NULL;
 };
 
 unsigned int SendStr(const char *data)
@@ -313,39 +300,36 @@ bool initGPS()
 
 	return true;
 };
-} // namespace SIM868Com
 
-float str2f(const char *str_num)
+THD_WORKING_AREA(GPSListener_wa, 128);
+//Serial listenser
+static THD_FUNCTION(GPSListener, arg)
 {
-	float temp = 0;
-	int dpCount = -1;
-	while (*str_num != '\0')
+	SendStr("AT+CGNSINF\r\n");
+	readBufclear();
+	char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
+	if (p1) //寻找开始符
 	{
-		if (*str_num >= '0' && *str_num <= '9')
+		char *p2;
+		if (p2 = (char *)waitWordTimeout("OK", 3)) //寻找结束符
 		{
-			temp *= 10.0;
-			temp += *str_num - '0';
-			if (dpCount >= 0)
-			{
-				dpCount++;
-			}
+			*p2 = 0; //添加结束符
+			p2 = strtok((p1), ",");
+			p2 = (char *)strtok(NULL, ",");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "time:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "longitude:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "latitude:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
 		}
-		else if (*str_num == '.')
-		{
-			if (dpCount < 0)
-			{
-				dpCount = 0;
-			}
-			else
-				return NAN; //return NaN if the input is not a valid number, check by (f==f), false for this
-		}
-		else
-			return NAN; //not all digits and .
-		str_num++;
 	}
-	for (int i = 0; i < dpCount; i++)
-	{
-		temp /= 10.0;
-	}
-	return temp;
 }
+
+} // namespace SIM868Com

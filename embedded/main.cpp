@@ -40,27 +40,6 @@
 
 #define SHELL_WA_SIZE THD_WORKING_AREA_SIZE(2048)
 
-/* Can be measured using dd if=/dev/xxxx of=/dev/null bs=512 count=10000.*/
-static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[])
-{
-	static uint8_t buf[] =
-		"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
-
-	(void)argv;
-	if (argc > 0)
-	{
-		chprintf(chp, "Usage: write\r\n");
-		return;
-	}
-
-	while (chnGetTimeout((BaseChannel *)chp, TIME_IMMEDIATE) == Q_TIMEOUT)
-	{
-		/* Writing in channel mode.*/
-		chnWrite(&SDU1, buf, sizeof buf - 1);
-	}
-	chprintf(chp, "\r\n\nstopped\r\n");
-}
-
 static void setDeviceID(BaseSequentialStream *chp, int argc, char *argv[])
 {
 	if (argc == 1)
@@ -94,7 +73,6 @@ static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
 }
 
 static const ShellCommand commands[] = {
-	{"write", cmd_write},
 	{"setID", setDeviceID},
 	{"hnsInfo", readDeviceInfo},
 	{NULL, NULL}};
@@ -121,14 +99,6 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		chThdSleepMilliseconds(time);
 		palSetPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
-		static int pos;
-		if ((pos = SIM868Com::waitWordTimeout("OK", 1)) >= 0)
-		{
-			SIM868Com::readBufclear();
-			SIM868Com::SendStr("found OK at ");
-			SIM868Com::SendChar('0' + pos);
-			SIM868Com::SendStr("\r\n");
-		}
 	}
 }
 
@@ -189,6 +159,14 @@ int main(void)
 													SHELL_WA_SIZE, "shell",
 													NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
 			chThdWait(shelltp); /* Waiting termination.             */
+		}
+		static const char *pos;
+		if ((pos = SIM868Com::waitWordTimeout("OK", 1)) >= 0)
+		{
+			SIM868Com::readBufclear();
+			SIM868Com::SendStr("found OK at ");
+			SIM868Com::SendChar('0' + pos - (char *)&SIM868Com::readBuf);
+			SIM868Com::SendStr("\r\n");
 		}
 		chThdSleepMilliseconds(300);
 	}
