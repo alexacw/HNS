@@ -271,6 +271,42 @@ bool HTTP_getFromURL(const char *url)
 	return false;
 };
 
+bool HTTP_postToURL(const char *url)
+{
+	int trialCount = 0;
+	while (trialCount <= 10)
+	{
+		trialCount++;
+		readBufclear();
+		SendStr("AT+HTTPINIT\r\n"); //init HTTP
+		if (waitWordTimeout("OK", 10) < 0)
+		{
+			SendStr("AT+HTTPTERM\r\n");
+			waitWordTimeout("OK", 10);
+			continue;
+		}
+
+		SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
+		SendStr(url);
+		SendStr("\"\r\n");
+		if (waitWordTimeout("OK", 10) < 0)
+		{
+			continue;
+		}
+
+		SendStr("AT+HTTPACTION=1"); //start post request
+		if (waitWordTimeout("200", 20) >= 0)
+		{
+			readBufclear();
+			SendStr("AT+HTTPTERM\r\n");
+			waitWordTimeout("OK", 10);
+
+			return true;
+		}
+	}
+	return false;
+};
+
 bool termIP()
 {
 	int trialCount = 0;
@@ -305,29 +341,47 @@ THD_WORKING_AREA(GPSListener_wa, 128);
 //Serial listenser
 static THD_FUNCTION(GPSListener, arg)
 {
-	SendStr("AT+CGNSINF\r\n");
-	readBufclear();
-	char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
-	if (p1) //寻找开始符
+	while (!chThdShouldTerminateX())
 	{
-		char *p2;
-		if (p2 = (char *)waitWordTimeout("OK", 3)) //寻找结束符
+		chThdSleepMilliseconds(500); //update frequency
+		readBufclear();
+		SendStr("AT+CGNSINF\r\n");
+		char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
+		if (p1) //寻找开始符
 		{
-			*p2 = 0; //添加结束符
-			p2 = strtok((p1), ",");
-			p2 = (char *)strtok(NULL, ",");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "time:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "longitude:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "latitude:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			char *p2;
+			if (p2 = (char *)waitWordTimeout("OK", 3)) //寻找结束符
+			{
+				*p2 = 0;				//添加结束符
+				p2 = strtok((p1), ":"); //skip the "CGNSINF:" part
+				p2 = strtok(NULL, ",");
+				if (*p2 != '1')
+				{
+					do
+					{
+						SendStr("AT+CGNSPWR=1\r\n");
+					} while (!waitWordTimeout("OK", 1));
+				}
+				p2 = (char *)strtok(NULL, ",");
+				if (*p2 != '1')
+				{
+					//GPS not fixed
+					//wait?
+					continue;
+				}
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "time:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "longitude:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "latitude:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			}
 		}
 	}
 }
