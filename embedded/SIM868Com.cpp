@@ -350,9 +350,9 @@ static THD_FUNCTION(GPSListener, arg)
 		if (p1) //寻找开始符
 		{
 			char *p2;
-			if (p2 = (char *)waitWordTimeout("OK", 3)) //寻找结束符
+			if (p2 = (char *)waitWordTimeout("OK", 3)) //module will send "OK" after the GPS info, so wait for this
 			{
-				*p2 = 0;				//添加结束符
+				*p2 = 0;				//set the char position of "OK" to be eol
 				p2 = strtok((p1), ":"); //skip the "CGNSINF:" part
 				p2 = strtok(NULL, ",");
 				if (*p2 != '1')
@@ -370,17 +370,42 @@ static THD_FUNCTION(GPSListener, arg)
 					continue;
 				}
 				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "time:");
+				chprintf((BaseSequentialStream *)&SDU1, "got time (yyyyMMddhhmmss.sss):");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
 				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
 				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "longitude:");
+				chprintf((BaseSequentialStream *)&SDU1, "got longitude:");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
 				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
 				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "latitude:");
+				chprintf((BaseSequentialStream *)&SDU1, "got latitude:");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
 				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got altitude:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got Speed Over Ground (Km/h):");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees):");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+				p2 = (char *)strtok(NULL, ",");//fix mode
+				p2 = (char *)strtok(NULL, ",");//reserved, p2 should be /0
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got HDOP:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got PDOP:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				p2 = (char *)strtok(NULL, ",");
+				chprintf((BaseSequentialStream *)&SDU1, "got VDOP:");
+				chprintf((BaseSequentialStream *)&SDU1, p2);
+				
+				
 			}
 		}
 	}
