@@ -168,7 +168,7 @@ const char *waitWordStopWordTimeout(const char *word, const char *termword, int 
 		{
 			return wordPos;
 		}
-		else if (SIM868Com::readBufFindWord(termword) >= 0)
+		else if (SIM868Com::readBufFindWord(termword))
 		{
 			return NULL;
 		}
@@ -226,7 +226,7 @@ bool initIP()
 		readBufclear();
 
 		SendStr("AT+SAPBR=2,1\r\n"); //查询 GPRS 上下文
-		if (waitWordTimeout("OK", 10) >= 0)
+		if (waitWordTimeout("OK", 10))
 		{
 			readBufclear();
 			return true;
@@ -243,7 +243,7 @@ bool HTTP_getFromURL(const char *url)
 		trialCount++;
 		readBufclear();
 		SendStr("AT+HTTPINIT\r\n"); //init HTTP
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 		{
 			SendStr("AT+HTTPTERM\r\n");
 			waitWordTimeout("OK", 10);
@@ -253,13 +253,13 @@ bool HTTP_getFromURL(const char *url)
 		SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
 		SendStr(url);
 		SendStr("\"\r\n");
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 		{
 			continue;
 		}
 
 		SendStr("AT+HTTPACTION=0"); //start get request
-		if (waitWordTimeout("200", 20) >= 0)
+		if (waitWordTimeout("200", 20))
 		{
 			readBufclear();
 			SendStr("AT+HTTPTERM\r\n");
@@ -279,7 +279,7 @@ bool HTTP_postToURL(const char *url)
 		trialCount++;
 		readBufclear();
 		SendStr("AT+HTTPINIT\r\n"); //init HTTP
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 		{
 			SendStr("AT+HTTPTERM\r\n");
 			waitWordTimeout("OK", 10);
@@ -289,13 +289,13 @@ bool HTTP_postToURL(const char *url)
 		SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
 		SendStr(url);
 		SendStr("\"\r\n");
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 		{
 			continue;
 		}
 
 		SendStr("AT+HTTPACTION=1"); //start post request
-		if (waitWordTimeout("200", 20) >= 0)
+		if (waitWordTimeout("200", 20))
 		{
 			readBufclear();
 			SendStr("AT+HTTPTERM\r\n");
@@ -314,7 +314,7 @@ bool termIP()
 	{
 		trialCount++;
 		SendStr("AT+SAPBR=0,1\r\n"); //terminate IP
-		if (waitWordTimeout("OK", 10) >= 0)
+		if (waitWordTimeout("OK", 10))
 		{
 			readBufclear();
 			return true;
@@ -393,8 +393,8 @@ static THD_FUNCTION(GPSListener, arg)
 				chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees):");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
 				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");//fix mode
-				p2 = (char *)strtok(NULL, ",");//reserved, p2 should be /0
+				p2 = (char *)strtok(NULL, ","); //fix mode
+				p2 = (char *)strtok(NULL, ","); //reserved, p2 should be /0
 				p2 = (char *)strtok(NULL, ",");
 				chprintf((BaseSequentialStream *)&SDU1, "got HDOP:");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
@@ -404,8 +404,6 @@ static THD_FUNCTION(GPSListener, arg)
 				p2 = (char *)strtok(NULL, ",");
 				chprintf((BaseSequentialStream *)&SDU1, "got VDOP:");
 				chprintf((BaseSequentialStream *)&SDU1, p2);
-				
-				
 			}
 		}
 	}

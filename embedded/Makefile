@@ -120,14 +120,17 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        $(STREAMSSRC) \
        $(SHELLSRC) \
-       usbcfg.c
+       usbcfg.c \
+       syscalls.c \
+       CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f64.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
           SIM868Com.cpp \
-	   	  flash.cpp \
-          main.cpp
+	   	    flash.cpp \
+          main.cpp  \
+          GeoPostProcess.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -156,7 +159,8 @@ ASMXSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 INCDIR = $(CHIBIOS)/os/license \
          $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
-         $(STREAMSINC) $(SHELLINC) $(CHCPPINC) $(CHIBIOS)/os/various
+         $(STREAMSINC) $(SHELLINC) $(CHCPPINC) $(CHIBIOS)/os/various  \
+         $(CURDIR)/CMSIS/DSP/Include $(CURDIR)/CMSIS/Core/Include $(CURDIR)/Device/ARM/ARMCM3 
 
 #
 # Project, sources and paths
@@ -206,7 +210,7 @@ CPPWARN = -Wall -Wextra -Wundef
 #
 
 # List all user C define here, like -D_DEBUG=1
-UDEFS =
+UDEFS = -D ARM_MATH_CM3
 
 # Define ASM defines here
 UADEFS =

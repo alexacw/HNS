@@ -25,7 +25,6 @@
 #include "chprintf.h"
 #include "stm32f1xx.h"
 
-
 #define EARTH_RADIUS 6378100.0 //in meters
 namespace GeoPost
 {
@@ -38,8 +37,9 @@ void reset();
  * @param longitude 
  * @param HDOP  the vertical 
  * @param timepoint a string of time/date with format yyyyMMddhhmmss.sss, same as that received from the module
+ * @return true when 
  */
-void update(const double &latitude, double longitude, double HDOP, const char *timepoint);
+bool update(const char *latitude_str, const char *longitude_str, const char *HDOP_str, const char *timedate_str);
 
 /**
  * @brief Get the Estimate object

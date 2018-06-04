@@ -75,7 +75,8 @@
                 "${workspaceRoot}/embedded",
                 "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx",
                 "${workspaceFolder}/embedded/os/hal/lib/peripherals/flash",
-                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/CANv1"
+                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/CANv1",
+                "${workspaceFolder}/embedded/CMSIS/DSP/Include"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
