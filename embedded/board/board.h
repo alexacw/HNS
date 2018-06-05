@@ -18,13 +18,9 @@
 #define _BOARD_H_
 
 /*
- * Setup for the LeafLabs Maple Mini.
- */
-
-/*
  * Board identifier.
  */
-#define BOARD_MAPLEMINI_STM32_F103
+#define STM32F103xB
 #define BOARD_NAME "Blue Pill"
 
 /*
@@ -142,8 +138,9 @@
  * Everything input with pull-up except:
  * PB1    - Push Pull output  (LED).
  * PB9    - Push Pull output  (USB switch).
+ * PB0    - Analog input    (battery)
  */
-#define VAL_GPIOBCRL 0x88888838 /*  PB7...PB0 */
+#define VAL_GPIOBCRL 0x88888830 /*  PB7...PB0 */
 #define VAL_GPIOBCRH 0x88888838 /* PB15...PB8 */
 #define VAL_GPIOBODR 0xFFFFFFFF
 

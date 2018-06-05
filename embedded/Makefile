@@ -130,7 +130,8 @@ CPPSRC = $(CHCPPSRC) \
           SIM868Com.cpp \
 	   	    flash.cpp \
           main.cpp  \
-          GeoPostProcess.cpp
+          GeoPostProcess.cpp \
+          batteryReader.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler

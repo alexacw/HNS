@@ -74,9 +74,11 @@
                 "${workspaceRoot}/embedded/board",
                 "${workspaceRoot}/embedded",
                 "${workspaceRoot}/embedded/os/hal/ports/STM32/STM32F1xx",
-                "${workspaceFolder}/embedded/os/hal/lib/peripherals/flash",
-                "${workspaceFolder}/embedded/os/hal/ports/STM32/LLD/CANv1",
-                "${workspaceFolder}/embedded/CMSIS/DSP/Include"
+                "${workspaceRoot}/embedded/os/hal/lib/peripherals/flash",
+                "${workspaceRoot}/embedded/os/hal/ports/STM32/LLD/CANv1",
+                "${workspaceRoot}/embedded/CMSIS/DSP/Include",
+                "${workspaceRoot}/embedded/os/hal/ports/STM32/LLD/GPIOv1/hal_pal_lld.h",
+                "${workspaceRoot}/embedded/os/common/ext/ST/STM32F1xx/stm32f103xb.h"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
