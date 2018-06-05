@@ -33,6 +33,7 @@
 
 #include "SIM868Com.hpp"
 #include "flash.hpp"
+#include "batteryReader.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */
@@ -162,7 +163,7 @@ int main(void)
 			chThdWait(shelltp); /* Waiting termination.             */
 		}
 		static const char *pos;
-		if ((pos = SIM868Com::waitWordTimeout("OK", 1)) >= 0)
+		if ((pos = SIM868Com::waitWordTimeout("OK", 1)))
 		{
 			SIM868Com::readBufclear();
 			SIM868Com::SendStr("found OK at ");
@@ -170,5 +171,6 @@ int main(void)
 			SIM868Com::SendStr("\r\n");
 		}
 		chThdSleepMilliseconds(300);
+		BatteryReader::adcfunc();
 	}
 }

@@ -11,7 +11,7 @@ namespace SIM868Com
 {
 
 const SerialConfig SIM868_SERIAL_CONFIG = {
-	9600, //Baud Rate
+	9600u, //Baud Rate
 };
 
 thread_t *readThreadPtr = NULL;
@@ -29,7 +29,6 @@ mutex_t mu;
 void readBufclear(void)
 {
 	chMtxLock(&mu);
-	memset(readBuf, 0, SIM868_MSG_BUF_SIZE);
 	writepos = 0;
 	readBuf[0] = '\0';
 	chMtxUnlock(&mu);
@@ -37,10 +36,8 @@ void readBufclear(void)
 
 void readBufInit(void)
 {
-	chMtxLock(&mu);
 	chMtxObjectInit(&mu);
 	readBufclear();
-	chMtxUnlock(&mu);
 }
 
 void readBuffedMsg()
@@ -83,12 +80,34 @@ bool readBufWaitLine(int sec)
 	 * @param word the word to find, a standard c string terminated by \0
 	 * @return int the starting position of the found word in the read queue
 	 */
+// const char *readBufFindWord(const char *word)
+// {
+// 	chMtxLock(&mu);
+// 	const char *result = strstr((char *)&SIM868Com::readBuf[0], word);
+// 	chMtxUnlock(&mu);
+// 	return result;
+// }
+//FIXME: somhow the above is not working
 const char *readBufFindWord(const char *word)
 {
 	chMtxLock(&mu);
-	const char *result = strstr(word, (const char *)SIM868Com::readBuf);
+	uint32_t wordStartPos = 0;
+	while (wordStartPos != writepos)
+	{
+		int i = 0;
+		while (word[i] != '\0' && readBuf[(wordStartPos + i)] == word[i])
+		{
+			i++;
+		}
+		if (word[i] == '\0' && i != 0)
+		{
+			chMtxUnlock(&mu);
+			return (const char *)&readBuf[wordStartPos];
+		}
+		wordStartPos++;
+	}
 	chMtxUnlock(&mu);
-	return result;
+	return NULL;
 }
 
 THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
@@ -205,23 +224,23 @@ bool initIP()
 		trialCount++;
 		readBufclear();
 		SendStr("AT+SAPBR=0,1\r\n"); //关闭 GPRS 上下文.
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 			continue;
 		readBufclear();
 		chThdSleepMilliseconds(1000 * trialCount);
 
 		SendStr("AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n");
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 			continue;
 		readBufclear();
 
 		SendStr("AT+SAPBR=3,1,\"APN\",\"cmhk\"\r\n");
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 			continue;
 		readBufclear();
 
 		SendStr("AT+SAPBR=1,1\r\n"); //激活一个 GPRS 上下文
-		if (waitWordTimeout("OK", 10) < 0)
+		if (!waitWordTimeout("OK", 10))
 			continue;
 		readBufclear();
 

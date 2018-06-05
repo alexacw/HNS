@@ -1,0 +1,5 @@
+namespace BatteryReader
+{
+void adcfunc();
+
+}
