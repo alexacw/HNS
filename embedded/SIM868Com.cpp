@@ -28,7 +28,6 @@ mutex_t mu;
 void readBufclear(void)
 {
 	chMtxLock(&mu);
-	memset(data, 0, SIM868_MSG_BUF_SIZE);
 	writepos = 0;
 	data[0] = '\0';
 	chMtxUnlock(&mu);
@@ -36,10 +35,8 @@ void readBufclear(void)
 
 void readBufInit(void)
 {
-	chMtxLock(&mu);
 	chMtxObjectInit(&mu);
 	readBufclear();
-	chMtxUnlock(&mu);
 }
 
 void readBuffedMsg()
