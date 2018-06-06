@@ -153,17 +153,26 @@ int main(void)
 	/*
 	 * Normal main() thread activity, spawning shells.
 	 */
+	thread_t *shelltp = NULL;
 	while (true)
 	{
+
 		//detecting usb connetion and start shell thread if connected
 		if (SDU1.config->usbp->state == USB_ACTIVE)
 		{
-			thread_t *shelltp = chThdCreateFromHeap(NULL,
-													SHELL_WA_SIZE, "shell",
-													NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
-			chThdWait(shelltp); /* Waiting termination.             */
+			if (!shelltp)
+			{
+				shelltp = chThdCreateFromHeap(NULL,
+											  SHELL_WA_SIZE, "shell",
+											  NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
+			}
+			else if (chThdTerminatedX(shelltp))
+
+				shelltp = chThdCreateFromHeap(NULL,
+											  SHELL_WA_SIZE, "shell",
+											  NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
 		}
-		
+
 		BatteryReader::adcfunc();
 
 		static const char *pos;
