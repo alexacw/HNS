@@ -33,7 +33,7 @@ void readBufclear(void)
 {
 	chMtxLock(&mu);
 	writepos = 0;
-	readBuf[0] = '\0';
+	readBuf[0] = 0;
 	chMtxUnlock(&mu);
 }
 
@@ -49,7 +49,7 @@ void readBuffedMsg()
 	//read till end of buffer if available
 	writepos += sdAsynchronousRead(&SIM868_SD, &readBuf[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
 	//this just to facilitate c string operation
-	readBuf[writepos] = '\0';
+	readBuf[writepos] = 0;
 	chMtxUnlock(&mu);
 }
 
@@ -83,35 +83,35 @@ bool readBufWaitLine(int sec)
 	 * @param word the word to find, a standard c string terminated by \0
 	 * @return int the starting position of the found word in the read queue
 	 */
-// const char *readBufFindWord(const char *word)
-// {
-// 	chMtxLock(&mu);
-// 	const char *result = strstr((char *)&SIM868Com::readBuf[0], word);
-// 	chMtxUnlock(&mu);
-// 	return result;
-// }
-//FIXME: somhow the above is not working
 const char *readBufFindWord(const char *word)
 {
 	chMtxLock(&mu);
-	uint32_t wordStartPos = 0;
-	while (wordStartPos != writepos)
-	{
-		int i = 0;
-		while (word[i] != '\0' && readBuf[(wordStartPos + i)] == word[i])
-		{
-			i++;
-		}
-		if (word[i] == '\0' && i != 0)
-		{
-			chMtxUnlock(&mu);
-			return (const char *)&readBuf[wordStartPos];
-		}
-		wordStartPos++;
-	}
+	const char *result = strstr((char *)&SIM868Com::readBuf[0], word);
 	chMtxUnlock(&mu);
-	return NULL;
+	return result;
 }
+//FIXME: somhow the above is not working
+// const char *readBufFindWord(const char *word)
+// {
+// 	chMtxLock(&mu);
+// 	uint32_t wordStartPos = 0;
+// 	while (wordStartPos != writepos)
+// 	{
+// 		int i = 0;
+// 		while (word[i] != '\0' && readBuf[(wordStartPos + i)] == word[i])
+// 		{
+// 			i++;
+// 		}
+// 		if (word[i] == '\0' && i != 0)
+// 		{
+// 			chMtxUnlock(&mu);
+// 			return (const char *)&readBuf[wordStartPos];
+// 		}
+// 		wordStartPos++;
+// 	}
+// 	chMtxUnlock(&mu);
+// 	return NULL;
+// }
 
 //Serial listenser
 static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
@@ -130,12 +130,12 @@ static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 		chEvtWaitAny(SIM868_SERIAL_EVENT_MASK); //wait for selected serial events
 		static eventflags_t pending_flags;
 		pending_flags = chEvtGetAndClearFlagsI(&serial_listener); //get event flags
-		if (pending_flags & !CHN_INPUT_AVAILABLE)
+		if (pending_flags & CHN_INPUT_AVAILABLE)
+			readBuffedMsg();
+		else
 		{
 			iqResetI(&(&SIM868_SD)->iqueue);
 		}
-		else if (pending_flags & ~CHN_INPUT_AVAILABLE)
-			readBuffedMsg();
 	}
 };
 
@@ -165,14 +165,14 @@ const char *waitWordTimeout(const char *word, int sec)
 {
 	static int waitCount;
 	static const char *wordPos;
-	waitCount = sec * 10;
+	waitCount = sec * 100;
 	while (waitCount >= 0)
 	{
 		if ((wordPos = SIM868Com::readBufFindWord(word)))
 		{
 			return wordPos;
 		}
-		chThdSleepMilliseconds(100);
+		chThdSleepMilliseconds(10);
 		waitCount--;
 	}
 	return NULL;
@@ -205,7 +205,7 @@ unsigned int SendStr(const char *data)
 		static uint32_t size;
 		for (size = 0; data[size] != '\0'; size++)
 			;
-		return sdWriteI(&SIM868_SD, (uint8_t *)data, size);
+		return sdWrite(&SIM868_SD, (uint8_t *)data, size);
 	}
 	else
 		return 0;
@@ -349,9 +349,6 @@ bool initGPS()
 	int trialCount = 10;
 	while (trialCount > 0)
 	{
-		SendStr("AT+CGNSPWR=1\r\n");
-		if (waitWordTimeout("OK", 1) < 0)
-			break;
 	}
 
 	return true;
@@ -361,16 +358,23 @@ THD_WORKING_AREA(GPSListener_wa, 128);
 //Serial listenser
 static THD_FUNCTION(GPSListener, arg)
 {
+	(void)arg;
 	while (!chThdShouldTerminateX())
 	{
 		chThdSleepMilliseconds(500); //update frequency
 		readBufclear();
+
+		SendStr("AT+CGNSPWR=1\r\n");
+		if (!waitWordTimeout("OK", 1))
+			continue;
+		readBufclear();
+
 		SendStr("AT+CGNSINF\r\n");
 		char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
 		if (p1) //寻找开始符
 		{
 			char *p2;
-			if (p2 = (char *)waitWordTimeout("OK", 3)) //module will send "OK" after the GPS info, so wait for this
+			if ((p2 = (char *)waitWordTimeout("OK", 3))) //module will send "OK" after the GPS info, so wait for this
 			{
 				*p2 = 0;				//set the char position of "OK" to be eol
 				p2 = strtok((p1), ":"); //skip the "CGNSINF:" part

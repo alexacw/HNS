@@ -12,6 +12,8 @@
         "initializer_list": "cpp",
         "utility": "cpp",
         "*.tcc": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "complex": "cpp",
+        "iostream": "cpp"
     }
 }

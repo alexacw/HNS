@@ -155,6 +155,7 @@ int main(void)
 	 */
 	while (true)
 	{
+		//detecting usb connetion and start shell thread if connected
 		if (SDU1.config->usbp->state == USB_ACTIVE)
 		{
 			thread_t *shelltp = chThdCreateFromHeap(NULL,
@@ -162,15 +163,16 @@ int main(void)
 													NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
 			chThdWait(shelltp); /* Waiting termination.             */
 		}
+		
+		BatteryReader::adcfunc();
+
 		static const char *pos;
 		if ((pos = SIM868Com::waitWordTimeout("OK", 1)))
 		{
 			SIM868Com::readBufclear();
 			SIM868Com::SendStr("found OK at ");
-			SIM868Com::SendChar('0');
+			chprintf((BaseSequentialStream *)&SD1, "%d", pos);
 			SIM868Com::SendStr("\r\n");
 		}
-		chThdSleepMilliseconds(300);
-		BatteryReader::adcfunc();
 	}
 }
