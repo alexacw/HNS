@@ -167,7 +167,7 @@ int main(void)
 		{
 			SIM868Com::readBufclear();
 			SIM868Com::SendStr("found OK at ");
-			SIM868Com::SendChar('0' + pos - (char *)&SIM868Com::readBuf);
+			SIM868Com::SendChar('0');
 			SIM868Com::SendStr("\r\n");
 		}
 		chThdSleepMilliseconds(300);

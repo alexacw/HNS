@@ -21,11 +21,10 @@
 
 #define SIM868_SERIAL_EVENT_ID 1
 #define SIM868_SERIAL_EVENT_MASK EVENT_MASK(SIM868_SERIAL_EVENT_ID)
-#define SIM868_MSG_BUF_SIZE 512
+#define SIM868_MSG_BUF_SIZE 128
 
 namespace SIM868Com
 {
-extern uint8_t readBuf[SIM868_MSG_BUF_SIZE];
 void initSerial();
 void startSerialRead();
 void stopSerialRead();

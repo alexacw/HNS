@@ -4,7 +4,7 @@
 #
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
+  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -specs=nosys.specs -specs=nano.specs -specs=rdimon.specs -lc -lrdimon 
 endif
 
 # C specific options here (added to USE_OPT).
@@ -121,7 +121,6 @@ CSRC = $(STARTUPSRC) \
        $(STREAMSSRC) \
        $(SHELLSRC) \
        usbcfg.c \
-       syscalls.c \
        CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f64.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

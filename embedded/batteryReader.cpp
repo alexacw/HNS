@@ -56,6 +56,6 @@ void adcfunc()
 	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
 	chThdSleepMilliseconds(10);
 	adcStopConversion(&ADCD1);
-	chprintf((BaseSequentialStream *)&SDU1, "ADC read: %f\r\n", samples_buf[0]);
+	chprintf((BaseSequentialStream *)&SD1, "ADC read: %d\r\n", samples_buf[0]);
 }
 } // namespace BatteryReader

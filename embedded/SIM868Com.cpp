@@ -15,10 +15,13 @@ const SerialConfig SIM868_SERIAL_CONFIG = {
 };
 
 thread_t *readThreadPtr = NULL;
+
+THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
+
 /**
 	 * @brief just a very simple buffer, end of string indicated by writepos and always end with a \0 character
 	 */
-uint8_t readBuf[SIM868_MSG_BUF_SIZE];
+static uint8_t readBuf[SIM868_MSG_BUF_SIZE];
 /**
 	 * @brief the position of the data array which reading from the serial port should write to, also means its the end of the received message
 	 *
@@ -45,7 +48,7 @@ void readBuffedMsg()
 	chMtxLock(&mu);
 	//read till end of buffer if available
 	writepos += sdAsynchronousRead(&SIM868_SD, &readBuf[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
-	//this jsut to facilitate c string operation
+	//this just to facilitate c string operation
 	readBuf[writepos] = '\0';
 	chMtxUnlock(&mu);
 }
@@ -109,8 +112,6 @@ const char *readBufFindWord(const char *word)
 	chMtxUnlock(&mu);
 	return NULL;
 }
-
-THD_WORKING_AREA(SIM868SerialReadThread_wa, 128);
 
 //Serial listenser
 static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
