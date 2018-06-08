@@ -50,7 +50,7 @@ static void setDeviceID(BaseSequentialStream *chp, int argc, char *argv[])
 		if (tempLong != 0)
 		{
 			flashStorage::content.deviceID = tempLong;
-			if (flashStorage::writeFlashAll() && tempLong != 0)
+			if (flashStorage::writeFlashAll())
 				chprintf(chp, "write device id to flash success\r\n");
 			else
 				chprintf(chp, "write to flash failed\r\n");
@@ -63,7 +63,53 @@ static void setDeviceID(BaseSequentialStream *chp, int argc, char *argv[])
 		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
 		return;
 	}
-}
+};
+
+static void setTel(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	if (argc == 1)
+	{
+		if (strlen(argv[0]) == 8)
+		{
+			strcpy(flashStorage::content.parentTel, argv[0]);
+			if (flashStorage::writeFlashAll())
+				chprintf(chp, "write telephone number to flash success\r\n");
+			else
+				chprintf(chp, "write to flash failed\r\n");
+		}
+		else
+			chprintf(chp, "invalid input, phone number must be 8 digit\r\n");
+	}
+	else
+	{
+		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
+		return;
+	}
+};
+
+static void setEmail(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	if (argc == 1)
+	{
+		if (strlen(argv[0]) < 100)
+		{
+			strcpy(flashStorage::content.parentEmail, argv[0]);
+			if (flashStorage::writeFlashAll())
+				chprintf(chp, "write device id to flash success\r\n");
+			else
+				chprintf(chp, "write to flash failed\r\n");
+		}
+		else
+		{
+			chprintf(chp, "email too long, at most 100 characters\r\n");
+		}
+	}
+	else
+	{
+		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
+		return;
+	}
+};
 
 static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
 {
@@ -75,7 +121,9 @@ static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
 
 static const ShellCommand commands[] = {
 	{"setID", setDeviceID},
-	{"hnsInfo", readDeviceInfo},
+	{"setTel", setTel},
+	{"setEmail", setEmail},
+	{"Info", readDeviceInfo},
 	{NULL, NULL}};
 
 static const ShellConfig shell_cfg1 =
@@ -87,8 +135,8 @@ static const ShellConfig shell_cfg1 =
 /*
  * Blinker thread, times are in milliseconds.
  */
-static THD_WORKING_AREA(waThread1, 128);
-static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
+static THD_WORKING_AREA(waBlinker, 128);
+static __attribute__((noreturn)) THD_FUNCTION(BlinkerThd, arg)
 {
 
 	(void)arg;
@@ -100,6 +148,18 @@ static __attribute__((noreturn)) THD_FUNCTION(Thread1, arg)
 		chThdSleepMilliseconds(time);
 		palSetPad(GPIOC, GPIOC_LED);
 		chThdSleepMilliseconds(time);
+	}
+}
+
+static THD_WORKING_AREA(waSim868Interface, 512);
+static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
+{
+
+	(void)arg;
+	chRegSetThreadName("Sim868Interface");
+	while (!chThdShouldTerminateX())
+	{
+		//TODO: state machine
 	}
 }
 
@@ -148,7 +208,7 @@ int main(void)
 	/*
 	 * Creates the blinker thread.
 	 */
-	chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+	chThdCreateStatic(waBlinker, sizeof(waBlinker), NORMALPRIO, BlinkerThd, NULL);
 
 	/*
 	 * Normal main() thread activity, spawning shells.

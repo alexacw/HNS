@@ -43,7 +43,7 @@ unsigned int SendChar(const char);
 bool initIP();
 bool termIP();
 bool HTTP_getFromURL(const char *url);
-bool initGPS();
+bool getGPS();
 } // namespace SIM868Com
 
 #endif

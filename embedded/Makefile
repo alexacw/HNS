@@ -120,16 +120,14 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        $(STREAMSSRC) \
        $(SHELLSRC) \
-       usbcfg.c \
-       CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f64.c
+       usbcfg.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
           SIM868Com.cpp \
 	   	    flash.cpp \
-          main.cpp  \
-          GeoPostProcess.cpp \
+          main.cpp \
           batteryReader.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.

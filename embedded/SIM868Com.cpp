@@ -90,29 +90,6 @@ const char *readBufFindWord(const char *word)
 	chMtxUnlock(&mu);
 	return result;
 }
-//FIXME: somhow the above is not working
-// const char *readBufFindWord(const char *word)
-// {
-// 	chMtxLock(&mu);
-// 	uint32_t wordStartPos = 0;
-// 	while (wordStartPos != writepos)
-// 	{
-// 		int i = 0;
-// 		while (word[i] != '\0' && readBuf[(wordStartPos + i)] == word[i])
-// 		{
-// 			i++;
-// 		}
-// 		if (word[i] == '\0' && i != 0)
-// 		{
-// 			chMtxUnlock(&mu);
-// 			return (const char *)&readBuf[wordStartPos];
-// 		}
-// 		wordStartPos++;
-// 	}
-// 	chMtxUnlock(&mu);
-// 	return NULL;
-// }
-
 //Serial listenser
 static THD_FUNCTION(SIM868SerialReadThreadFunc, arg)
 {
@@ -343,94 +320,75 @@ bool termIP()
 	return false;
 };
 
-bool initGPS()
+bool getGPS()
 {
-	//TODO:
-	int trialCount = 10;
-	while (trialCount > 0)
+	readBufclear();
+
+	SendStr("AT+CGNSPWR=1\r\n");
+	if (!waitWordTimeout("OK", 1))
+		return false;
+	readBufclear();
+
+	SendStr("AT+CGNSINF\r\n");
+	char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
+	if (p1) //寻找开始符
 	{
-	}
-
-	return true;
-};
-
-THD_WORKING_AREA(GPSListener_wa, 128);
-//Serial listenser
-static THD_FUNCTION(GPSListener, arg)
-{
-	(void)arg;
-	while (!chThdShouldTerminateX())
-	{
-		chThdSleepMilliseconds(500); //update frequency
-		readBufclear();
-
-		SendStr("AT+CGNSPWR=1\r\n");
-		if (!waitWordTimeout("OK", 1))
-			continue;
-		readBufclear();
-
-		SendStr("AT+CGNSINF\r\n");
-		char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
-		if (p1) //寻找开始符
+		char *p2;
+		if ((p2 = (char *)waitWordTimeout("OK", 3))) //module will send "OK" after the GPS info, so wait for this
 		{
-			char *p2;
-			if ((p2 = (char *)waitWordTimeout("OK", 3))) //module will send "OK" after the GPS info, so wait for this
+			*p2 = 0;				//set the char position of "OK" to be eol
+			p2 = strtok((p1), ":"); //skip the "CGNSINF:" part
+			p2 = strtok(NULL, ",");
+			if (*p2 != '1')
 			{
-				*p2 = 0;				//set the char position of "OK" to be eol
-				p2 = strtok((p1), ":"); //skip the "CGNSINF:" part
-				p2 = strtok(NULL, ",");
-				if (*p2 != '1')
+				do
 				{
-					do
-					{
-						SendStr("AT+CGNSPWR=1\r\n");
-					} while (!waitWordTimeout("OK", 1));
-				}
-				p2 = (char *)strtok(NULL, ",");
-				if (*p2 != '1')
-				{
-					//GPS not fixed
-					//wait?
-					continue;
-				}
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got time (yyyyMMddhhmmss.sss):");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got longitude:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got latitude:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got altitude:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got Speed Over Ground (Km/h):");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees):");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-				p2 = (char *)strtok(NULL, ","); //fix mode
-				p2 = (char *)strtok(NULL, ","); //reserved, p2 should be /0
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got HDOP:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got PDOP:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
-				p2 = (char *)strtok(NULL, ",");
-				chprintf((BaseSequentialStream *)&SDU1, "got VDOP:");
-				chprintf((BaseSequentialStream *)&SDU1, p2);
+					SendStr("AT+CGNSPWR=1\r\n");
+				} while (!waitWordTimeout("OK", 1));
 			}
+			p2 = (char *)strtok(NULL, ",");
+			if (*p2 != '1')
+			{
+				//GPS not fixed
+				//wait?
+				return false;
+			}
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got time (yyyyMMddhhmmss.sss):");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got longitude:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got latitude:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got altitude:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got Speed Over Ground (Km/h):");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees):");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
+			p2 = (char *)strtok(NULL, ","); //fix mode
+			p2 = (char *)strtok(NULL, ","); //reserved, p2 should be /0
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got HDOP:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got PDOP:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
+			p2 = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got VDOP:");
+			chprintf((BaseSequentialStream *)&SDU1, p2);
 		}
 	}
 }
-
 } // namespace SIM868Com
