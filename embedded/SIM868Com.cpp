@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "ch.h"
 #include "hal.h"
 #include "math.h"
 #include "SIM868Com.hpp"
 #include "usbcfg.h"
+#include "gpsProcess.hpp"
 
 namespace SIM868Com
 {
+bool monitorSerial = false;
 
 const SerialConfig SIM868_SERIAL_CONFIG = {
 	9600u, //Baud Rate
@@ -46,8 +49,33 @@ void readBufInit(void)
 void readBuffedMsg()
 {
 	chMtxLock(&mu);
+	if (SIM868_MSG_BUF_SIZE - writepos - 1 == 0)
+	{
+		if (monitorSerial)
+			chprintf((BaseSequentialStream *)&SDU1, "\n\nserial buffer full!\n\n");
+		chMtxUnlock(&mu);
+		iqResetI(&(&SIM868_SD)->iqueue);
+		readBufclear();
+		return;
+	}
 	//read till end of buffer if available
-	writepos += sdAsynchronousRead(&SIM868_SD, &readBuf[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
+	uint32_t dataCount = sdAsynchronousRead(&SIM868_SD, &readBuf[writepos], (SIM868_MSG_BUF_SIZE - writepos - 1));
+	//DEBUG only
+
+	if (monitorSerial)
+	{
+		char temp[64];
+		temp[0] = 0;
+		if (dataCount < 64 && dataCount > 0)
+		{
+			memcpy(temp, &readBuf[writepos], dataCount);
+			temp[dataCount] = 0;
+		}
+		chprintf((BaseSequentialStream *)&SDU1, "%s", temp);
+	}
+
+	writepos += dataCount;
+
 	//this just to facilitate c string operation
 	readBuf[writepos] = 0;
 	chMtxUnlock(&mu);
@@ -142,14 +170,14 @@ const char *waitWordTimeout(const char *word, int sec)
 {
 	static int waitCount;
 	static const char *wordPos;
-	waitCount = sec * 100;
+	waitCount = sec * 10;
 	while (waitCount >= 0)
 	{
 		if ((wordPos = SIM868Com::readBufFindWord(word)))
 		{
 			return wordPos;
 		}
-		chThdSleepMilliseconds(10);
+		chThdSleepMilliseconds(100);
 		waitCount--;
 	}
 	return NULL;
@@ -177,6 +205,8 @@ const char *waitWordStopWordTimeout(const char *word, const char *termword, int 
 
 unsigned int SendStr(const char *data)
 {
+	if (monitorSerial)
+		chprintf((BaseSequentialStream *)&SDU1, "mcu send to sd:%s", data);
 	if (data != NULL)
 	{
 		static uint32_t size;
@@ -194,78 +224,97 @@ unsigned int SendChar(const char letter)
 	return sdWriteI(&SIM868_SD, (const uint8_t *)&letter, 1);
 };
 
-bool initIP()
+bool initGPRS()
 {
-	int trialCount = 0;
-	while (trialCount <= 10)
+	SendStr("AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n");
+	if (!waitWordTimeout("OK", 1))
+		return false;
+	readBufclear();
+
+	SendStr("AT+SAPBR=3,1,\"APN\",\"cmhk\"\r\n");
+	if (!waitWordTimeout("OK", 1))
+		return false;
+	readBufclear();
+
+	SendStr("AT+SAPBR=1,1\r\n"); //activate GPRS
+	if (!waitWordStopWordTimeout("OK", "ERROR", 60))
+		return false;
+	readBufclear();
+
+	SendStr("AT+SAPBR=2,1\r\n"); //query gprs, here will get my ip
+	if (waitWordTimeout("OK", 10))
 	{
-		trialCount++;
 		readBufclear();
-		SendStr("AT+SAPBR=0,1\r\n"); //关闭 GPRS 上下文.
-		if (!waitWordTimeout("OK", 10))
-			continue;
-		readBufclear();
-		chThdSleepMilliseconds(1000 * trialCount);
-
-		SendStr("AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n");
-		if (!waitWordTimeout("OK", 10))
-			continue;
-		readBufclear();
-
-		SendStr("AT+SAPBR=3,1,\"APN\",\"cmhk\"\r\n");
-		if (!waitWordTimeout("OK", 10))
-			continue;
-		readBufclear();
-
-		SendStr("AT+SAPBR=1,1\r\n"); //激活一个 GPRS 上下文
-		if (!waitWordTimeout("OK", 10))
-			continue;
-		readBufclear();
-
-		SendStr("AT+SAPBR=2,1\r\n"); //查询 GPRS 上下文
-		if (waitWordTimeout("OK", 10))
-		{
-			readBufclear();
-			return true;
-		}
+		return true;
 	}
+
 	return false;
 };
 
+bool checkGPRS()
+{
+	readBufclear();
+	SendStr("AT+SAPBR=2,1\r\n"); //query gprs, here will get my ip
+	char *p1 = (char *)waitWordTimeout(",", 3);
+	if (p1)
+	{
+		p1 = strtok(p1, ",");
+		if (p1)
+		{
+			return *p1 == '1';
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+}
+
+bool deinitGPRS()
+{
+	readBufclear();
+	SendStr("AT+SAPBR=0,1\r\n"); //关闭 GPRS 上下文.
+	bool temp = waitWordStopWordTimeout("OK", "ERROR", 60);
+	readBufclear();
+	return temp;
+}
+
 bool HTTP_getFromURL(const char *url)
 {
-	int trialCount = 0;
-	while (trialCount <= 10)
+	if (!checkGPRS())
 	{
-		trialCount++;
-		readBufclear();
-		SendStr("AT+HTTPINIT\r\n"); //init HTTP
-		if (!waitWordTimeout("OK", 10))
-		{
-			SendStr("AT+HTTPTERM\r\n");
-			waitWordTimeout("OK", 10);
-			continue;
-		}
-
-		SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
-		SendStr(url);
-		SendStr("\"\r\n");
-		if (!waitWordTimeout("OK", 10))
-		{
-			continue;
-		}
-
-		SendStr("AT+HTTPACTION=0"); //start get request
-		if (waitWordTimeout("200", 20))
-		{
-			readBufclear();
-			SendStr("AT+HTTPTERM\r\n");
-			waitWordTimeout("OK", 10);
-
-			return true;
-		}
+		if (!initGPRS())
+			return false;
 	}
-	return false;
+	readBufclear();
+
+	SendStr("AT+HTTPINIT\r\n"); //init HTTP
+	if (!waitWordTimeout("OK", 10))
+	{
+		SendStr("AT+HTTPTERM\r\n");
+		waitWordTimeout("OK", 2);
+		return false;
+	}
+
+	SendStr("AT+HTTPPARA=\"URL\",\""); //set HTTP parameters
+	SendStr(url);
+	SendStr("\"\r\n");
+	if (!waitWordTimeout("OK", 2))
+	{
+		return false;
+	}
+
+	SendStr("AT+HTTPACTION=0\r\n"); //start get request
+	if (waitWordTimeout("200", 20))
+	{
+		readBufclear();
+		SendStr("AT+HTTPTERM\r\n");
+		waitWordTimeout("OK", 10);
+
+		return true;
+	}
+	else
+		return false;
 };
 
 bool HTTP_postToURL(const char *url)
@@ -291,7 +340,7 @@ bool HTTP_postToURL(const char *url)
 			continue;
 		}
 
-		SendStr("AT+HTTPACTION=1"); //start post request
+		SendStr("AT+HTTPACTION=1\r\n"); //start post request
 		if (waitWordTimeout("200", 20))
 		{
 			readBufclear();
@@ -304,14 +353,14 @@ bool HTTP_postToURL(const char *url)
 	return false;
 };
 
-bool termIP()
+bool termGPRS()
 {
 	int trialCount = 0;
 	while (trialCount <= 5)
 	{
 		trialCount++;
 		SendStr("AT+SAPBR=0,1\r\n"); //terminate IP
-		if (waitWordTimeout("OK", 10))
+		if (waitWordTimeout("OK", 30))
 		{
 			readBufclear();
 			return true;
@@ -320,8 +369,14 @@ bool termIP()
 	return false;
 };
 
+bool emailParent(const char*)
+{
+
+};
+
 bool getGPS()
 {
+	double estLat, estLong;
 	readBufclear();
 
 	SendStr("AT+CGNSPWR=1\r\n");
@@ -333,61 +388,62 @@ bool getGPS()
 	char *p1 = (char *)waitWordTimeout("CGNSINF:", 3);
 	if (p1) //寻找开始符
 	{
-		char *p2;
-		if ((p2 = (char *)waitWordTimeout("OK", 3))) //module will send "OK" after the GPS info, so wait for this
+		char *tempCharPtr;
+		if ((tempCharPtr = (char *)waitWordTimeout("OK", 3))) //module will send "OK" after the GPS info, so wait for this
 		{
-			*p2 = 0;				//set the char position of "OK" to be eol
-			p2 = strtok((p1), ":"); //skip the "CGNSINF:" part
-			p2 = strtok(NULL, ",");
-			if (*p2 != '1')
+			char *receivedLattitue = NULL;
+			char *receivedLongitude = NULL;
+			char *receivedTimedate = NULL;
+			char *receivedHDOP = NULL;
+
+			*tempCharPtr = 0;			   //set the char position of "OK" to be eol
+			tempCharPtr = strtok(p1, ":"); //skip the "CGNSINF:" part
+			tempCharPtr = strtok(NULL, ",");
+			if (!strstr(tempCharPtr, "1"))
 			{
 				do
 				{
 					SendStr("AT+CGNSPWR=1\r\n");
 				} while (!waitWordTimeout("OK", 1));
 			}
-			p2 = (char *)strtok(NULL, ",");
-			if (*p2 != '1')
+			tempCharPtr = (char *)strtok(NULL, ",");
+			if (*tempCharPtr != '1')
 			{
 				//GPS not fixed
 				//wait?
 				return false;
 			}
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got time (yyyyMMddhhmmss.sss):");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got longitude:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got latitude:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got altitude:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got Speed Over Ground (Km/h):");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees):");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			chprintf((BaseSequentialStream *)&SDU1, "\r\n");
-			p2 = (char *)strtok(NULL, ","); //fix mode
-			p2 = (char *)strtok(NULL, ","); //reserved, p2 should be /0
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got HDOP:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got PDOP:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
-			p2 = (char *)strtok(NULL, ",");
-			chprintf((BaseSequentialStream *)&SDU1, "got VDOP:");
-			chprintf((BaseSequentialStream *)&SDU1, p2);
+			receivedTimedate = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got time (yyyyMMddhhmmss.sss): %s\n", receivedTimedate);
+			receivedLattitue = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got lattitude: %s\n", receivedLattitue);
+			receivedLongitude = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got longitude: %s\n", receivedLongitude);
+			tempCharPtr = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got altitude:%s\n", tempCharPtr);
+			tempCharPtr = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got Speed Over Ground (Km/h): %s\n", tempCharPtr);
+			tempCharPtr = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got Course Over Ground (Degrees): %s\n", tempCharPtr);
+			tempCharPtr = (char *)strtok(NULL, ","); //fix mode
+			tempCharPtr = (char *)strtok(NULL, ","); //reserved, tempCharPtr should be /0
+			receivedHDOP = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got HDOP: %s\n", receivedHDOP);
+			tempCharPtr = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got PDOP: %s\n", tempCharPtr);
+			tempCharPtr = (char *)strtok(NULL, ",");
+			chprintf((BaseSequentialStream *)&SDU1, "got VDOP: %s\n", tempCharPtr);
+			if (GeoPost::update(receivedLattitue, receivedLongitude, receivedHDOP, receivedTimedate))
+			{
+				GeoPost::getEstimate(estLat, estLong);
+				chprintf((BaseSequentialStream *)&SDU1, "filtered estimate lattidue: %d.%d, longitude: %d.%d\n",
+						 (int)estLat,
+						 ((int)(estLat * 100000.0)) % 100000,
+						 (int)estLong,
+						 ((int)(estLong * 100000.0)) % 100000);
+				chThdSleepMilliseconds(100);
+				return true;
+			}
 		}
 	}
 }

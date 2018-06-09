@@ -51,7 +51,7 @@ namespace flashStorage
 struct flashStorageContent_t
 {
 	uint32_t deviceID = 1234;
-	char parentTel[8];
+	char parentTel[9] = {0};
 	char parentEmail[100];
 };
 

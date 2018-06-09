@@ -41,8 +41,7 @@ void reset();
  * @param longitude
  * @return true when 
  */
-bool update(const char *latitude_str, const char *longitude_str, const char *HDOP_str, const char *timedate_str,
-            double &latitude, double &longitude);
+bool update(const char *latitude_str, const char *longitude_str, const char *HDOP_str, const char *timedate_str);
 
 /**
  * @brief Get the Estimated latitude and longitude when last updated

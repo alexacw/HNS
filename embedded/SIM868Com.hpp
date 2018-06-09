@@ -21,10 +21,11 @@
 
 #define SIM868_SERIAL_EVENT_ID 1
 #define SIM868_SERIAL_EVENT_MASK EVENT_MASK(SIM868_SERIAL_EVENT_ID)
-#define SIM868_MSG_BUF_SIZE 128
+#define SIM868_MSG_BUF_SIZE 256
 
 namespace SIM868Com
 {
+extern bool monitorSerial;
 void initSerial();
 void startSerialRead();
 void stopSerialRead();
@@ -40,8 +41,8 @@ const char *waitWordStopWordTimeout(const char *word, const char *termword, int 
 unsigned int SendStr(const char *);
 unsigned int SendChar(const char);
 
-bool initIP();
-bool termIP();
+bool initGPRS();
+bool termGPRS();
 bool HTTP_getFromURL(const char *url);
 bool getGPS();
 } // namespace SIM868Com

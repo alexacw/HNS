@@ -34,6 +34,7 @@
 #include "SIM868Com.hpp"
 #include "flash.hpp"
 #include "batteryReader.hpp"
+#include "gpsProcess.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */
@@ -82,7 +83,7 @@ static void setTel(BaseSequentialStream *chp, int argc, char *argv[])
 	}
 	else
 	{
-		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
+		chprintf(chp, "Usage: setTel [phone number (8 digit)]\r\n");
 		return;
 	}
 };
@@ -106,7 +107,7 @@ static void setEmail(BaseSequentialStream *chp, int argc, char *argv[])
 	}
 	else
 	{
-		chprintf(chp, "Usage: setID [id (4 char)]\r\n");
+		chprintf(chp, "Usage: setEmail [email address up to 100 letters]\r\n");
 		return;
 	}
 };
@@ -116,6 +117,44 @@ static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 	chprintf(chp, "Device ID: %ld\r\n", flashStorage::content.deviceID);
+	chprintf(chp, "Parent tel: %s\r\n", flashStorage::content.parentTel);
+	chprintf(chp, "Parent email: %s\r\n", flashStorage::content.parentEmail);
+	return;
+}
+
+static void getADC(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+
+	BatteryReader::printADC2USB();
+	return;
+}
+
+static void usb2uart(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	if (argc == 1)
+		chprintf((BaseSequentialStream *)&SD1, argv[0]);
+	return;
+}
+
+static void clearSDbuf(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	SIM868Com::readBufclear();
+	chprintf((BaseSequentialStream *)&SDU1, "readBufclear() called\n");
+	return;
+}
+
+static void toggleSerialMonitor(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	SIM868Com::monitorSerial = !SIM868Com::monitorSerial;
+	chprintf((BaseSequentialStream *)&SDU1, "toggled Serial Monitor over USB, now %s\n", SIM868Com::monitorSerial ? "on" : "off");
 	return;
 }
 
@@ -124,6 +163,10 @@ static const ShellCommand commands[] = {
 	{"setTel", setTel},
 	{"setEmail", setEmail},
 	{"Info", readDeviceInfo},
+	{"getADC", getADC},
+	{"send", usb2uart},
+	{"clearSDbuf", clearSDbuf},
+	{"tSD", toggleSerialMonitor},
 	{NULL, NULL}};
 
 static const ShellConfig shell_cfg1 =
@@ -151,6 +194,11 @@ static __attribute__((noreturn)) THD_FUNCTION(BlinkerThd, arg)
 	}
 }
 
+bool enableGPS = true;
+bool serverPresent = true;
+bool enableSMS = true;
+bool enableEmail = true;
+
 static THD_WORKING_AREA(waSim868Interface, 512);
 static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 {
@@ -160,6 +208,9 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 	while (!chThdShouldTerminateX())
 	{
 		//TODO: state machine
+		if (enableGPS)
+			SIM868Com::getGPS();
+		chThdSleepMilliseconds(1000);
 	}
 }
 
@@ -193,7 +244,7 @@ int main(void)
 	 * after a reset.
 	 */
 	usbDisconnectBus(serusbcfg.usbp);
-	chThdSleepMilliseconds(500);
+	chThdSleepMilliseconds(100);
 	usbStart(serusbcfg.usbp, &usbcfg);
 	usbConnectBus(serusbcfg.usbp);
 
@@ -205,10 +256,15 @@ int main(void)
 	SIM868Com::initSerial();
 	SIM868Com::startSerialRead();
 
+	BatteryReader::init();
+
 	/*
 	 * Creates the blinker thread.
 	 */
 	chThdCreateStatic(waBlinker, sizeof(waBlinker), NORMALPRIO, BlinkerThd, NULL);
+
+	//create the state machine thread
+	chThdCreateStatic(waSim868Interface, sizeof(waSim868Interface), NORMALPRIO, Sim868InterfaceThd, NULL);
 
 	/*
 	 * Normal main() thread activity, spawning shells.
@@ -232,16 +288,6 @@ int main(void)
 											  SHELL_WA_SIZE, "shell",
 											  NORMALPRIO + 1, shellThread, (void *)&shell_cfg1);
 		}
-
-		BatteryReader::adcfunc();
-
-		static const char *pos;
-		if ((pos = SIM868Com::waitWordTimeout("OK", 1)))
-		{
-			SIM868Com::readBufclear();
-			SIM868Com::SendStr("found OK at ");
-			chprintf((BaseSequentialStream *)&SD1, "%d", pos);
-			SIM868Com::SendStr("\r\n");
-		}
+		chThdSleepMilliseconds(500);
 	}
 }

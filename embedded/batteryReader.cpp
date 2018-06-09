@@ -1,3 +1,10 @@
+/**
+ * @brief 
+ * 
+ * @file batteryReader.cpp
+ * @author Alex Au
+ * @date 2018-06-09
+ */
 #include "ch.h"  // needs for all ChibiOS programs
 #include "hal.h" // hardware abstraction layer header
 #include "stm32f103xb.h"
@@ -43,8 +50,25 @@ static ADCConversionGroup adccgp =
 
 // Thats all with configuration
 
-void adcfunc()
+void printADC2USB()
 {
+	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
+	chThdSleepMilliseconds(10);
+	adcStopConversion(&ADCD1);
+	chprintf((BaseSequentialStream *)&SDU1, "ADC read: %d\r\n", samples_buf[0]);
+}
+
+bool isBatteryLow()
+{
+	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
+	chThdSleepMilliseconds(10);
+	adcStopConversion(&ADCD1);
+	return samples_buf[0] < 2048;
+}
+
+void init()
+{
+
 	// Setup pins of our MCU as analog inputs
 	palSetPadMode(GPIOB, 0, PAL_MODE_INPUT_ANALOG); // this is 8th channel
 	// Following 3 functions use previously created configuration
@@ -53,9 +77,6 @@ void adcfunc()
 	// Other arguments defined ourself earlier.
 	adcInit();
 	adcStart(&ADCD1, &adccfg);
-	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
-	chThdSleepMilliseconds(10);
-	adcStopConversion(&ADCD1);
-	chprintf((BaseSequentialStream *)&SD1, "ADC read: %d\r\n", samples_buf[0]);
 }
+
 } // namespace BatteryReader

@@ -11,10 +11,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include "constantVKalman.hpp"
+#include <math.h>
 
 #define EXTERNAL_V_VAR_PER_UPDATE 2.0
 
-namespace GeoPostProcess
+namespace GeoPost
 {
 
 //the date/time mesage last received
@@ -23,6 +24,7 @@ KV_Kalman x_filter;
 KV_Kalman y_filter;
 double originLatitude, originLongitude;
 double estimateLatitude, estimateLongitude;
+double long_multi;
 
 bool update(const char *latitude_str, const char *longitude_str, const char *HDOP_str, const char *timedate_str)
 {
@@ -60,11 +62,11 @@ bool update(const char *latitude_str, const char *longitude_str, const char *HDO
                 {
                     //TODO: perform filtering
                     double measurementX = (latitude - originLatitude) / M_PI / 2.0 * EARTH_RADIUS;
-                    double measurementY = (longitude - originLongitude) / M_PI / 2.0 * EARTH_RADIUS * cos(originLatitude / M_PI / 2.0);
+                    double measurementY = (longitude - originLongitude) / M_PI / 2.0 * EARTH_RADIUS * long_multi;
                     double est_x = x_filter.correct(dt, measurementX, r, EXTERNAL_V_VAR_PER_UPDATE);
                     double est_y = y_filter.correct(dt, measurementY, r, EXTERNAL_V_VAR_PER_UPDATE);
                     estimateLatitude = originLatitude + est_x / EARTH_RADIUS * 2.0 * M_PI;
-                    estimateLongitude = originLongitude + est_y / cos(originLatitude / M_PI / 2.0) * 2.0 * M_PI;
+                    estimateLongitude = originLongitude + est_y / EARTH_RADIUS * 2.0 * M_PI / long_multi;
                 }
 
                 strcpy(lastSeen, timedate_str);
@@ -92,6 +94,7 @@ void init(const double &originLat, const double &originLong, const char *timedat
     y_filter.init(0, EXTERNAL_V_VAR_PER_UPDATE);
     estimateLatitude = originLatitude = originLat;
     estimateLongitude = originLongitude = originLong;
+    long_multi = std::cos(originLatitude / M_PI / 2.0);
 };
 
 double deltaTimeFinder(const char *timedate_str_new, const char *timedate_str_old)
@@ -118,4 +121,4 @@ double deltaTimeFinder(const char *timedate_str_new, const char *timedate_str_ol
 
     return dt;
 };
-} // namespace GeoPostProcess
+} // namespace GeoPost

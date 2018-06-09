@@ -4,7 +4,7 @@
 #
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
+  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -specs=nano.specs -specs=nosys.specs -lm
 endif
 
 # C specific options here (added to USE_OPT).
@@ -128,7 +128,9 @@ CPPSRC = $(CHCPPSRC) \
           SIM868Com.cpp \
 	   	    flash.cpp \
           main.cpp \
-          batteryReader.cpp
+          batteryReader.cpp \
+          gpsProcess.cpp \
+          constantVKalman.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
