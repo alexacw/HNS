@@ -303,7 +303,7 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 		if (aggressiveCount > 0)
 		{
 			aggressiveCount--;
-			sleeptime = 2;
+			sleeptime = 1;
 			enableGPS = true;
 		}
 		else if (BatteryReader::isBatteryLow())
@@ -334,29 +334,31 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 				{
 					gpsFailCount++;
 				}
-				if (gpsFailCount > 5)
-				{
-					if (SIM868Com::updateGSMLoc(reportlat, reportlng))
-					{
-						SIM868Com::reportToServer(reportlat, reportlng);
-						SIM868Com::HTTP_getLocStatus();
-					}
-				}
-
-				if (SIM868Com::outBound && !reported)
-				{
-					SIM868Com::reportToSMS(reportlat, reportlng);
-					reported = true;
-				}
-				else
-				{
-					reported = false;
-				}
 			}
 			else
 			{
 				gpsFailCount = 0;
 				SIM868Com::turnoffGPS();
+			}
+
+			if (gpsFailCount > 5)
+			{
+				if (SIM868Com::updateGSMLoc(reportlat, reportlng))
+				{
+					SIM868Com::reportToServer(reportlat, reportlng);
+					SIM868Com::HTTP_getLocStatus();
+				}
+			}
+
+			if (SIM868Com::outBound && !reported)
+			{
+				aggressiveCount = 100;
+				SIM868Com::reportToSMS(reportlat, reportlng);
+				reported = true;
+			}
+			else
+			{
+				reported = false;
 			}
 		}
 
