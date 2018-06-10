@@ -50,12 +50,12 @@ static ADCConversionGroup adccgp =
 
 // Thats all with configuration
 
-void printADC2USB()
+uint16_t getADC()
 {
 	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
 	chThdSleepMilliseconds(10);
 	adcStopConversion(&ADCD1);
-	chprintf((BaseSequentialStream *)&SDU1, "ADC read: %d\r\n", samples_buf[0]);
+	return samples_buf[0];
 }
 
 bool isBatteryLow()
@@ -63,7 +63,14 @@ bool isBatteryLow()
 	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
 	chThdSleepMilliseconds(10);
 	adcStopConversion(&ADCD1);
-	return samples_buf[0] < 2048;
+	if (samples_buf[0] < 2400)
+	{
+
+		chprintf((BaseSequentialStream *)&SDU1, "battery low");
+		return true;
+	}
+	else
+		return false;
 }
 
 void init()

@@ -42,7 +42,9 @@ static void flashUnlock(void)
 	}
 }
 
-flashStorage::flashStorageContent_t flashStorage::content;
+flashStorage::flashStorageContent_t flashStorage::content = {12345678,
+															 "12345678",
+															 "user@mail.com"};
 
 bool flashStorage::writeFlashAll()
 {
@@ -101,6 +103,14 @@ bool flashStorage::writeFlashAll()
 
 bool flashStorage::readFlashAll()
 {
-	content = *(flashStorageContent_t *)FlASH_START_ADDRESS;
-	return true;
+	if (*(char *)FlASH_START_ADDRESS != 0xff)
+	{
+		content = *(flashStorageContent_t *)FlASH_START_ADDRESS;
+		return true;
+	}
+	else
+	{
+		writeFlashAll();
+		return false;
+	}
 };

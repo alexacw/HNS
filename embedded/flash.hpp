@@ -52,7 +52,7 @@ struct flashStorageContent_t
 {
 	uint32_t deviceID = 1234;
 	char parentTel[9] = {0};
-	char parentEmail[100];
+	char parentEmail[100]= {0};
 };
 
 extern flashStorageContent_t content;

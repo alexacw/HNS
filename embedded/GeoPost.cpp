@@ -7,7 +7,7 @@
  * @date 2018-06-03
  */
 
-#include "gpsProcess.hpp"
+#include "GeoPost.hpp"
 #include <math.h>
 #include <stdlib.h>
 #include "constantVKalman.hpp"

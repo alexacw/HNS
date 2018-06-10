@@ -34,7 +34,7 @@
 #include "SIM868Com.hpp"
 #include "flash.hpp"
 #include "batteryReader.hpp"
-#include "gpsProcess.hpp"
+#include "GeoPost.hpp"
 
 /*===========================================================================*/
 /* Command line related.                                                     */
@@ -88,30 +88,6 @@ static void setTel(BaseSequentialStream *chp, int argc, char *argv[])
 	}
 };
 
-static void setEmail(BaseSequentialStream *chp, int argc, char *argv[])
-{
-	if (argc == 1)
-	{
-		if (strlen(argv[0]) < 100)
-		{
-			strcpy(flashStorage::content.parentEmail, argv[0]);
-			if (flashStorage::writeFlashAll())
-				chprintf(chp, "write device id to flash success\r\n");
-			else
-				chprintf(chp, "write to flash failed\r\n");
-		}
-		else
-		{
-			chprintf(chp, "email too long, at most 100 characters\r\n");
-		}
-	}
-	else
-	{
-		chprintf(chp, "Usage: setEmail [email address up to 100 letters]\r\n");
-		return;
-	}
-};
-
 static void readDeviceInfo(BaseSequentialStream *chp, int argc, char *argv[])
 {
 	(void)argc;
@@ -127,16 +103,17 @@ static void getADC(BaseSequentialStream *chp, int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 
-	BatteryReader::printADC2USB();
+	chprintf((BaseSequentialStream *)chp, "ADC read: %d\r\n", BatteryReader::getADC());
 	return;
 }
 
-static void usb2uart(BaseSequentialStream *chp, int argc, char *argv[])
+static void send2uart(BaseSequentialStream *chp, int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;
 	if (argc == 1)
 		chprintf((BaseSequentialStream *)&SD1, argv[0]);
+	chprintf((BaseSequentialStream *)&SD1, "\r\n");
 	return;
 }
 
@@ -145,7 +122,7 @@ static void clearSDbuf(BaseSequentialStream *chp, int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 	SIM868Com::readBufclear();
-	chprintf((BaseSequentialStream *)&SDU1, "readBufclear() called\n");
+	chprintf((BaseSequentialStream *)chp, "readBufclear() called\n");
 	return;
 }
 
@@ -154,19 +131,107 @@ static void toggleSerialMonitor(BaseSequentialStream *chp, int argc, char *argv[
 	(void)argc;
 	(void)argv;
 	SIM868Com::monitorSerial = !SIM868Com::monitorSerial;
-	chprintf((BaseSequentialStream *)&SDU1, "toggled Serial Monitor over USB, now %s\n", SIM868Com::monitorSerial ? "on" : "off");
+	chprintf((BaseSequentialStream *)chp, "toggled Serial Monitor over USB, now %s\n", SIM868Com::monitorSerial ? "on" : "off");
 	return;
+}
+
+bool trackToggle = true;
+static void toggleTracking(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	trackToggle = !trackToggle;
+	chprintf((BaseSequentialStream *)chp, "toggled tracking, now %s\n", trackToggle ? "on" : "off");
+	return;
+}
+
+static void sendSMScmd(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	if (argc == 2)
+	{
+		chprintf((BaseSequentialStream *)chp, "Sending SMS to %s;\n content:%s\n", argv[0], argv[1]);
+		if (SIM868Com::sendSMS(argv[0], argv[1]))
+		{
+			chprintf((BaseSequentialStream *)chp, "SMS sent");
+		}
+	}
+	else
+	{
+		chprintf((BaseSequentialStream *)chp, "usage: sendSMS [receiver number] [content]");
+	}
+	return;
+}
+
+static void findSMScmd(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	if (argc == 1)
+	{
+		chprintf((BaseSequentialStream *)chp, "finding SMS from %s;\n", argv[0]);
+		if (SIM868Com::unreadSMSFindSender(argv[0]))
+		{
+			chprintf((BaseSequentialStream *)chp, "SMS found");
+		}
+	}
+	else
+	{
+		chprintf((BaseSequentialStream *)chp, "usage: sendSMS [sender number]");
+	}
+	return;
+}
+
+static void httpgetcmd(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	if (argc == 1)
+	{
+		chprintf((BaseSequentialStream *)&chp, "get from url: %s;\n", argv[0]);
+		if (SIM868Com::sendSMS(argv[0], argv[1]))
+		{
+			chprintf((BaseSequentialStream *)chp, "SMS sent");
+		}
+	}
+}
+
+static void trygsmloc(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	if (argc == 1)
+	{
+		chprintf((BaseSequentialStream *)chp, "trygsmloc\n");
+		double a, b;
+		char temp[50];
+		SIM868Com::updateGSMLoc(temp, a, b);
+	}
+}
+
+static void makeaggressive(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	SIM868Com::aggressive = true;
+	chprintf((BaseSequentialStream *)chp, "makeaggressive\n");
 }
 
 static const ShellCommand commands[] = {
 	{"setID", setDeviceID},
 	{"setTel", setTel},
-	{"setEmail", setEmail},
 	{"Info", readDeviceInfo},
 	{"getADC", getADC},
-	{"send", usb2uart},
+	{"send", send2uart},
 	{"clearSDbuf", clearSDbuf},
 	{"tSD", toggleSerialMonitor},
+	{"track", toggleTracking},
+	{"sendSMS", sendSMScmd},
+	{"httpgetcmd", httpgetcmd},
+	{"findSMS", findSMScmd},
+	{"trygsmloc", trygsmloc},
+	{"mg", makeaggressive},
 	{NULL, NULL}};
 
 static const ShellConfig shell_cfg1 =
@@ -184,7 +249,7 @@ static __attribute__((noreturn)) THD_FUNCTION(BlinkerThd, arg)
 
 	(void)arg;
 	chRegSetThreadName("blinker");
-	while (true)
+	while (!chThdShouldTerminateX())
 	{
 		systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 100 : 300;
 		palClearPad(GPIOC, GPIOC_LED);
@@ -205,12 +270,93 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 
 	(void)arg;
 	chRegSetThreadName("Sim868Interface");
+
+	SIM868Com::initSerial();
+	SIM868Com::startSerialRead();
+	SIM868Com::initModulePara();
+
+	flashStorage::readFlashAll();
+	while (!SIM868Com::initGPRS())
+	{
+		chprintf((BaseSequentialStream *)&SDU1, "GPRS init failed");
+	}
+	int gpsFailCount = 0;
+	int aggressiveCount = 0;
+	double reportlat, reportlng;
+	char timestr[50];
+	int sleeptime = 10;
 	while (!chThdShouldTerminateX())
 	{
-		//TODO: state machine
-		if (enableGPS)
-			SIM868Com::getGPS();
-		chThdSleepMilliseconds(1000);
+		//TODO:
+		//aggressive mode trigger, active for at leat 5 minute, 2 sec sleep
+
+		if (SIM868Com::receivedCall || SIM868Com::receivedNewSMS)
+		{
+			aggressiveCount = 150;
+		}
+
+		if (SIM868Com::aggressive)
+		{
+			aggressiveCount = 150;
+			SIM868Com::aggressive = false;
+		}
+
+		if (aggressiveCount > 0)
+		{
+			aggressiveCount--;
+			sleeptime = 2;
+			enableGPS = true;
+		}
+		else if (BatteryReader::isBatteryLow())
+		{
+			sleeptime = 30;
+			enableGPS = false;
+		}
+		else
+		{
+			//normal mode
+			sleeptime = 10;
+			enableGPS = true;
+		}
+
+		if (trackToggle)
+		{
+			if (enableGPS)
+			{
+				if (SIM868Com::updateGPS())
+				{
+					GeoPost::getEstimate(reportlat, reportlng);
+					strcpy(timestr, GeoPost::lastSeen);
+					SIM868Com::reportToServer(reportlat, reportlng);
+					SIM868Com::HTTP_getLocStatus();
+					gpsFailCount = 0;
+				}
+				else
+				{
+					gpsFailCount++;
+				}
+				if (gpsFailCount > 5)
+				{
+					if (SIM868Com::updateGSMLoc(timestr, reportlat, reportlng))
+					{
+						SIM868Com::reportToServer(reportlat, reportlng);
+						SIM868Com::HTTP_getLocStatus();
+					}
+				}
+
+				if (SIM868Com::outBound)
+				{
+					SIM868Com::reportToSMS(GeoPost::lastSeen, reportlat, reportlng);
+				}
+			}
+			else
+			{
+				gpsFailCount = 0;
+				SIM868Com::turnoffGPS();
+			}
+		}
+
+		chThdSleepSeconds(sleeptime);
 	}
 }
 
@@ -229,8 +375,6 @@ int main(void)
 	 */
 	halInit();
 	chSysInit();
-
-	flashStorage::readFlashAll();
 
 	/*
 	 * Initializes a serial-over-USB CDC driver.
@@ -253,9 +397,6 @@ int main(void)
 	 */
 	shellInit();
 
-	SIM868Com::initSerial();
-	SIM868Com::startSerialRead();
-
 	BatteryReader::init();
 
 	/*
@@ -264,8 +405,8 @@ int main(void)
 	chThdCreateStatic(waBlinker, sizeof(waBlinker), NORMALPRIO, BlinkerThd, NULL);
 
 	//create the state machine thread
-	chThdCreateStatic(waSim868Interface, sizeof(waSim868Interface), NORMALPRIO, Sim868InterfaceThd, NULL);
 
+	chThdCreateStatic(waSim868Interface, sizeof(waSim868Interface), NORMALPRIO, Sim868InterfaceThd, NULL);
 	/*
 	 * Normal main() thread activity, spawning shells.
 	 */

@@ -28,6 +28,11 @@
 #define EARTH_RADIUS 6378100.0 //in meters
 namespace GeoPost
 {
+
+extern char lastSeen[19];
+extern double estimateLatitude;
+extern double estimateLongitude;
+
 void reset();
 
 /**

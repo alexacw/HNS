@@ -1,8 +1,8 @@
 /**********************************************************************************
- * ¹¤³ÌÃû  :
- * ÃèÊö    :Í¨¹ýÊÖ»ú·¢ËÍ¶ÌÐÅ¿ØÖÆLED
- * ÊµÑéÆ½Ì¨:STM32F10X
- * ¿â°æ±¾  :
+ * å·¥ç¨‹å  :
+ * æè¿°    :é€šè¿‡æ‰‹æœºå‘é€çŸ­ä¿¡æŽ§åˆ¶LED
+ * å®žéªŒå¹³å°:STM32F10X
+ * åº“ç‰ˆæœ¬  :
 
 **********************************************************************************/
 
@@ -13,25 +13,25 @@
 #include "timer.h"
 #include "string.h"
 
-#define Automatic_Startup 1     //¶¨Òå×ÔÆô¶¯ V1.2°æ±¾ÆðÓÐ×ÔÆô¶¯¹¦ÄÜ
+#define Automatic_Startup 1     //å®šä¹‰è‡ªå¯åŠ¨ V1.2ç‰ˆæœ¬èµ·æœ‰è‡ªå¯åŠ¨åŠŸèƒ½
 
-//#define Buf1_Max 60 					  //´®¿Ú1»º´æ³¤¶È
-#define Buf2_Max 200 					  //´®¿Ú2»º´æ³¤¶È
-/*************	±¾µØ³£Á¿ÉùÃ÷	**************/
+//#define Buf1_Max 60 					  //ä¸²å£1ç¼“å­˜é•¿åº¦
+#define Buf2_Max 200 					  //ä¸²å£2ç¼“å­˜é•¿åº¦
+/*************	æœ¬åœ°å¸¸é‡å£°æ˜Ž	**************/
 
 
-/*************  ±¾µØ±äÁ¿ÉùÃ÷	**************/
+/*************  æœ¬åœ°å˜é‡å£°æ˜Ž	**************/
 //char Uart1_Buf[Buf1_Max];
 char Uart2_Buf[Buf2_Max];
 
 u8 Times=0,First_Int = 0,shijian=0;
 
-vu8 Timer0_start;	//¶¨Ê±Æ÷0ÑÓÊ±Æô¶¯¼ÆÊýÆ÷
-vu8 Uart2_Start;	//´®¿Ú2¿ªÊ¼½ÓÊÕÊý¾Ý
-vu8 Uart2_End;	  //´®¿Ú2½ÓÊÕÊý¾Ý½áÊø
+vu8 Timer0_start;	//å®šæ—¶å™¨0å»¶æ—¶å¯åŠ¨è®¡æ•°å™¨
+vu8 Uart2_Start;	//ä¸²å£2å¼€å§‹æŽ¥æ”¶æ•°æ®
+vu8 Uart2_End;	  //ä¸²å£2æŽ¥æ”¶æ•°æ®ç»“æŸ
 
 
-/*************	±¾µØº¯ÊýÉùÃ÷	**************/
+/*************	æœ¬åœ°å‡½æ•°å£°æ˜Ž	**************/
 void CLR_Buf2(void);
 u8 Find(char *a);
 void Second_AT_Command(char *b,u8 wait_time);
@@ -39,19 +39,19 @@ void Set_Text_Mode(void);
 void Check_New_Message(void);
 void Wait_CREG(void);
 
-/*************  Íâ²¿º¯ÊýºÍ±äÁ¿ÉùÃ÷*****************/
+/*************  å¤–éƒ¨å‡½æ•°å’Œå˜é‡å£°æ˜Ž*****************/
 
 
 
 
 /*******************************************************************************
-* º¯ÊýÃû : main 
-* ÃèÊö   : Ö÷º¯Êý
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : ´®¿Ú2¸ºÔðÓëGPRSÄ£¿éÍ¨ÐÅ£¬´®¿Ú1ÓÃÓÚ´®¿Úµ÷ÊÔ£¬¿ÉÒÔ±ÜÃâÔÚÏÂÔØ³ÌÐòÊ±Êý¾Ý
-					 »¹·¢ËÍµ½Ä£¿é
+* å‡½æ•°å : main 
+* æè¿°   : ä¸»å‡½æ•°
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : ä¸²å£2è´Ÿè´£ä¸ŽGPRSæ¨¡å—é€šä¿¡ï¼Œä¸²å£1ç”¨äºŽä¸²å£è°ƒè¯•ï¼Œå¯ä»¥é¿å…åœ¨ä¸‹è½½ç¨‹åºæ—¶æ•°æ®
+					 è¿˜å‘é€åˆ°æ¨¡å—
 *******************************************************************************/
 int main(void)
 {
@@ -61,16 +61,16 @@ int main(void)
 	USART1_Init_Config(115200);
 	USART2_Init_Config(115200);
 	Timer2_Init_Config();
-	UART1_SendString("GPRSÄ£¿é¶ÌÐÅ²âÊÔ³ÌÐò\r\n");
-	UART1_SendString("GPRSÄ£¿éÔÚ×¢²áÍøÂç\r\n");
+	UART1_SendString("GPRSæ¨¡å—çŸ­ä¿¡æµ‹è¯•ç¨‹åº\r\n");
+	UART1_SendString("GPRSæ¨¡å—åœ¨æ³¨å†Œç½‘ç»œ\r\n");
 	Wait_CREG();
-	UART1_SendString("GPRSÄ£¿é×¢²á³É¹¦\r\n");
-	UART1_SendString("GPRSÄ£¿é¶ÌÐÅÄ£Ê½ÉèÖÃ\r\n");
+	UART1_SendString("GPRSæ¨¡å—æ³¨å†ŒæˆåŠŸ\r\n");
+	UART1_SendString("GPRSæ¨¡å—çŸ­ä¿¡æ¨¡å¼è®¾ç½®\r\n");
 	Set_Text_Mode();
-	UART1_SendString("ÉèÖÃ³É¹¦£¬¶ÌÐÅÄ£Ê½£ºTEXT\r\n");
-	//Second_AT_Command("AT+CMGD=1,4",3);//É¾³ý¿¨ÉÏËùÓÐ¶ÌÐÅ
+	UART1_SendString("è®¾ç½®æˆåŠŸï¼ŒçŸ­ä¿¡æ¨¡å¼ï¼šTEXT\r\n");
+	//Second_AT_Command("AT+CMGD=1,4",3);//åˆ é™¤å¡ä¸Šæ‰€æœ‰çŸ­ä¿¡
 	
-	UART1_SendString("³õÊ¼»¯Íê³É\r\n");
+	UART1_SendString("åˆå§‹åŒ–å®Œæˆ\r\n");
 	while(1)
 	{
 		Check_New_Message();
@@ -78,40 +78,40 @@ int main(void)
 }
 
 /*******************************************************************************
-* º¯ÊýÃû  : USART2_IRQHandler
-* ÃèÊö    : ´®¿Ú1ÖÐ¶Ï·þÎñ³ÌÐò
-* ÊäÈë    : ÎÞ
-* ·µ»Ø    : ÎÞ 
-* ËµÃ÷    : 
+* å‡½æ•°å  : USART2_IRQHandler
+* æè¿°    : ä¸²å£1ä¸­æ–­æœåŠ¡ç¨‹åº
+* è¾“å…¥    : æ— 
+* è¿”å›ž    : æ—  
+* è¯´æ˜Ž    : 
 *******************************************************************************/
 void USART2_IRQHandler(void)                	
 {
 			u8 Res=0;
 			Res =USART_ReceiveData(USART2);
-			Uart2_Buf[First_Int] = Res;  	  //½«½ÓÊÕµ½µÄ×Ö·û´®´æµ½»º´æÖÐ
-			First_Int++;                			//»º´æÖ¸ÕëÏòºóÒÆ¶¯
-			if(First_Int > Buf2_Max)       		//Èç¹û»º´æÂú,½«»º´æÖ¸ÕëÖ¸Ïò»º´æµÄÊ×µØÖ·
+			Uart2_Buf[First_Int] = Res;  	  //å°†æŽ¥æ”¶åˆ°çš„å­—ç¬¦ä¸²å­˜åˆ°ç¼“å­˜ä¸­
+			First_Int++;                			//ç¼“å­˜æŒ‡é’ˆå‘åŽç§»åŠ¨
+			if(First_Int > Buf2_Max)       		//å¦‚æžœç¼“å­˜æ»¡,å°†ç¼“å­˜æŒ‡é’ˆæŒ‡å‘ç¼“å­˜çš„é¦–åœ°å€
 			{
 				First_Int = 0;
 			}    
 } 	
 
 /*******************************************************************************
-* º¯ÊýÃû  : TIM2_IRQHandler
-* ÃèÊö    : ¶¨Ê±Æ÷2ÖÐ¶Ï¶Ï·þÎñº¯Êý
-* ÊäÈë    : ÎÞ
-* Êä³ö    : ÎÞ
-* ·µ»Ø    : ÎÞ 
-* ËµÃ÷    : ÎÞ
+* å‡½æ•°å  : TIM2_IRQHandler
+* æè¿°    : å®šæ—¶å™¨2ä¸­æ–­æ–­æœåŠ¡å‡½æ•°
+* è¾“å…¥    : æ— 
+* è¾“å‡º    : æ— 
+* è¿”å›ž    : æ—  
+* è¯´æ˜Ž    : æ— 
 *******************************************************************************/
-void TIM2_IRQHandler(void)   //TIM3ÖÐ¶Ï
+void TIM2_IRQHandler(void)   //TIM3ä¸­æ–­
 {
 	static u8 flag =1;
 
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)  //¼ì²éTIM3¸üÐÂÖÐ¶Ï·¢ÉúÓë·ñ
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)  //æ£€æŸ¥TIM3æ›´æ–°ä¸­æ–­å‘ç”Ÿä¸Žå¦
 	{
 		
-		TIM_ClearITPendingBit(TIM2, TIM_IT_Update  );  //Çå³ýTIMx¸üÐÂÖÐ¶Ï±êÖ¾ 
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update  );  //æ¸…é™¤TIMxæ›´æ–°ä¸­æ–­æ ‡å¿— 
 		
 		if(Timer0_start)
 		Times++;
@@ -135,30 +135,30 @@ void TIM2_IRQHandler(void)   //TIM3ÖÐ¶Ï
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : CLR_Buf2
-* ÃèÊö   : Çå³ý´®¿Ú2»º´æÊý¾Ý
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : CLR_Buf2
+* æè¿°   : æ¸…é™¤ä¸²å£2ç¼“å­˜æ•°æ®
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void CLR_Buf2(void)
 {
 	u16 k;
-	for(k=0;k<Buf2_Max;k++)      //½«»º´æÄÚÈÝÇåÁã
+	for(k=0;k<Buf2_Max;k++)      //å°†ç¼“å­˜å†…å®¹æ¸…é›¶
 	{
 		Uart2_Buf[k] = 0x00;
 	}
-    First_Int = 0;              //½ÓÊÕ×Ö·û´®µÄÆðÊ¼´æ´¢Î»ÖÃ
+    First_Int = 0;              //æŽ¥æ”¶å­—ç¬¦ä¸²çš„èµ·å§‹å­˜å‚¨ä½ç½®
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : Find
-* ÃèÊö   : ÅÐ¶Ï»º´æÖÐÊÇ·ñº¬ÓÐÖ¸¶¨µÄ×Ö·û´®
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : unsigned char:1 ÕÒµ½Ö¸¶¨×Ö·û£¬0 Î´ÕÒµ½Ö¸¶¨×Ö·û 
-* ×¢Òâ   : 
+* å‡½æ•°å : Find
+* æè¿°   : åˆ¤æ–­ç¼“å­˜ä¸­æ˜¯å¦å«æœ‰æŒ‡å®šçš„å­—ç¬¦ä¸²
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : unsigned char:1 æ‰¾åˆ°æŒ‡å®šå­—ç¬¦ï¼Œ0 æœªæ‰¾åˆ°æŒ‡å®šå­—ç¬¦ 
+* æ³¨æ„   : 
 *******************************************************************************/
 
 u8 Find(char *a)
@@ -170,19 +170,19 @@ u8 Find(char *a)
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : Second_AT_Command
-* ÃèÊö   : ·¢ËÍATÖ¸Áîº¯Êý
-* ÊäÈë   : ·¢ËÍÊý¾ÝµÄÖ¸Õë¡¢·¢ËÍµÈ´ýÊ±¼ä(µ¥Î»£ºS)
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Second_AT_Command
+* æè¿°   : å‘é€ATæŒ‡ä»¤å‡½æ•°
+* è¾“å…¥   : å‘é€æ•°æ®çš„æŒ‡é’ˆã€å‘é€ç­‰å¾…æ—¶é—´(å•ä½ï¼šS)
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 
 void Second_AT_Command(char *b,u8 wait_time)         
 {
 	u8 i;
 	char *c;
-	c = b;										//±£´æ×Ö·û´®µØÖ·µ½c
+	c = b;										//ä¿å­˜å­—ç¬¦ä¸²åœ°å€åˆ°c
 	CLR_Buf2(); 
   i = 0;
 	while(i == 0)                    
@@ -191,7 +191,7 @@ void Second_AT_Command(char *b,u8 wait_time)
 		{
 			if(Timer0_start == 0)
 			{
-				b = c;							//½«×Ö·û´®µØÖ·¸øb
+				b = c;							//å°†å­—ç¬¦ä¸²åœ°å€ç»™b
 				for (; *b!='\0';b++)
 				{
 					while(USART_GetFlagStatus(USART2, USART_FLAG_TC)==RESET);
@@ -213,37 +213,37 @@ void Second_AT_Command(char *b,u8 wait_time)
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : Set_Text_Mode
-* ÃèÊö   : ÉèÖÃ¶ÌÐÅÎªTEXTÎÄ±¾Ä£Ê½
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Set_Text_Mode
+* æè¿°   : è®¾ç½®çŸ­ä¿¡ä¸ºTEXTæ–‡æœ¬æ¨¡å¼
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void Set_Text_Mode(void)
 {
-	Second_AT_Command("ATE0",3);										//È¡Ïû»ØÏÔ	
-	Second_AT_Command("AT+CNMI=3,2,0,0,0",3);							//ÐÂ¶ÌÐÅÖ±½ÓÊä³ö
-	Second_AT_Command("AT+CMGF=1",3);								//TEXTÄ£Ê½	
-	Second_AT_Command("AT+CPMS=\"SM\",\"SM\",\"SM\"",3);		//ËùÓÐ²Ù×÷¶¼ÔÚSIM¿¨ÖÐ½øÐÐ	
+	Second_AT_Command("ATE0",3);										//å–æ¶ˆå›žæ˜¾	
+	Second_AT_Command("AT+CNMI=3,2,0,0,0",3);							//æ–°çŸ­ä¿¡ç›´æŽ¥è¾“å‡º
+	Second_AT_Command("AT+CMGF=1",3);								//TEXTæ¨¡å¼	
+	Second_AT_Command("AT+CPMS=\"SM\",\"SM\",\"SM\"",3);		//æ‰€æœ‰æ“ä½œéƒ½åœ¨SIMå¡ä¸­è¿›è¡Œ	
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : Check_Message_rec
-* ÃèÊö   : ¼ì²éÊÇ·ñÓÐÐÂÐÅÏ¢£¬²¢Ö´ÐÐÐÅÏ¢ÄÚÈÝÖ¸Áî
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Check_Message_rec
+* æè¿°   : æ£€æŸ¥æ˜¯å¦æœ‰æ–°ä¿¡æ¯ï¼Œå¹¶æ‰§è¡Œä¿¡æ¯å†…å®¹æŒ‡ä»¤
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 
 void Check_New_Message(void)
 {
-	if(strstr(Uart2_Buf,"+CMT")!=NULL)   		//Èô»º´æ×Ö·û´®ÖÐº¬ÓÐ"+CMT"¾Í±íÊ¾ÓÐÐÂµÄ¶ÌÐÅ
+	if(strstr(Uart2_Buf,"+CMT")!=NULL)   		//è‹¥ç¼“å­˜å­—ç¬¦ä¸²ä¸­å«æœ‰"+CMT"å°±è¡¨ç¤ºæœ‰æ–°çš„çŸ­ä¿¡
 	{
-		Delay_nMs(50);//µÈ´ýÊý¾ÝÈ«²¿½ÓÊÕÍê³É
-		UART1_SendString("ÊÕµ½ÐÂ¶ÌÐÅ:\r\n");
-		UART1_SendString(Uart2_Buf);			//°ÑÄ£¿é·µ»ØµÄÐÅÏ¢Ô­ÑùÊä³ö
+		Delay_nMs(50);//ç­‰å¾…æ•°æ®å…¨éƒ¨æŽ¥æ”¶å®Œæˆ
+		UART1_SendString("æ”¶åˆ°æ–°çŸ­ä¿¡:\r\n");
+		UART1_SendString(Uart2_Buf);			//æŠŠæ¨¡å—è¿”å›žçš„ä¿¡æ¯åŽŸæ ·è¾“å‡º
 		if(strstr(Uart2_Buf,"onled")!=NULL)
 		{
 			LED1_ON();
@@ -253,17 +253,17 @@ void Check_New_Message(void)
 			LED1_OFF();
 		}
 		CLR_Buf2();
-		//Second_AT_Command("AT+CMGD=1,4",3);//É¾³ý¶ÌÐÅ
+		//Second_AT_Command("AT+CMGD=1,4",3);//åˆ é™¤çŸ­ä¿¡
 	}
 }
 
 /*******************************************************************************
-* º¯ÊýÃû : Wait_CREG
-* ÃèÊö   : µÈ´ýÄ£¿é×¢²á³É¹¦
-* ÊäÈë   : 
-* Êä³ö   : 
-* ·µ»Ø   : 
-* ×¢Òâ   : 
+* å‡½æ•°å : Wait_CREG
+* æè¿°   : ç­‰å¾…æ¨¡å—æ³¨å†ŒæˆåŠŸ
+* è¾“å…¥   : 
+* è¾“å‡º   : 
+* è¿”å›ž   : 
+* æ³¨æ„   : 
 *******************************************************************************/
 void Wait_CREG(void)
 {
@@ -289,6 +289,6 @@ void Wait_CREG(void)
 				}
 			}
 		}
-		UART1_SendString("×¢²áÖÐ.....");
+		UART1_SendString("æ³¨å†Œä¸­.....");
 	}
 }

@@ -129,7 +129,7 @@ CPPSRC = $(CHCPPSRC) \
 	   	    flash.cpp \
           main.cpp \
           batteryReader.cpp \
-          gpsProcess.cpp \
+          GeoPost.cpp \
           constantVKalman.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.

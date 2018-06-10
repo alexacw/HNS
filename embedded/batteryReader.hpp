@@ -10,6 +10,6 @@ namespace BatteryReader
 {
 void init();
 bool isBatteryLow();
-void printADC2USB();
+uint16_t getADC();
 
 } // namespace BatteryReader
