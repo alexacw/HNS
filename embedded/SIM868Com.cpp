@@ -42,7 +42,7 @@ mutex_t mu;
 void readBufclear(void)
 {
 	chThdSleepMilliseconds(300);
-	findKeywords();
+	findandactKeywords();
 	chMtxLock(&mu);
 	writepos = 0;
 	readBuf[0] = 0;
@@ -271,7 +271,7 @@ unsigned int SendStr(const char *data)
 unsigned int SendChar(const char letter)
 {
 
-	return sdWriteI(&SIM868_SD, (const uint8_t *)&letter, 1);
+	return sdWrite(&SIM868_SD, (const uint8_t *)&letter, 1);
 };
 
 bool initGPRS()
@@ -341,9 +341,13 @@ bool HTTP_getFromURL(const char *url)
 	}
 
 	SendStr("AT+HTTPACTION=0\r\n"); //start get request
-	if (!waitWordTimeout("200", 30))
+	if (waitWordTimeout("200", 30))
 	{
 		return true;
+	}
+	else
+	{
+		return false;
 	}
 };
 
@@ -360,6 +364,7 @@ bool HTTP_getLocStatus()
 		else
 		{
 			outBound = false;
+			calmDownAlert = false;
 		}
 		return true;
 	}
@@ -448,7 +453,7 @@ bool updateGPS()
 	}
 };
 
-bool updateGSMLoc(char *timedate, double &lat, double &lng)
+bool updateGSMLoc(double &lat, double &lng)
 {
 	SendStr("AT+CIPGSMLOC=1,1\r\n");
 	if (waitWordTimeout("OK", 10))
@@ -498,8 +503,10 @@ bool sendSMS(const char *receiverNumber, const char *message)
 		return false;
 
 	SendStr(message); //set message body
-	SendChar(0x1a);   //send end of message
-	if (!waitWordTimeout("+CMGS:", 2))
+	SendChar(0x1A);   //send end of message
+	SendStr("\r\n");  //set message body
+
+	if (!waitWordTimeout("+CMGS:", 20))
 		return false;
 	return true;
 };
@@ -512,31 +519,44 @@ bool unreadSMSFindSender(const char *senderNumber)
 };
 
 //for finding keywords like receiving a phone call or sms
-void findKeywords()
+void findandactKeywords()
 {
 	//receiving a call
-	if (readBufFindWord("+CCWA"))
+	if (!receivedCall)
 	{
-		receivedCall = true;
+		if (readBufFindWord("+CCWA"))
+		{
+			receivedCall = true;
+			aggressive = true;
+		}
 	}
 	//receiving a message
-	if (readBufFindWord("+CMT"))
+	if (!receivedNewSMS) //this is to prevent call loop which happened
 	{
-		receivedNewSMS = true;
+		if (readBufFindWord("+CMT"))
+		{
+
+			chprintf((BaseSequentialStream *)&SDU1, "Got new SMS\n");
+			receivedNewSMS = true;
+			if (unreadSMSFindSender(flashStorage::content.parentTel))
+			{
+				chprintf((BaseSequentialStream *)&SDU1, "\nFound SMS from caregiver\n");
+				aggressive = true;
+			}
+		}
 	}
 };
 
-void reportToSMS(char *updatetime, const double &lat, const double &lng)
+void reportToSMS(const double &lat, const double &lng)
 {
-	char tempMsg[128] = {0};
+	static char tempMsg[128] = {0};
 	sprintf(tempMsg,
-			"lastSeen %s \n lattidue: %d.%05d\n longitude: %d.%05d",
-			updatetime,
+			"device out of bound: lattidue: %d.%05d\n longitude: %d.%05d",
 			(int)lat,
 			((int)(lat * 100000.0)) % 100000,
 			(int)lng,
 			((int)(lng * 100000.0)) % 100000);
-	sendSMS(flashStorage::content.parentTel, tempMreportToSMSsg);
+	sendSMS(flashStorage::content.parentTel, tempMsg);
 }
 
 bool reportToServer(const double &lat, const double &lng)

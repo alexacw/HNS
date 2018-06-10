@@ -30,16 +30,16 @@ extern bool outBound;
 extern bool aggressive;
 extern bool receivedCall;
 extern bool receivedNewSMS;
+extern bool calmDownAlert;
 void initSerial();
 void startSerialRead();
 void stopSerialRead();
 void initModulePara();
 void readBufInit();
-
-//create flags to keywords in buffer, called in readBufclear
-void findKeywords();
-
 void readBufclear();
+
+//search the buffer for incoming message and calls, and react to them
+void findandactKeywords();
 
 void readBuffedMsg();
 bool readBufWaitLine(int sec); //wait until \n or \r is received
@@ -59,11 +59,11 @@ bool HTTP_getLocStatus();
 bool HTTP_postToURL(const char *url);
 bool updateGPS();
 bool turnoffGPS();
-bool updateGSMLoc(char *timedate, double &lat, double &lng);
+bool updateGSMLoc(double &lat, double &lng);
 bool sendSMS(const char *receiverNumber, const char *message);
 bool unreadSMSFindSender(const char *receiverNumber);
 
-void reportToSMS(char *updatetime, const double &lat, const double &lng);
+void reportToSMS(const double &lat, const double &lng);
 bool reportToServer(const double &lat, const double &lng);
 
 } // namespace SIM868Com

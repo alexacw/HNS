@@ -205,8 +205,7 @@ static void trygsmloc(BaseSequentialStream *chp, int argc, char *argv[])
 	{
 		chprintf((BaseSequentialStream *)chp, "trygsmloc\n");
 		double a, b;
-		char temp[50];
-		SIM868Com::updateGSMLoc(temp, a, b);
+		SIM868Com::updateGSMLoc(a, b);
 	}
 }
 
@@ -223,14 +222,11 @@ static const ShellCommand commands[] = {
 	{"setTel", setTel},
 	{"Info", readDeviceInfo},
 	{"getADC", getADC},
-	{"send", send2uart},
-	{"clearSDbuf", clearSDbuf},
 	{"tSD", toggleSerialMonitor},
-	{"track", toggleTracking},
+	{"send", send2uart},
+	{"ttrack", toggleTracking},
 	{"sendSMS", sendSMScmd},
 	{"httpgetcmd", httpgetcmd},
-	{"findSMS", findSMScmd},
-	{"trygsmloc", trygsmloc},
 	{"mg", makeaggressive},
 	{NULL, NULL}};
 
@@ -285,6 +281,8 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 	double reportlat, reportlng;
 	char timestr[50];
 	int sleeptime = 10;
+	bool reported = false;
+
 	while (!chThdShouldTerminateX())
 	{
 		//TODO:
@@ -292,12 +290,13 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 
 		if (SIM868Com::receivedCall || SIM868Com::receivedNewSMS)
 		{
-			aggressiveCount = 150;
+			SIM868Com::receivedCall = SIM868Com::receivedNewSMS = false;
+			aggressiveCount = 100;
 		}
 
 		if (SIM868Com::aggressive)
 		{
-			aggressiveCount = 150;
+			aggressiveCount = 100;
 			SIM868Com::aggressive = false;
 		}
 
@@ -337,16 +336,21 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 				}
 				if (gpsFailCount > 5)
 				{
-					if (SIM868Com::updateGSMLoc(timestr, reportlat, reportlng))
+					if (SIM868Com::updateGSMLoc(reportlat, reportlng))
 					{
 						SIM868Com::reportToServer(reportlat, reportlng);
 						SIM868Com::HTTP_getLocStatus();
 					}
 				}
 
-				if (SIM868Com::outBound)
+				if (SIM868Com::outBound && !reported)
 				{
-					SIM868Com::reportToSMS(GeoPost::lastSeen, reportlat, reportlng);
+					SIM868Com::reportToSMS(reportlat, reportlng);
+					reported = true;
+				}
+				else
+				{
+					reported = false;
 				}
 			}
 			else

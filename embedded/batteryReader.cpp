@@ -12,6 +12,10 @@
 #include "shell.h"
 #include "board.h"
 #include "usbcfg.h"
+#include "batteryReader.hpp"
+
+#define BATTERY_LOW_THRESHOLD 1900
+
 namespace BatteryReader
 {
 // Lets configure our ADC first
@@ -52,9 +56,11 @@ static ADCConversionGroup adccgp =
 
 uint16_t getADC()
 {
+	chThdSleepMilliseconds(300);
 	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
 	chThdSleepMilliseconds(10);
 	adcStopConversion(&ADCD1);
+	isBatteryLow();
 	return samples_buf[0];
 }
 
@@ -63,7 +69,7 @@ bool isBatteryLow()
 	adcStartConversion(&ADCD1, &adccgp, &samples_buf[0], ADC_BUF_DEPTH);
 	chThdSleepMilliseconds(10);
 	adcStopConversion(&ADCD1);
-	if (samples_buf[0] < 2400)
+	if (samples_buf[0] < BATTERY_LOW_THRESHOLD)
 	{
 
 		chprintf((BaseSequentialStream *)&SDU1, "battery low");
