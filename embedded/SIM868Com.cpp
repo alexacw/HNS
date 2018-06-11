@@ -438,7 +438,7 @@ bool updateGPS()
 			chprintf((BaseSequentialStream *)&SDU1, "\tgot PDOP: %s\n", tempCharPtr);
 			tempCharPtr = (char *)strtok(NULL, ",");
 			chprintf((BaseSequentialStream *)&SDU1, "\tgot VDOP: %s\n", tempCharPtr);
-			chprintf((BaseSequentialStream *)&SDU1, "	updating Kalman filter... %s\n", tempCharPtr);
+			chprintf((BaseSequentialStream *)&SDU1, "	updating Kalman filter... \n");
 			if (GeoPost::update(receivedLattitue, receivedLongitude, receivedHDOP, receivedTimedate))
 			{
 				GeoPost::getEstimate(estLat, estLong);

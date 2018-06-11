@@ -164,6 +164,19 @@ static void sendSMScmd(BaseSequentialStream *chp, int argc, char *argv[])
 	return;
 }
 
+static void sendSMScmdC(BaseSequentialStream *chp, int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+
+	chprintf((BaseSequentialStream *)chp, "Sending SMS to %s;\n content:%s\n", argv[0], argv[1]);
+	if (SIM868Com::sendSMS(flashStorage::content.parentTel, "sms from sendSMSC"))
+	{
+		chprintf((BaseSequentialStream *)chp, "SMS sent");
+	}
+	return;
+}
+
 static void findSMScmd(BaseSequentialStream *chp, int argc, char *argv[])
 {
 	(void)argc;
@@ -208,12 +221,15 @@ static void trygsmloc(BaseSequentialStream *chp, int argc, char *argv[])
 		SIM868Com::updateGSMLoc(a, b);
 	}
 }
+int aggressiveCount = 0;
 
 static void makeaggressive(BaseSequentialStream *chp, int argc, char *argv[])
 {
-	(void)argc;
 	(void)argv;
-	SIM868Com::aggressive = true;
+	if (argc > 0)
+		SIM868Com::aggressive = true;
+	else
+		aggressiveCount = 0;
 	chprintf((BaseSequentialStream *)chp, "makeaggressive\n");
 }
 
@@ -226,6 +242,7 @@ static const ShellCommand commands[] = {
 	{"send", send2uart},
 	{"ttrack", toggleTracking},
 	{"sendSMS", sendSMScmd},
+	{"sendSMSC", sendSMScmdC},
 	{"httpgetcmd", httpgetcmd},
 	{"mg", makeaggressive},
 	{NULL, NULL}};
@@ -275,9 +292,10 @@ static __attribute__((noreturn)) THD_FUNCTION(Sim868InterfaceThd, arg)
 	while (!SIM868Com::initGPRS())
 	{
 		chprintf((BaseSequentialStream *)&SDU1, "GPRS init failed");
+
+		SIM868Com::deinitGPRS();
 	}
 	int gpsFailCount = 0;
-	int aggressiveCount = 0;
 	double reportlat, reportlng;
 	char timestr[50];
 	int sleeptime = 10;
